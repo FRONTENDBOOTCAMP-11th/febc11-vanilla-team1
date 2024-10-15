@@ -38,9 +38,3 @@ assignees: ""
 
 다른 정보가 있으면 추가해주세요.
 ```
-
-- enhancement_request.md
-
-```md
-
-```
