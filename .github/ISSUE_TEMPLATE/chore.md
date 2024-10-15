@@ -1,9 +1,9 @@
 ---
 name: 기타 이슈 (Other Issue)
 about: 기능 요청이나 버그 리포트가 아닌 기타 이슈를 작성합니다.
-title: "[OTHER] <이슈 제목>"
-labels: ["question", "discussion", "documentation"]
-assignees: ""
+title: '[OTHER] <이슈 제목>'
+labels: ['question', 'discussion', 'documentation']
+assignees: ''
 ---
 
 ## 📋 이슈 내용 (Issue Description)
