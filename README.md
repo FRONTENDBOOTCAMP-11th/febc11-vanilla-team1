@@ -1,7 +1,6 @@
 # FrontEnd BootCamp 11기 바닐라 프로젝트
 
-- GitHub Page에서 보기: <https://uzoolove.github.io/fes11-vanilla>
-- 소스 코드(GitHub): <https://github.com/uzoolove/fes11-vanilla>
+- 페이지 주소: <[https://uzoolove.github.io/fes11-vanilla](https://lovely-cocada-a2fc63.netlify.app/)>
 
 ## 목차
 
