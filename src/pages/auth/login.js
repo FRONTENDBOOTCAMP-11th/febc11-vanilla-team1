@@ -1,17 +1,33 @@
 'use strict'
 import axios from 'axios';
 
-console.log('login.js loaded successfully');
-
-const authInput = document.querySelector('#authInput');
+const authInput = document.querySelector('#emailInput');
 const authBtn = document.querySelector('#loginBtn');
+const emailRegex = /^[A-Za-z0-9]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+const regText = document.querySelector('.reg-Text');
 
-console.log('login.js is loaded');
+authBtn.disabled = true;
+
+authInput.addEventListener('input', function () {
+  const userEmail = authInput.value.trim();
+  if (userEmail === '') {
+    authBtn.disabled = true;
+    authInput.style.borderColor = 'red';
+    regText.textContent = '필수';
+  } else if (emailRegex.test(userEmail)) {
+    authBtn.disabled = false;
+    authInput.style.borderColor = 'black';
+    regText.textContent = '';
+  } else {
+    authBtn.disabled = true;
+    authInput.style.borderColor = 'red';
+    regText.textContent = '잘못된 이메일 주소입니다.';
+  }
+});
 
 authBtn.addEventListener('click', function (e) {
   e.preventDefault();
-  console.log('Login button clicked'); // 클릭 시 메시지가 나오는지 확인
-  const userEmail = authInput.value;
+  const userEmail = authInput.value.trim();
   const infoEmail = encodeURIComponent(userEmail);
 
   async function getEmail(userEmail) {
@@ -26,9 +42,12 @@ authBtn.addEventListener('click', function (e) {
           'Authorization': `Bearer ${accessToken}`
         },
       });
+
+      console.log('Server response:', response.data); // 서버 응답 확인
+
       if (response.data && response.data.exists) {
         console.log('존재함');
-        window.location.href = 'main.html';
+        window.location.href = 'pw.html';
       } else {
         console.log('존재하지 않음');
         sessionStorage.setItem('email', userEmail);
@@ -40,37 +59,3 @@ authBtn.addEventListener('click', function (e) {
   }
   getEmail(infoEmail);
 });
-
-
-
-// loginBtn.addEventListener('click', function (e) {
-//   e.preventDefault();
-//   const userEmail = authInput.value;
-//   const infoEmail = encodeURIComponent(userEmail);
-
-//   async function authEmail(userEmail) {
-//     try {
-//       const accessToken = localStorage.getItem('accessToken');
-//       const response = await axios.post('https://11.fesp.shop/users/', {
-//         headers: {
-//           'Authorization': `Bearer ${accessToken}`
-//         },
-//         params: {
-//           email: userEmail
-//         }
-//       })
-//       if (response.data.email === true) {
-//         window.location.href = 'main.html';
-//       } else {
-//         console.log('가입페이지로 이동');
-//         localStorage.setItem('userEmail', userEmail);
-//         window.location.href = `check.html?email=${infoEmail}}`;
-//       }
-//     } catch (error) {
-//       // 에러 코드
-//       console.error('이메일 확인 중 오류', error);
-//     }
-//   }
-
-//   authEmail(userEmail);
-// });
