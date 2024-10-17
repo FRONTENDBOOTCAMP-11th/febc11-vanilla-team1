@@ -3,35 +3,117 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>상품리스트</title>
+    <title>나이키</title>
     <link rel="stylesheet" href="list.css" />
   </head>
   <body>
     <div id="app">
       <div class="product-list-container">
         <header class="list-header">
-          <h1 class="header-title">신제품 (749)</h1>
-          <button>
-            <span>필터숨기기</span>
+          <h1 class="title">신제품 <span class="result-count">(749)</span></h1>
+          <div class="nav">
+            <button class="filter-toggle" aria-expanded="true">
+              <span>필터 숨기기</span>
+              <img
+                src="../../assets/icons/button24px/filter.svg"
+                alt="필터토글"
+                srcset=""
+              />
+            </button>
+            <div class="droptown-wrapper">
+              <button class="sort-toggle" aria-expanded="true">
+                <span>정렬 기준:</span>
+                <img
+                  src="../../assets/icons/button24px/down.svg"
+                  alt="정렬 기준 보기"
+                  srcset=""
+                />
+              </button>
+              <div
+                aria-labelledby="dropdown-btn"
+                class="dropdown__options-list"
+                id="sort-options"
+                role="menu"
+              >
+                <button
+                  aria-hidden="false"
+                  aria-label="추천순"
+                  class="dropdown__option css-10h9yp8"
+                  data-ndx="0"
+                  role="menuitem"
+                  tabindex="-1"
+                  type="button"
+                  value=""
+                >
+                  추천순
+                </button>
+                <button
+                  aria-hidden="false"
+                  aria-label="최신순"
+                  class="dropdown__option css-10h9yp8"
+                  data-ndx="1"
+                  role="menuitem"
+                  tabindex="-1"
+                  type="button"
+                  value="newest"
+                >
+                  최신순
+                </button>
+                <button
+                  aria-hidden="false"
+                  aria-label="높은 가격순"
+                  class="dropdown__option css-10h9yp8"
+                  data-ndx="2"
+                  role="menuitem"
+                  tabindex="-1"
+                  type="button"
+                  value="priceDesc"
+                >
+                  높은 가격순
+                </button>
+                <button
+                  aria-hidden="false"
+                  aria-label="낮은 가격순"
+                  class="dropdown__option css-10h9yp8"
+                  data-ndx="3"
+                  role="menuitem"
+                  tabindex="-1"
+                  type="button"
+                  value="priceAsc"
+                >
+                  낮은 가격순
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
 
+        <div class="category-wrapper is_mobile">
+          <ul class="category-select">
+            <li class="category"><a href="">신발</a></li>
+            <li class="category"><a href="">팬츠 & 타이츠</a></li>
+            <li class="category"><a href="">팬츠 & 타이츠</a></li>
+            <li class="category"><a href="">팬츠 & 타이츠</a></li>
+            <li class="category"><a href="">팬츠 & 타이츠</a></li>
+            <li class="category"><a href="">점프수트 & 롬퍼스</a></li>
+            <li class="category"><a href="">스커트 & 드레스</a></li>
+          </ul>
+        </div>
+
+        <div class="subheading is_mobile">
+          <div class="result-count">61개의 결과</div>
+          <button class="filter-toggle">
+            <span>필터</span>
             <img
               src="../../assets/icons/button24px/filter.svg"
               alt="필터토글"
               srcset=""
             />
           </button>
-          <button>
-            <span>정렬 기준:</span>
-            <img
-              src="../../assets/icons/button24px/down.svg"
-              alt="정렬 기준 보기"
-              srcset=""
-            />
-          </button>
-        </header>
+        </div>
 
         <main class="result-container">
-          <aside class="sidbar">
+          <aside class="sidebar active">
             <ul class="category-select">
               <li class="category"><a href="">신발</a></li>
               <li class="category"><a href="">팬츠 & 타이츠</a></li>
@@ -87,5 +169,6 @@
         </main>
       </div>
     </div>
+    <script type="module" src="./list.js"></script>
   </body>
 </html>
