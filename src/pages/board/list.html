@@ -15,7 +15,7 @@
             <button class="filter-toggle" aria-expanded="true">
               <span>필터 숨기기</span>
               <img
-                src="../../assets/icons/button24px/filter.svg"
+                src="/assets/icons/button24px/filter.svg"
                 alt="필터토글"
                 srcset=""
               />
@@ -24,7 +24,7 @@
               <button class="sort-toggle" aria-expanded="true">
                 <span>정렬 기준:</span>
                 <img
-                  src="../../assets/icons/button24px/down.svg"
+                  src="/assets/icons/button24px/down.svg"
                   alt="정렬 기준 보기"
                   srcset=""
                 />
@@ -105,11 +105,112 @@
           <button class="filter-toggle">
             <span>필터</span>
             <img
-              src="../../assets/icons/button24px/filter.svg"
+              src="/assets/icons/button24px/filter.svg"
               alt="필터토글"
               srcset=""
             />
           </button>
+        </div>
+
+        <div class="sidebar-mobile-wrapper is_mobile">
+          <div class="sidebar-mobile">
+            <button class="close-btn">
+              <img
+                src="/assets/icons/buttons/l-fill-x.svg"
+                alt="닫기"
+                srcset=""
+              />
+            </button>
+            <div class="sidebar-header">필터</div>
+            <div class="drag-handle">
+              <fieldset aria-label="정렬 기준">
+                <legend><h3>정렬 기준:</h3></legend>
+                <div class="selection-list">
+                  <div class="radio-item">
+                    <div class="sort-input">
+                      <input
+                        type="radio"
+                        name="sortBy"
+                        id="sort-by-best"
+                        checked
+                      />
+                      <img
+                        src="/assets/icons/buttons/toggle.svg"
+                        alt=""
+                        srcset=""
+                        class="checked"
+                      />
+                      <img
+                        src="/assets/icons/buttons/toggleoff.svg"
+                        alt=""
+                        srcset=""
+                        class="unchecked"
+                      />
+                    </div>
+                    <label for="sort-by-best">추천순</label>
+                  </div>
+                  <div class="radio-item">
+                    <div class="sort-input">
+                      <input type="radio" name="sortBy" id="sort-by-newest" />
+                      <img
+                        src="/assets/icons/buttons/toggle.svg"
+                        alt=""
+                        srcset=""
+                        class="checked"
+                      />
+                      <img
+                        src="/assets/icons/buttons/toggleoff.svg"
+                        alt=""
+                        srcset=""
+                        class="unchecked"
+                      />
+                    </div>
+                    <label for="sort-by-newest">최신순</label>
+                  </div>
+                  <div class="radio-item">
+                    <div class="sort-input">
+                      <input
+                        type="radio"
+                        name="sortBy"
+                        id="sort-by-priceDesc"
+                      />
+                      <img
+                        src="/assets/icons/buttons/toggle.svg"
+                        alt=""
+                        srcset=""
+                        class="checked"
+                      />
+                      <img
+                        src="/assets/icons/buttons/toggleoff.svg"
+                        alt=""
+                        srcset=""
+                        class="unchecked"
+                      />
+                    </div>
+                    <label for="sort-by-priceDesc">높은 가격순</label>
+                  </div>
+                  <div class="radio-item">
+                    <div class="sort-input">
+                      <input type="radio" name="sortBy" id="sort-by-priceAsc" />
+                      <img
+                        src="/assets/icons/buttons/toggle.svg"
+                        alt=""
+                        srcset=""
+                        class="checked"
+                      />
+                      <img
+                        src="/assets/icons/buttons/toggleoff.svg"
+                        alt=""
+                        srcset=""
+                        class="unchecked"
+                      />
+                    </div>
+                    <label for="sort-by-priceAsc">낮은 가격순</label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
         </div>
 
         <main class="result-container">
@@ -129,7 +230,7 @@
                 <h2 class="fliter_title">
                   성별
                   <img
-                    src="../../assets/icons/button24px/down.svg"
+                    src="/assets/icons/button24px/down.svg"
                     alt="필터 드롭다운"
                     srcset=""
                   />

@@ -16,6 +16,20 @@ document
   .querySelector('button.filter-toggle')
   .addEventListener('click', filterToggle);
 
+// 필터 모바일 토글
+function filterMobileToggle(e) {
+  e.preventDefault();
+
+  const sidebarNode = document.querySelector('.sidebar-mobile-wrapper');
+  sidebarNode.classList.toggle('active');
+}
+document
+  .querySelector('.subheading.is_mobile button.filter-toggle')
+  .addEventListener('click', filterMobileToggle);
+document
+  .querySelector('.sidebar-mobile-wrapper button.close-btn')
+  .addEventListener('click', filterMobileToggle);
+
 // 정렬 드롭다운
 function sortMenuDropdown(e) {
   e.preventDefault();
