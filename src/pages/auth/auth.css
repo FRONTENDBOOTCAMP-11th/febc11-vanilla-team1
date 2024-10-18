@@ -155,6 +155,15 @@ input[type='checkbox']:checked + label {
 .pw-title {
   margin-bottom: 10px;
 }
+.auth-email {
+  font-size: 1.6rem;
+  line-height: 2.4;
+}
+
+.find-password {
+  font-size: 1.6rem;
+  line-height: 2.4;
+}
 
 .password-container {
   position: relative;
@@ -236,6 +245,7 @@ input[type='checkbox']:checked + label {
 }
 
 #inputPassword[type='password'],
+#inputPassword[type='text'],
 #inputCalendar[type='date'] {
   width: 100%;
   margin: 20px 0 16px 0;
@@ -288,8 +298,35 @@ input[type='date']:valid::before {
   color: var(--color-secondary);
 }
 
+.text-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .invalid {
   color: var(--color-primary);
+}
+
+.login-first {
+  color: var(--color-gray-500);
+  display: inline-flex;
+}
+
+.login-first .icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+.login-second {
+  color: var(--color-gray-500);
+  display: inline-flex;
+}
+
+.login-second .icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
 }
 
 /* Check form */

@@ -24,10 +24,21 @@
             <input class="auth-input" id="inputFirstName" type="text" placeholder="이름" maxlength="30" />
             <input class="auth-input" id="inputLastName" type="text" placeholder="성" maxlength="30" />
           </div>
-          <input class="auth-input" id="inputPassword" placeholder="비밀번호" type="password" maxlength="32" />
+          <div class="password-container">
+            <input class="auth-input" id="inputPassword" placeholder="비밀번호" type="password" maxlength="32" />
+            <img class="close" id="toggleClose" src="../../assets/icons/eye-icon/closeeye.svg">
+            <img class="open" id="toggleOpen" src="../../assets/icons/eye-icon/openeye.svg">
+          </div>
           <div class="text-container">
-            <p class="auth-validation first">X 최소 8자</p>
-            <p class="auth-validation second ">X 알파벳 대문자 및 소문자 조합, 최소 1개 이상의 숫자</p>
+            <p id="loginTxtFirst" class="login-first">
+              <img src="../../assets/icons/buttons/s-x.svg" alt="icon" class="icon">
+              <span class="first red green">최소 8자</span>
+            </p>
+            <p id="loginTxtFirst" class="login-second">
+              <img src="../../assets/icons/buttons/s-x.svg" alt="icon" class="icon">
+              <span class="first red green">알파벳 대문자 및 소문자 조합, 최소 1개 이상의 숫자</span>
+            </p>
+
           </div>
           <input class="auth-input" id="inputCalendar" data-placeholder="생년원일" type="date" required />
           <p class="signUp-agreement"><input type="checkbox" id="check" aria-label="약관에 동의" /><label
