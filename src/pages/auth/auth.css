@@ -105,7 +105,7 @@ label {
   width: 24px;
   height: 24px;
   background-repeat: no-repeat;
-  background-image: url(../../assets/icons/buttons/m-check.svg);
+  background-image: url(/assets/icons/buttons/m-check.svg);
   cursor: pointer;
 }
 
@@ -114,7 +114,7 @@ input[type='checkbox'] {
 }
 
 input[type='checkbox']:checked + label {
-  background-image: url(../../assets/icons/buttons/m-checked.svg);
+  background-image: url(/assets/icons/buttons/m-checked.svg);
 }
 
 .spacing {
@@ -254,8 +254,8 @@ input[type='checkbox']:checked + label {
 input[type='date'] {
   margin-top: 20px;
   position: relative;
-  background: url(../../assets/icons/button24px/calendar.svg) no-repeat right
-    16px center;
+  background: url(/assets/icons/button24px/calendar.svg) no-repeat right 16px
+    center;
   width: 100%;
 }
 

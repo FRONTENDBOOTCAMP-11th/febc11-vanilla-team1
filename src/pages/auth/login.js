@@ -34,7 +34,7 @@ authBtn.addEventListener('click', function (e) {
     try {
       const accessToken = localStorage.getItem('accessToken');
       console.log('Access token:', accessToken); // 토큰 확인
-      const response = await axios.get('https://11.fesp.shop/users/', {
+      const response = await axios.get('https://11.fesp.shop/users/login', {
         params: {
           email: userEmail,
         },
