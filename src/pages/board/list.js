@@ -1,21 +1,6 @@
 'use strict';
 import axios from 'axios';
 
-// 필터 토글
-function filterToggle(e) {
-  e.preventDefault();
-
-  const asideNode = document.querySelector('.sidebar');
-  const toggleTextNode = document.querySelector('.filter-toggle span');
-  asideNode.classList.toggle('active');
-  toggleTextNode.textContent = toggleTextNode.textContent.includes('숨기기')
-    ? '필터 표시'
-    : '필터 숨기기';
-}
-document
-  .querySelector('button.filter-toggle')
-  .addEventListener('click', filterToggle);
-
 // 필터 모바일 토글
 function filterMobileToggle(e) {
   e.preventDefault();
@@ -29,21 +14,6 @@ document
 document
   .querySelector('.sidebar-mobile-wrapper button.close-btn')
   .addEventListener('click', filterMobileToggle);
-
-// 정렬 드롭다운
-function sortMenuDropdown(e) {
-  e.preventDefault();
-
-  const dropdownNode = document.querySelector('.dropdown__options-list');
-  dropdownNode.classList.toggle('active');
-  const buttonIcon = document.querySelector('button.sort-toggle img');
-  buttonIcon.src = buttonIcon.src.includes('up')
-    ? '../../assets/icons/button24px/down.svg'
-    : '../../assets/icons/button24px/up.svg';
-}
-document
-  .querySelector('button.sort-toggle')
-  .addEventListener('click', sortMenuDropdown);
 
 // 게시글 목록 조회
 async function getList() {
