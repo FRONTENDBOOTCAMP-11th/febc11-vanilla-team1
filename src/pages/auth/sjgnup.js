@@ -17,6 +17,27 @@ const regPw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 const regEight = /^.{8,}$/;
 const regMin = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
 
+
+document.addEventListener('DOMContentLoaded', function () {
+  const savedEmail = sessionStorage.getItem('email');
+
+  if (!savedEmail) {
+    window.location.href = 'login.html';
+  }
+});
+
+toggleClose.addEventListener('click', function () {
+  inputPassword.type = 'text';
+  toggleClose.style.display = 'none';
+  toggleOpen.style.display = 'block';
+});
+
+toggleOpen.addEventListener('click', function () {
+  inputPassword.type = 'password';
+  toggleClose.style.display = 'block';
+  toggleOpen.style.display = 'none';
+});
+
 function validatePassword(userPw) {
   if (userPw === '') {
     loginTxtFirst.innerHTML = `<p style="color:var(--color-gray-500)">X 최소 8자 이상 *</p>`;
@@ -34,7 +55,6 @@ function validatePassword(userPw) {
 }
 
 inputPassword.addEventListener('input', function () {
-
   const userPw = inputPassword.value;
   validatePassword(userPw);
 });
@@ -48,53 +68,61 @@ async function userSign(userPw, userName, userBirth, userEmail) {
       type: 'user',
       extra: {
         userBirth
-      }
+      },
     });
-    const accessToken = response.data.token;
-    if (accessToken) {
-      localStorage.setItem('accessToken', accessToken);
-    }
-    if (response.data && response.data.exists) {
-      window.location.href = 'pw.html';
+
+    if (response.data) {
+      loginUser(userEmail, userPw);
     }
 
   } catch (error) {
     // 오류 정보 출력
     if (error.response) {
-      console.error('서버 응답 오류:', error.response.data);  // 서버에서 반환된 오류 메시지 출력
-      console.error('상태 코드:', error.response.status);     // HTTP 상태 코드 확인
+      console.error('서버 응답 오류:', error.response.data);
+      console.error('상태 코드:', error.response.status);
     } else {
-      console.error('정보가 없는뎁숑?', error);                // 네트워크 또는 기타 오류 처리
+      console.error('정보가 없습니다.', error);
     }
   }
 };
 
+async function loginUser(userEmail, userPw) {
+  try {
+    const response = await axios.post('https://11.fesp.shop/users/login', {
+      email: userEmail,
+      password: userPw,
+    });
+
+    const accessToken = response.data.accessToken;
+    const refreshToken = response.data.refreshToken;
+    if (accessToken && refreshToken) {
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+      console.log('토큰 저장 완료:', { accessToken, refreshToken });
+      if (response.data.exists) {
+        window.location.href = 'complete.html';
+      }
+    } else {
+      console.error('토큰을 받지 못했습니다. 로그인 실패');
+    }
+
+  } catch (error) {
+    console.log('로그인 중 오류 발생', error);
+  }
+}
+
 signUpBtn.addEventListener('click', function (e) {
   e.preventDefault();
-
   const userPw = inputPassword.value;
   const userName = `${inputFirstName.value + inputLastName.value}`;
   const userBirth = inputCalendar.value;
-  const userEmail = decodeURIComponent(sessionStorage.getItem('email'));
+  const userEmail = sessionStorage.getItem('email');
 
   if (regFirstName.test(inputFirstName.value) && regLastName.test(inputLastName.value) && regPw.test(userPw)) {
-    validatePassword(userPw);  // 비밀번호 유효성 업데이트
-    userSign(userPw, userName, userBirth, userEmail);  // 서버로 회원가입 요청
+    validatePassword(userPw);
+    userSign(userPw, userName, userBirth, userEmail);
 
   } else {
-    validatePassword(userPw);  // 비밀번호 유효성 오류 메시지 표시
+    validatePassword(userPw);
   }
-});
-
-
-toggleClose.addEventListener('click', function () {
-  inputPassword.type = 'text';
-  toggleClose.style.display = 'none';
-  toggleOpen.style.display = 'block';
-});
-
-toggleOpen.addEventListener('click', function () {
-  inputPassword.type = 'password';
-  toggleClose.style.display = 'block';
-  toggleOpen.style.display = 'none';
 });

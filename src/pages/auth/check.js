@@ -29,7 +29,6 @@ checkboxes.forEach((checkbox) => {
 function updateAgreeButtonState() {
   const allChecked = Array.from(checkboxes).every((checkbox) => checkbox.checked);
   const savedEmail = sessionStorage.getItem('email');
-
   agreeBtn.disabled = !(allChecked && savedEmail);
 };
 

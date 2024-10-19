@@ -26,28 +26,32 @@
           <div class="check-container">
             <div class="line">
               <div class="check-section">
-                <input type="checkbox" id="checkAll" aria-label="모든 약관에 동의" /><label for="checkAll"></label>
+                <input type="checkbox" id="checkAll" aria-label="모든 약관에 동의" /><label for="checkAll" tabindex="1"
+                  class="label-hover"></label>
                 <p class="first">모든 약관에 동의합니다</p>
               </div>
             </div>
             <div class="check-section">
-              <input type="checkbox" id="check1" aria-label="이용약관에 동의" /><label for="check1"></label>
+              <input type="checkbox" id="check1" aria-label="이용약관에 동의" /><label for="check1" tabindex="1"
+                class="label-hover"></label>
               <p><a target="_blank"
                   href="https://agreementservice.svs.nike.com/rest/agreement?agreementType=termsOfUse&uxId=4fd2d5e7db76e0f85a6bb56721bd51df&country=KR&language=ko&requestType=redirect"
-                  rel="noopener noreferrer">이용약관</a>에 동의합니다</p>
+                  rel="noopener noreferrer" tabindex="1">이용약관</a>에 동의합니다 *</p>
             </div>
             <div class="check-section">
-              <input type="checkbox" id="check2" aria-label="개인정보 수집 및 이용약관에 동의" /><label for="check2"></label>
+              <input type="checkbox" id="check2" aria-label="개인정보 수집 및 이용약관에 동의" /><label for="check2" tabindex="1"
+                class="label-hover"></label></label>
               <p><a target="_blank"
                   href="https://agreementservice.svs.nike.com/rest/agreement?agreementType=piCollectionList&uxId=4fd2d5e7db76e0f85a6bb56721bd51df&country=KR&language=ko&requestType=redirect"
-                  rel="noopener noreferrer">개인 정보 수집 및 이용</a>에 동의합니다 *</p>
+                  rel="noopener noreferrer" tabindex="1">개인 정보 수집 및 이용</a>에 동의합니다 *</p>
             </div>
             <div class="check-section">
-              <input type="checkbox" id="check3" aria-label="개인정보 약관에 동의" /><label for="check3"></label>
+              <input type="checkbox" id="check3" aria-label="개인정보 약관에 동의" /><label for="check3" tabindex="1"
+                class="label-hover"></label>
               <p class="last"><a target="_blank"
                   href="https://agreementservice.svs.nike.com/rest/agreement?agreementType=3rdPartyList&uxId=4fd2d5e7db76e0f85a6bb56721bd51df&country=KR&language=ko&requestType=redirect"
-                  rel="noopener noreferrer">개인
-                  정보의 제3자 제공 및 국외이전</a>에 동의합니다</p>
+                  rel="noopener noreferrer" tabindex="1">개인
+                  정보의 제3자 제공 및 국외이전</a>에 동의합니다 *</p>
             </div>
           </div>
 
@@ -55,8 +59,8 @@
 
 
         </section>
-        <button type="submit" id="agreeBtn" class="btn agree-btn">계속</button>
-        <button type="submit" id="cancelBtn" class="btn cancel-btn">취소</button>
+        <button type="submit" id="agreeBtn" class="btn agree-btn" tabindex="1">계속</button>
+        <button type="submit" id="cancelBtn" class="btn cancel-btn" tabindex="1">취소</button>
 
 
       </div>

@@ -21,13 +21,14 @@
         </header>
         <section class="input-form">
           <div class="name-container">
-            <input class="auth-input" id="inputFirstName" type="text" placeholder="이름" maxlength="30" />
-            <input class="auth-input" id="inputLastName" type="text" placeholder="성" maxlength="30" />
+            <input class="auth-input" id="inputFirstName" type="text" placeholder="이름" maxlength="30" tabindex="1" />
+            <input class="auth-input" id="inputLastName" type="text" placeholder="성" maxlength="30" tabindex="1" />
           </div>
           <div class="password-container">
-            <input class="auth-input" id="inputPassword" placeholder="비밀번호" type="password" maxlength="32" />
-            <img class="close" id="toggleClose" src="/assets/icons/eye-icon/closeeye.svg" alt="icon">
-            <img class="open" id="toggleOpen" src="/assets/icons/eye-icon/openeye.svg">
+            <input class="auth-input" id="inputPassword" placeholder="비밀번호" type="password" maxlength="32"
+              tabindex="1" />
+            <img class="close" id="toggleClose" src="/assets/icons/eye-icon/closeeye.svg" alt="icon" tabindex="1">
+            <img class="open" id="toggleOpen" src="/assets/icons/eye-icon/openeye.svg" tabindex="1">
           </div>
           <div class="text-container">
             <div class="login-first">
@@ -38,9 +39,9 @@
             </div>
 
           </div>
-          <input class="auth-input" id="inputCalendar" data-placeholder="생년원일" type="date" required />
-          <p class="signUp-agreement"><input type="checkbox" id="check" aria-label="약관에 동의" /><label
-              for="check"></label><span class="spacing">나이키의</span>
+          <input class="auth-input" id="inputCalendar" data-placeholder="생년원일" type="date" required tabindex="1" />
+          <p class="signUp-agreement"><input type="checkbox" id="check" aria-label="약관에 동의" /><label for="check"
+              class="label-hover" tabindex="1"></label><span class="spacing">나이키의</span>
             <a target="_blank"
               href="https://agreementservice.svs.nike.com/rest/agreement?agreementType=privacyPolicy&country=KR&language=ko&requestType=redirect&uxId=4fd2d5e7db76e0f85a6bb56721bd51df"
               rel="noopener noreferrer">개인정보 처리방침</a><span class="spacing">및</span><a target="_blank"

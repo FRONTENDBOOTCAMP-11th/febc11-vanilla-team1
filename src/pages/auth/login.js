@@ -6,56 +6,71 @@ const authBtn = document.querySelector('#loginBtn');
 const emailRegex = /^[A-Za-z0-9]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const regText = document.querySelector('.reg-Text');
 
-authBtn.disabled = true;
 
 authInput.addEventListener('input', function () {
   const userEmail = authInput.value.trim();
   if (userEmail === '') {
-    authBtn.disabled = true;
     authInput.style.borderColor = 'red';
     regText.textContent = '필수';
   } else if (emailRegex.test(userEmail)) {
-    authBtn.disabled = false;
     authInput.style.borderColor = 'black';
     regText.textContent = '';
   } else {
-    authBtn.disabled = true;
     authInput.style.borderColor = 'red';
     regText.textContent = '잘못된 이메일 주소입니다.';
   }
 });
 
-authBtn.addEventListener('click', function (e) {
-  e.preventDefault();
-  const userEmail = authInput.value.trim();
-  const infoEmail = encodeURIComponent(userEmail);
+async function getEmail(userEmail) {
+  try {
 
-  async function getEmail(userEmail) {
-    try {
-      const accessToken = localStorage.getItem('accessToken');
-      console.log('Access token:', accessToken); // 토큰 확인
-      const response = await axios.get('https://11.fesp.shop/users/login', {
-        params: {
-          email: userEmail,
-        },
-        headers: {
-          'Authorization': `Bearer ${accessToken}`
-        },
-      });
+    const response = await axios.get('https://11.fesp.shop/users/email', {
+      params: {
+        email: userEmail,
+      },
+    });
 
-      console.log('Server response:', response.data); // 서버 응답 확인
+    const accessToken = response.data.accessToken;
+    const refreshToken = response.data.refreshToken;
 
-      if (response.data && response.data.exists) {
-        console.log('존재함');
-        window.location.href = 'pw.html';
-      } else {
-        console.log('존재하지 않음');
-        sessionStorage.setItem('email', userEmail);
-        window.location.href = 'check.html';
-      }
-    } catch (error) {
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+    console.log('토큰 저장 완료:', { accessToken, refreshToken });
+
+    if (response.data.ok === 0 && response.data.message === "이미 등록된 이메일입니다.") {
+      sessionStorage.setItem('email', userEmail);
+      window.location.href = 'pw.html';
+    } else {
+      sessionStorage.setItem('email', userEmail);
+      window.location.href = 'check.html';
+    }
+  } catch (error) {
+    if (error.response && error.response.status === 409) {
+      // 409 Conflict 에러 처리
+      console.log('이메일이 이미 등록되어 있습니다.');
+      sessionStorage.setItem('email', userEmail);
+      window.location.href = 'pw.html'; // 비밀번호 입력 페이지로 이동
+    } else {
       console.error('이메일 확인 중 오류', error);
     }
   }
-  getEmail(infoEmail);
+}
+
+authBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+  const userEmail = authInput.value.trim();
+  if (userEmail === '') {
+    authInput.style.borderColor = 'red';
+    regText.textContent = '필수';
+  } else if (emailRegex.test(userEmail)) {
+    authInput.style.borderColor = 'black';
+    regText.textContent = '';
+  } else {
+
+    authInput.style.borderColor = 'red';
+    regText.textContent = '잘못된 이메일 주소입니다.';
+  }
+
+  sessionStorage.setItem('email', userEmail);
+  getEmail(userEmail);
 });
