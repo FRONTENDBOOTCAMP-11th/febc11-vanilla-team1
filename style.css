@@ -28,7 +28,7 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
+  /* display: flex; why? */
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -97,4 +97,166 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* ---------------제품 상세--------------- */
+/* 신발 wrapper */
+.shoes_l_wrapper{
+  display: flex;
+  border: 1px solid red;
+  max-width: fit-content;
+  margin: 0 auto; 
+  flex-direction: row;
+}
+
+.shoes_img{
+  display: flex;
+  width: 896px;
+  height: 669px;
+  box-shadow: inset 0 0 50px blueviolet;
+}
+
+.shoes_img_left{
+  /* 존재 이유를 모르겠음 */
+  width: 285px;
+  height: 669px;
+  box-shadow: inset 0 0 50px darkgoldenrod;
+}
+
+.shoes_img_middle{
+  width: 60px;
+  height: 669px;
+  box-shadow: inset 0 0 20px orange;
+}
+
+.shoes_img_middle img {
+  width: 60px;
+  height: 60px;
+  /* box-shadow: inset 0 0 20px orchid; */
+}
+
+.shoes_img_right {
+  position: relative;
+  display: flex;
+  width: 100%;
+  
+  box-shadow: inset 0 0 20px yellow;
+  margin: 0 32px 0 16px;
+  
+}
+
+.nike_shoes {
+  position: absolute;
+  width: 89%;
+  height: auto;
+}
+
+.reputation {
+  position: absolute;
+  margin: 24px 0 0 24px;
+  z-index: 1;
+}
+
+.before_botton{
+  position: absolute;
+  z-index: 1;
+  top: 73%;
+  left: 63%;
+}
+
+.next_botton{
+  position: absolute;
+  z-index: 1;
+  top: 73%;
+  left: 73%;
+}
+
+.next_botton{
+  position: absolute;
+}
+
+
+/* .shoes_img_right img:nth-child(4) {
+  width: 100%;
+} */
+
+/*.shoes_img_right img:nth-child(1) { /*평점 높음
+  position: absolute;
+  margin: 24px 0 0 24px;
+  z-index: 1;
+}
+
+.shoes_img_right img:nth-child(2) { /*이전 버튼
+  position: absolute;
+  top: 80%;
+  z-index: 1;
+  
+}
+
+.shoes_img_right img:nth-child(3) { /*다음 버튼
+  position: absolute;
+  z-index: 1;
+}*/
+
+.details_wrapper{
+  width: 376px;
+  height: 2226px;
+  box-shadow: inset 0 0 50px green;
+}
+
+.det_header{
+  width: 376px;
+  height: 92px;
+  box-shadow: inset 0 0 40px blue;
+}
+
+.det_container{
+  width: 376px;
+  height: 2102px;
+  box-shadow: inset 0 0 20px navajowhite;
+  
+}
+
+.det_size_list{
+  display: flex;
+  width: 376px;
+  height: 141px;
+  box-shadow: inset 0 0 20px gray;
+  flex-wrap: wrap;
+}
+
+.det_shoes_img img{
+  width: 100px;
+  height: 100px;
+  box-shadow: inset 0 0 20px navajowhite;
+}
+
+.size_number {
+  width: 69.19px;
+  height: 48px;
+  box-shadow: inset 0 0 20px darkcyan;
+  margin: 3px;
+}
+
+/* ---------------추천 제품--------------- */
+.recommend_product_container{
+width: 1824px;
+height: 808.94px;
+box-shadow: inset 0 0 20px skyblue;
+margin: 0 auto;
+}
+
+.re_description{
+display: flex;
+
+}
+
+.product_content{
+  margin: 0px auto;
+}
+
+.product_content img{
+  width: 566.94px;
+  height: 599.94px;
+  box-shadow: inset 0 0 20px wheat;
 }
