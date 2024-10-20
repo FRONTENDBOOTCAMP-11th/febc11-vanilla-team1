@@ -5,7 +5,12 @@ const authInput = document.querySelector('#emailInput');
 const authBtn = document.querySelector('#loginBtn');
 const emailRegex = /^[A-Za-z0-9]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const regText = document.querySelector('.reg-Text');
+const socialBtn = document.querySelector('#socialBtn');
 
+socialBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+  alert('아직 구현되지 않은 기능입니다.')
+})
 
 authInput.addEventListener('input', function () {
   const userEmail = authInput.value.trim();
@@ -24,7 +29,7 @@ authInput.addEventListener('input', function () {
 async function getEmail(userEmail) {
   try {
 
-    const response = await axios.get('https://11.fesp.shop/users/email', {
+    const response = await axios.get('https://11.fesp.shop/apidocs/users/email', {
       params: {
         email: userEmail,
       },

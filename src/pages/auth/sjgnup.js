@@ -61,7 +61,7 @@ inputPassword.addEventListener('input', function () {
 
 async function userSign(userPw, userName, userBirth, userEmail) {
   try {
-    const response = await axios.post('https://11.fesp.shop/users/', {
+    const response = await axios.post('https://11.fesp.shop/apidocs/users/', {
       email: userEmail,
       password: userPw,
       name: userName,
@@ -88,7 +88,7 @@ async function userSign(userPw, userName, userBirth, userEmail) {
 
 async function loginUser(userEmail, userPw) {
   try {
-    const response = await axios.post('https://11.fesp.shop/users/login', {
+    const response = await axios.post('https://11.fesp.shop/apidocs/users/login', {
       email: userEmail,
       password: userPw,
     });
