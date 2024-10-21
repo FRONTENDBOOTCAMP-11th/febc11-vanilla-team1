@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>나이키</title>
     <link rel="stylesheet" href="list.css" />
+    <link rel="stylesheet" href="./components/footer/footer.css" />
   </head>
   <body>
     <div id="app">
@@ -20,7 +21,8 @@
             <button
               class="header__action-button header__filter-toggle"
               aria-expanded="true"
-              onclick="filterToggle(event)"
+              aria-controls="sidebar"
+              onclick="filterToggle(event, this)"
             >
               <span>필터 숨기기</span>
               <img
@@ -35,6 +37,7 @@
               <button
                 class="header__action-button header__sorting-dropdown"
                 aria-expanded="false"
+                aria-controls="sorting-options"
                 onclick="sortingDropdown(event, this)"
               >
                 <span>정렬 기준:</span>
@@ -47,6 +50,7 @@
 
               <!-- 정렬 옵션 리스트 -->
               <div
+                id="sorting-options"
                 class="sorting__options-list dropdown__options-wrapper"
                 aria-labelledby="dropdown-btn"
                 role="menu"
@@ -104,21 +108,22 @@
           </div>
         </header>
 
-        <div class="category-wrapper is_mobile">
-          <ul class="category-select">
-            <li class="category"><a href="">신발</a></li>
-            <li class="category"><a href="">팬츠 & 타이츠</a></li>
-            <li class="category"><a href="">팬츠 & 타이츠</a></li>
-            <li class="category"><a href="">팬츠 & 타이츠</a></li>
-            <li class="category"><a href="">팬츠 & 타이츠</a></li>
-            <li class="category"><a href="">점프수트 & 롬퍼스</a></li>
-            <li class="category"><a href="">스커트 & 드레스</a></li>
-          </ul>
-        </div>
+        <ul class="categories is_mobile">
+          <li class="categories__item"><a href="">신발</a></li>
+          <li class="categories__item"><a href="">팬츠 & 타이츠</a></li>
+          <li class="categories__item"><a href="">팬츠 & 타이츠</a></li>
+          <li class="categories__item"><a href="">팬츠 & 타이츠</a></li>
+          <li class="categories__item"><a href="">팬츠 & 타이츠</a></li>
+          <li class="categories__item"><a href="">점프수트 & 롬퍼스</a></li>
+          <li class="categories__item"><a href="">스커트 & 드레스</a></li>
+        </ul>
 
         <div class="subheading is_mobile">
-          <div class="result-count">61개의 결과</div>
-          <button class="filter-toggle">
+          <div class="subheading__result-count">61개의 결과</div>
+          <button
+            class="subheading__filter-toggle subheading__action-button"
+            onclick="filterMobileToggle(event)"
+          >
             <span>필터</span>
             <img
               src="/assets/icons/button24px/filter.svg"
@@ -128,61 +133,60 @@
           </button>
         </div>
 
-        <div class="sidebar-mobile-wrapper is_mobile">
-          <div class="sidebar-mobile">
-            <div class="sidebar-header">필터</div>
-            <div class="drag-handle">
-              <fieldset aria-label="정렬 기준">
-                <legend><h3>정렬 기준:</h3></legend>
-                <div class="selection-list">
-                  <div class="radio-item">
-                    <div class="sort-input">
-                      <input
-                        type="radio"
-                        name="sortBy"
-                        id="sort-by-best"
-                        checked
-                        aria-label="추천순"
-                      />
-                    </div>
-                    <label for="sort-by-best">추천순</label>
+        <div class="dialog is_mobile">
+          <div class="dialog-wrapper">
+            <div class="dialog__header">필터</div>
+            <fieldset aria-label="정렬 기준">
+              <legend><h3>정렬 기준:</h3></legend>
+              <div class="selection-list">
+                <div class="radio-item">
+                  <div class="sort-input">
+                    <input
+                      type="radio"
+                      name="sortBy"
+                      id="sort-by-best"
+                      checked
+                      aria-label="추천순"
+                    />
                   </div>
-                  <div class="radio-item">
-                    <div class="sort-input">
-                      <input
-                        type="radio"
-                        name="sortBy"
-                        id="sort-by-newest"
-                        aria-label="최신순"
-                      />
-                    </div>
-                    <label for="sort-by-newest">최신순</label>
-                  </div>
-                  <div class="radio-item">
-                    <div class="sort-input">
-                      <input
-                        type="radio"
-                        name="sortBy"
-                        id="sort-by-priceDesc"
-                        aria-label="높은 가격순"
-                      />
-                    </div>
-                    <label for="sort-by-priceDesc">높은 가격순</label>
-                  </div>
-                  <div class="radio-item">
-                    <div class="sort-input">
-                      <input
-                        type="radio"
-                        name="sortBy"
-                        id="sort-by-priceAsc"
-                        aria-label="낮은 가격순"
-                      />
-                    </div>
-                    <label for="sort-by-priceAsc">낮은 가격순</label>
-                  </div>
+                  <label for="sort-by-best">추천순</label>
                 </div>
-              </fieldset>
-            </div>
+                <div class="radio-item">
+                  <div class="sort-input">
+                    <input
+                      type="radio"
+                      name="sortBy"
+                      id="sort-by-newest"
+                      aria-label="최신순"
+                    />
+                  </div>
+                  <label for="sort-by-newest">최신순</label>
+                </div>
+                <div class="radio-item">
+                  <div class="sort-input">
+                    <input
+                      type="radio"
+                      name="sortBy"
+                      id="sort-by-priceDesc"
+                      aria-label="높은 가격순"
+                    />
+                  </div>
+                  <label for="sort-by-priceDesc">높은 가격순</label>
+                </div>
+                <div class="radio-item">
+                  <div class="sort-input">
+                    <input
+                      type="radio"
+                      name="sortBy"
+                      id="sort-by-priceAsc"
+                      aria-label="낮은 가격순"
+                    />
+                  </div>
+                  <label for="sort-by-priceAsc">낮은 가격순</label>
+                </div>
+              </div>
+            </fieldset>
+
             <ul class="filter-select">
               <li class="filter collapse-container">
                 <div class="filter-title collapse-button">
@@ -302,7 +306,11 @@
               적용
             </button>
           </div>
-          <button class="close-btn" aria-label="필터 메뉴 닫기">
+          <button
+            class="close-btn"
+            aria-label="필터 메뉴 닫기"
+            onclick="filterMobileToggle(event)"
+          >
             <img
               src="/assets/icons/buttons/l-fill-x.svg"
               alt="닫기"
@@ -312,15 +320,20 @@
         </div>
 
         <main class="result-container">
-          <aside class="sidebar active">
-            <ul class="category-select">
-              <li class="category"><a href="">신발</a></li>
-              <li class="category"><a href="">팬츠 & 타이츠</a></li>
-              <li class="category"><a href="">팬츠 & 타이츠</a></li>
-              <li class="category"><a href="">팬츠 & 타이츠</a></li>
-              <li class="category"><a href="">팬츠 & 타이츠</a></li>
-              <li class="category"><a href="">점프수트 & 롬퍼스</a></li>
-              <li class="category"><a href="">스커트 & 드레스</a></li>
+          <!-- sidebar -->
+          <aside id="sidebar" class="sidebar active" aria-expanded="true">
+            <ul class="sidebar__categories">
+              <li class="sidebar__category"><a href="">신발</a></li>
+              <li class="sidebar__category"><a href="">팬츠 & 타이츠</a></li>
+              <li class="sidebar__category"><a href="">팬츠 & 타이츠</a></li>
+              <li class="sidebar__category"><a href="">팬츠 & 타이츠</a></li>
+              <li class="sidebar__category"><a href="">팬츠 & 타이츠</a></li>
+              <li class="sidebar__category">
+                <a href="">점프수트 & 롬퍼스</a>
+              </li>
+              <li class="sidebar__category">
+                <a href="">스커트 & 드레스</a>
+              </li>
             </ul>
 
             <ul class="filter-select">
@@ -447,8 +460,257 @@
               </li>
             </ul>
           </aside>
-
           <ul class="product-list">
+            <li class="product-item">
+              <figure>
+                <a href="">
+                  <div class="product-image">
+                    <img
+                      src="https://via.placeholder.com/150"
+                      alt="상품 이미지"
+                    />
+                  </div>
+
+                  <div class="product-info">
+                    <div class="product-title">
+                      <span class="isNew">신제품</span>
+                      <div class="product-card_title">대한민국 스트라이크</div>
+
+                      <div class="product-card_subtitle">
+                        남성 나이키 드라이 핏 축구 니트 드릴 탑
+                      </div>
+                    </div>
+                    <div class="product-count">1개 색상</div>
+                    <p class="product-price">115,000원</p>
+                  </div>
+                </a>
+              </figure>
+            </li>
+            <li class="product-item">
+              <figure>
+                <a href="">
+                  <div class="product-image">
+                    <img
+                      src="https://via.placeholder.com/150"
+                      alt="상품 이미지"
+                    />
+                  </div>
+
+                  <div class="product-info">
+                    <div class="product-title">
+                      <span class="isNew">신제품</span>
+                      <div class="product-card_title">대한민국 스트라이크</div>
+
+                      <div class="product-card_subtitle">
+                        남성 나이키 드라이 핏 축구 니트 드릴 탑
+                      </div>
+                    </div>
+                    <div class="product-count">1개 색상</div>
+                    <p class="product-price">115,000원</p>
+                  </div>
+                </a>
+              </figure>
+            </li>
+            <li class="product-item">
+              <figure>
+                <a href="">
+                  <div class="product-image">
+                    <img
+                      src="https://via.placeholder.com/150"
+                      alt="상품 이미지"
+                    />
+                  </div>
+
+                  <div class="product-info">
+                    <div class="product-title">
+                      <span class="isNew">신제품</span>
+                      <div class="product-card_title">대한민국 스트라이크</div>
+
+                      <div class="product-card_subtitle">
+                        남성 나이키 드라이 핏 축구 니트 드릴 탑
+                      </div>
+                    </div>
+                    <div class="product-count">1개 색상</div>
+                    <p class="product-price">115,000원</p>
+                  </div>
+                </a>
+              </figure>
+            </li>
+            <li class="product-item">
+              <figure>
+                <a href="">
+                  <div class="product-image">
+                    <img
+                      src="https://via.placeholder.com/150"
+                      alt="상품 이미지"
+                    />
+                  </div>
+
+                  <div class="product-info">
+                    <div class="product-title">
+                      <span class="isNew">신제품</span>
+                      <div class="product-card_title">대한민국 스트라이크</div>
+
+                      <div class="product-card_subtitle">
+                        남성 나이키 드라이 핏 축구 니트 드릴 탑
+                      </div>
+                    </div>
+                    <div class="product-count">1개 색상</div>
+                    <p class="product-price">115,000원</p>
+                  </div>
+                </a>
+              </figure>
+            </li>
+            <li class="product-item">
+              <figure>
+                <a href="">
+                  <div class="product-image">
+                    <img
+                      src="https://via.placeholder.com/150"
+                      alt="상품 이미지"
+                    />
+                  </div>
+
+                  <div class="product-info">
+                    <div class="product-title">
+                      <span class="isNew">신제품</span>
+                      <div class="product-card_title">대한민국 스트라이크</div>
+
+                      <div class="product-card_subtitle">
+                        남성 나이키 드라이 핏 축구 니트 드릴 탑
+                      </div>
+                    </div>
+                    <div class="product-count">1개 색상</div>
+                    <p class="product-price">115,000원</p>
+                  </div>
+                </a>
+              </figure>
+            </li>
+            <li class="product-item">
+              <figure>
+                <a href="">
+                  <div class="product-image">
+                    <img
+                      src="https://via.placeholder.com/150"
+                      alt="상품 이미지"
+                    />
+                  </div>
+
+                  <div class="product-info">
+                    <div class="product-title">
+                      <span class="isNew">신제품</span>
+                      <div class="product-card_title">대한민국 스트라이크</div>
+
+                      <div class="product-card_subtitle">
+                        남성 나이키 드라이 핏 축구 니트 드릴 탑
+                      </div>
+                    </div>
+                    <div class="product-count">1개 색상</div>
+                    <p class="product-price">115,000원</p>
+                  </div>
+                </a>
+              </figure>
+            </li>
+            <li class="product-item">
+              <figure>
+                <a href="">
+                  <div class="product-image">
+                    <img
+                      src="https://via.placeholder.com/150"
+                      alt="상품 이미지"
+                    />
+                  </div>
+
+                  <div class="product-info">
+                    <div class="product-title">
+                      <span class="isNew">신제품</span>
+                      <div class="product-card_title">대한민국 스트라이크</div>
+
+                      <div class="product-card_subtitle">
+                        남성 나이키 드라이 핏 축구 니트 드릴 탑
+                      </div>
+                    </div>
+                    <div class="product-count">1개 색상</div>
+                    <p class="product-price">115,000원</p>
+                  </div>
+                </a>
+              </figure>
+            </li>
+            <li class="product-item">
+              <figure>
+                <a href="">
+                  <div class="product-image">
+                    <img
+                      src="https://via.placeholder.com/150"
+                      alt="상품 이미지"
+                    />
+                  </div>
+
+                  <div class="product-info">
+                    <div class="product-title">
+                      <span class="isNew">신제품</span>
+                      <div class="product-card_title">대한민국 스트라이크</div>
+
+                      <div class="product-card_subtitle">
+                        남성 나이키 드라이 핏 축구 니트 드릴 탑
+                      </div>
+                    </div>
+                    <div class="product-count">1개 색상</div>
+                    <p class="product-price">115,000원</p>
+                  </div>
+                </a>
+              </figure>
+            </li>
+            <li class="product-item">
+              <figure>
+                <a href="">
+                  <div class="product-image">
+                    <img
+                      src="https://via.placeholder.com/150"
+                      alt="상품 이미지"
+                    />
+                  </div>
+
+                  <div class="product-info">
+                    <div class="product-title">
+                      <span class="isNew">신제품</span>
+                      <div class="product-card_title">대한민국 스트라이크</div>
+
+                      <div class="product-card_subtitle">
+                        남성 나이키 드라이 핏 축구 니트 드릴 탑
+                      </div>
+                    </div>
+                    <div class="product-count">1개 색상</div>
+                    <p class="product-price">115,000원</p>
+                  </div>
+                </a>
+              </figure>
+            </li>
+            <li class="product-item">
+              <figure>
+                <a href="">
+                  <div class="product-image">
+                    <img
+                      src="https://via.placeholder.com/150"
+                      alt="상품 이미지"
+                    />
+                  </div>
+
+                  <div class="product-info">
+                    <div class="product-title">
+                      <span class="isNew">신제품</span>
+                      <div class="product-card_title">대한민국 스트라이크</div>
+
+                      <div class="product-card_subtitle">
+                        남성 나이키 드라이 핏 축구 니트 드릴 탑
+                      </div>
+                    </div>
+                    <div class="product-count">1개 색상</div>
+                    <p class="product-price">115,000원</p>
+                  </div>
+                </a>
+              </figure>
+            </li>
             <li class="product-item">
               <figure>
                 <a href="">
@@ -477,8 +739,9 @@
           </ul>
         </main>
       </div>
+      <!-- <footer id="footer"></footer> -->
     </div>
     <script type="module" src="./list.js"></script>
-    <script src="./components/collapse.js"></script>
+    <script src="./uiHandler.js"></script>
   </body>
 </html>

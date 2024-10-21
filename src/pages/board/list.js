@@ -1,20 +1,6 @@
 'use strict';
 import axios from 'axios';
 
-// 필터 모바일 토글
-function filterMobileToggle(e) {
-  e.preventDefault();
-
-  const sidebarNode = document.querySelector('.sidebar-mobile-wrapper');
-  sidebarNode.classList.toggle('active');
-}
-document
-  .querySelector('.subheading.is_mobile button.filter-toggle')
-  .addEventListener('click', filterMobileToggle);
-document
-  .querySelector('.sidebar-mobile-wrapper button.close-btn')
-  .addEventListener('click', filterMobileToggle);
-
 // 게시글 목록 조회
 async function getList() {
   const res = await axios.get('https://11.fesp.shop/posts', {

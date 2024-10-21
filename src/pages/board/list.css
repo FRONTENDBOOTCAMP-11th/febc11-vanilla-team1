@@ -93,11 +93,12 @@ body {
 header.header {
   position: sticky;
   top: 0;
+  z-index: 100;
 
   display: flex;
   align-items: center;
-  padding: 8px 48px 15px;
-  margin-bottom: 15px;
+  padding: 8px 48px 16px;
+  margin-bottom: 16px;
   background-color: var(--color-white);
 
   & .header__title {
@@ -110,7 +111,8 @@ header.header {
     display: flex;
   }
 }
-button.header__action-button {
+button.header__action-button,
+button.subheading__action-button {
   margin-left: 25px;
   display: flex;
   position: relative;
@@ -139,7 +141,7 @@ button.header__action-button {
 
   display: flex;
   flex-direction: column;
-  padding: 24px 0 15px 0;
+  padding: 24px 0 16px 0;
   align-items: stretch;
 
   border-radius: 20px;
@@ -169,30 +171,38 @@ main.result-container {
 aside.sidebar {
   flex-shrink: 0;
   width: 260px;
+  max-height: 704px;
   padding: 0 24px 0 48px;
   margin-left: -260px;
 
+  overflow-y: auto;
+
   position: sticky;
+  top: 60px;
   left: -260px;
+
   transition:
     margin-left 0.3s,
     left 0.3s;
-  &.active {
+  &[aria-expanded='true'] {
     margin-left: 0;
     left: 0;
   }
 }
-.category-select {
-  padding-bottom: 40px;
+.sidebar-wrapper {
+  overflow-y: hidden;
 }
+.sidebar__categories {
+  padding-bottom: 40px;
 
-.category-select .category {
-  font-weight: 500;
-  white-space: normal;
-  word-wrap: break-word;
-  line-height: 1.35em;
-  padding: 0 1.1em 10px 0;
-  margin-left: 4px;
+  & .sidebar__category {
+    font-weight: 500;
+    white-space: normal;
+    word-wrap: break-word;
+    line-height: 1.35em;
+    padding: 0 1.1em 10px 0;
+    margin-left: 4px;
+  }
 }
 
 /* filter */
@@ -285,14 +295,14 @@ ul.product-list {
 
 @media screen and (max-width: 960px) {
   aside.sidebar,
-  header.list-header .nav,
-  header.list-header .result-count {
+  header.header .header__actions,
+  .header__title .result-count {
     display: none;
   }
   .is_mobile {
     display: block;
   }
-  .result-count {
+  .subheading__result-count {
     color: var(--color-gray-500);
   }
 
@@ -304,14 +314,14 @@ ul.product-list {
   }
 
   /* mobile category, filter */
-  .is_mobile .category-select {
+  .is_mobile.categories {
     display: flex;
     justify-content: space-between;
     padding: 0 16px 14px;
     border-bottom: 1px solid var(--color-gray-200);
     overflow-x: auto;
 
-    & .category {
+    & .categories__item {
       padding: 0 16px;
       white-space: nowrap;
     }
@@ -329,14 +339,14 @@ ul.product-list {
     min-height: 60px;
     padding: 0 20px;
 
-    & button.filter-toggle {
+    & button.subheading__filter-toggle {
       height: 25px;
       padding: 6px 20px;
       border-radius: 30px;
       border: 1.5px solid var(--color-gray-300);
     }
   }
-  .sidebar-mobile-wrapper {
+  .dialog {
     position: fixed;
     inset: 0;
     z-index: 100;
@@ -349,14 +359,14 @@ ul.product-list {
   }
 
   /* sidebar-mobile */
-  .sidebar-mobile {
+  .dialog-wrapper {
     width: 100%;
     height: 100%;
     padding: 0 20px 80px;
 
     overflow-y: auto;
 
-    & .sidebar-header {
+    & .dialog__header {
       padding: 36px 0 20px;
     }
   }
