@@ -96,8 +96,8 @@ async function loginUser(userEmail, userPw) {
     const accessToken = response.data.accessToken;
     const refreshToken = response.data.refreshToken;
     if (accessToken && refreshToken) {
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
+      sessionStorage.setItem('accessToken', accessToken);
+      sessionStorage.setItem('refreshToken', refreshToken);
       console.log('토큰 저장 완료:', { accessToken, refreshToken });
       if (response.data.exists) {
         window.location.href = 'complete.html';
