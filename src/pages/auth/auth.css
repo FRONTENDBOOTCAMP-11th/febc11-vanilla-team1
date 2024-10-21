@@ -49,6 +49,10 @@ input {
   padding: 0 5px;
 }
 
+.social_wrapper {
+  margin-top: 40px;
+}
+
 /* Commons */
 .auth-form {
   display: flex;
@@ -522,6 +526,86 @@ label {
   color: black;
   background-color: var(--color-white);
   border: 1px solid var(--color-gray-300);
+}
+
+/* Social Login */
+.social-title p {
+  font-size: 2.8rem;
+  line-height: 3.2;
+}
+
+.social-idInput {
+  padding-left: 0;
+  border-radius: 0;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid black;
+  color: var(--color-gray-500);
+}
+
+.social-pwInput {
+  padding-left: 0;
+  border-radius: 0;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid black;
+  color: var(--color-gray-500);
+}
+
+.social-save {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.social-save p {
+  font-size: 1.4rem;
+  line-height: 2;
+  color: var(--color-gray-500);
+}
+
+#socialIcon {
+  display: block;
+  cursor: pointer;
+}
+
+#socialBlank {
+  display: none;
+  cursor: pointer;
+}
+
+#socialQuestion {
+  cursor: pointer;
+}
+
+.edit-btn {
+  border-radius: 0;
+  margin-top: 20px;
+}
+
+.social-auth {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  color: var(--color-gray-500);
+}
+
+.social-cancel {
+  margin-top: 30px;
+  border-radius: 0;
+}
+
+.social-auth p {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  cursor: pointer;
+}
+
+.social-auth span {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: var(--color-gray-300);
 }
 
 /* 기본 스타일 설정 (375px 이상) */

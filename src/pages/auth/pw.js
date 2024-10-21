@@ -46,38 +46,34 @@ prevBtn.addEventListener('click', function (e) {
   window.location.href = 'login.html';
 });
 
-function validPassword(userPw) {
-  if (!userPw) {
-    regContainer.style.display = 'block';
-    regTxt.innerHTML = `<p>비밀번호가 일치하지 않습니다. *</p>`;
-  }
-}
-
+// 로그인 요청 함수
 async function loginUser(userEmail, userPw) {
   try {
-    const response = await axios.post('https://11.fesp.shop/apidocs/users/login', {
+    const response = await axios.post('https://11.fesp.shop/users/login', {
       email: userEmail,
       password: userPw,
     });
 
-    const accessToken = response.data.accessToken;
-    const refreshToken = response.data.refreshToken;
-    if (accessToken && refreshToken) {
-      sessionStorage.setItem('accessToken', accessToken);
-      sessionStorage.setItem('refreshToken', refreshToken);
-      console.log('토큰 저장 완료:', { accessToken, refreshToken });
-      if (response.data.exists) {
-        window.location.href = 'main.html';
+    if (response.data.item.token) {
+      const { accessToken, refreshToken } = response.data.item.token;
+
+      if (accessToken && refreshToken) {
+        sessionStorage.setItem('accessToken', accessToken);
+        sessionStorage.setItem('refreshToken', refreshToken);
+        window.location.href = 'complete.html';
+      } else {
+        console.error('로그인 실패');
       }
     } else {
-      console.error('토큰을 받지 못했습니다. 로그인 실패');
+      console.error('정보가 응답에 없습니다.');
     }
-
   } catch (error) {
-    console.log('로그인 중 오류 발생', error);
-    validPassword();
+    console.log('로그인 중 오류 발생', error.response ? error.response.data : error.message);
+    validPassword(userPw);
   }
 }
+
+// loginBtn 클릭 이벤트 리스너
 loginBtn.addEventListener('click', function (e) {
   e.preventDefault();
   const userEmail = sessionStorage.getItem('email');
@@ -90,6 +86,16 @@ loginBtn.addEventListener('click', function (e) {
     validPassword(userPw);
   }
 });
+
+function validPassword(userPw) {
+  if (!userPw) {
+    regContainer.style.display = 'block';
+    regTxt.innerHTML = `<p>비밀번호를 입력해주세요 *</p>`;
+  } else {
+    regContainer.style.display = 'block';
+    regTxt.innerHTML = `<p>비밀번호가 일치하지 않습니다. *</p>`;
+  }
+}
 
 alertMessage.addEventListener('click', function () {
   alert('아직 구현하지 않은 페이지입니다.')

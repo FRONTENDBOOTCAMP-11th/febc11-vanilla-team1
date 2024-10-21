@@ -6,6 +6,7 @@ const inputLastName = document.querySelector('#inputLastName');
 const inputPassword = document.querySelector('#inputPassword');
 const inputCalendar = document.querySelector('#inputCalendar');
 const signUpBtn = document.querySelector('.signUp-btn');
+const cancelBtn = document.querySelector('#cancelBtn');
 const loginTxtFirst = document.querySelector('.first');
 const loginTxtSecond = document.querySelector('.second');
 const toggleOpen = document.querySelector('#toggleOpen');
@@ -20,7 +21,6 @@ const regMin = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
 
 document.addEventListener('DOMContentLoaded', function () {
   const savedEmail = sessionStorage.getItem('email');
-
   if (!savedEmail) {
     window.location.href = 'login.html';
   }
@@ -61,7 +61,7 @@ inputPassword.addEventListener('input', function () {
 
 async function userSign(userPw, userName, userBirth, userEmail) {
   try {
-    const response = await axios.post('https://11.fesp.shop/apidocs/users/', {
+    const response = await axios.post('https://11.fesp.shop/users/', {
       email: userEmail,
       password: userPw,
       name: userName,
@@ -88,24 +88,23 @@ async function userSign(userPw, userName, userBirth, userEmail) {
 
 async function loginUser(userEmail, userPw) {
   try {
-    const response = await axios.post('https://11.fesp.shop/apidocs/users/login', {
+    const response = await axios.post('https://11.fesp.shop/users/login', {
       email: userEmail,
       password: userPw,
     });
 
-    const accessToken = response.data.accessToken;
-    const refreshToken = response.data.refreshToken;
-    if (accessToken && refreshToken) {
-      sessionStorage.setItem('accessToken', accessToken);
-      sessionStorage.setItem('refreshToken', refreshToken);
-      console.log('토큰 저장 완료:', { accessToken, refreshToken });
-      if (response.data.exists) {
-        window.location.href = 'complete.html';
-      }
-    } else {
-      console.error('토큰을 받지 못했습니다. 로그인 실패');
-    }
+    if (response.data.item.token) {
+      const { accessToken, refreshToken } = response.data.item.token
 
+      if (accessToken && refreshToken) {
+        sessionStorage.setItem('accessToken', accessToken);
+        sessionStorage.setItem('refreshToken', refreshToken);
+        console.log('토큰 저장 완료:', { accessToken, refreshToken });
+        window.location.href = 'complete.html';
+      } else {
+        console.error('토큰을 받지 못했습니다. 로그인 실패');
+      }
+    }
   } catch (error) {
     console.log('로그인 중 오류 발생', error);
   }
@@ -125,4 +124,9 @@ signUpBtn.addEventListener('click', function (e) {
   } else {
     validatePassword(userPw);
   }
+});
+
+cancelBtn.addEventListener('click', function () {
+  window.location.href = 'login.html'
+  sessionStorage.removeItem('email');
 });

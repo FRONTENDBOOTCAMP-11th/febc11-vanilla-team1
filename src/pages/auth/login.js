@@ -9,7 +9,7 @@ const socialBtn = document.querySelector('#socialBtn');
 
 socialBtn.addEventListener('click', function (e) {
   e.preventDefault();
-  alert('아직 구현되지 않은 기능입니다.')
+  window.location.href = 'social.html'
 })
 
 authInput.addEventListener('input', function () {
@@ -29,7 +29,7 @@ authInput.addEventListener('input', function () {
 async function getEmail(userEmail) {
   try {
 
-    const response = await axios.get('https://11.fesp.shop/apidocs/users/email', {
+    const response = await axios.get('https://11.fesp.shop/users/email', {
       params: {
         email: userEmail,
       },
@@ -43,12 +43,7 @@ async function getEmail(userEmail) {
       window.location.href = 'check.html';
     }
   } catch (error) {
-    if (error.response && error.response.status === 409) {
-      sessionStorage.setItem('email', userEmail);
-      window.location.href = 'pw.html';
-    } else {
-      console.error('이메일 확인 중 오류', error);
-    }
+    console.error('이메일 확인 중 오류', error);
   }
 }
 
