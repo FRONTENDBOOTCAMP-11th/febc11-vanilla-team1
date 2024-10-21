@@ -43,7 +43,9 @@ async function getEmail(userEmail) {
       window.location.href = 'check.html';
     }
   } catch (error) {
-    console.error('이메일 확인 중 오류', error);
+    if (error.status === 409)
+      window.location.href = 'pw.html';
+
   }
 }
 
