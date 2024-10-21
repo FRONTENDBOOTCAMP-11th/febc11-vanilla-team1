@@ -46,6 +46,16 @@ prevBtn.addEventListener('click', function (e) {
   window.location.href = 'login.html';
 });
 
+function tokenError(error) {
+  if (error.response && error.response.status === 401) {
+    alert('다시 로그인 해주세요.');
+    sessionStorage.removeItem('email');
+    window.location.href = 'login.html';
+  } else {
+    console.log('오류', error);
+  }
+}
+
 // 로그인 요청 함수
 async function loginUser(userEmail, userPw) {
   try {
@@ -63,15 +73,39 @@ async function loginUser(userEmail, userPw) {
         window.location.href = 'complete.html';
       } else {
         console.error('로그인 실패');
+        validPassword(userPw);
       }
     } else {
       console.error('정보가 응답에 없습니다.');
     }
   } catch (error) {
-    console.log('로그인 중 오류 발생', error.response ? error.response.data : error.message);
-    validPassword(userPw);
+    if (error.response && error.response.status === 401) {
+      const reToken = await issueToken();
+      if (reToken) {
+        sessionStorage.setItem('accessToken', reToken);
+        return loginUser(userEmail, userPw);
+      } else {
+        tokenError(error)
+      }
+    } else {
+      tokenError(error)
+    }
   }
 }
+
+async function issueToken() {
+  try {
+    const response = await axios.get('https://11.fesp.shop/auth/refresh', {
+      headers: {
+        'Authorization': `Bearer ${sessionStorage.getItem('refreshToken')}`,
+      },
+    });
+    return response.data.item.accessToken;
+  } catch (error) {
+    tokenError(error)
+  }
+}
+
 
 // loginBtn 클릭 이벤트 리스너
 loginBtn.addEventListener('click', function (e) {

@@ -76,7 +76,6 @@ async function userSign(userPw, userName, userBirth, userEmail) {
     }
 
   } catch (error) {
-    // 오류 정보 출력
     if (error.response) {
       console.error('서버 응답 오류:', error.response.data);
       console.error('상태 코드:', error.response.status);
@@ -99,7 +98,6 @@ async function loginUser(userEmail, userPw) {
       if (accessToken && refreshToken) {
         sessionStorage.setItem('accessToken', accessToken);
         sessionStorage.setItem('refreshToken', refreshToken);
-        console.log('토큰 저장 완료:', { accessToken, refreshToken });
         window.location.href = 'complete.html';
       } else {
         console.error('토큰을 받지 못했습니다. 로그인 실패');
@@ -130,3 +128,5 @@ cancelBtn.addEventListener('click', function () {
   window.location.href = 'login.html'
   sessionStorage.removeItem('email');
 });
+
+
