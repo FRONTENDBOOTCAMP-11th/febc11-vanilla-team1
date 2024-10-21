@@ -1,21 +1,18 @@
-import './style.css';
-import javascriptLogo from './javascript.svg';
-import viteLogo from '/vite.svg';
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`;
+var act = document.getElementsByClassName("active_button"); 
+var val; //변수 val
+
+for (val = 0; val < act.length; val++) { 
+  act[val].addEventListener("click", function() { 
+    this.classList.toggle("on");     //화살표 on off
+
+    var shoes_panel = this.nextElementSibling; 
+    
+    // 높이 속성값
+    if (shoes_panel.style.maxHeight) { 
+      shoes_panel.style.maxHeight = null;
+    } else {
+      shoes_panel.style.maxHeight = shoes_panel.scrollHeight + "px"; 
+    } 
+  });
+}
