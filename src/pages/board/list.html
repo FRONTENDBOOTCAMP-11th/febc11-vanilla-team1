@@ -22,7 +22,6 @@
               class="header__action-button header__filter-toggle"
               aria-expanded="true"
               aria-controls="sidebar"
-              onclick="filterToggle(event, this)"
             >
               <span>필터 숨기기</span>
               <img
@@ -38,7 +37,6 @@
                 class="header__action-button header__sorting-dropdown"
                 aria-expanded="false"
                 aria-controls="sorting-options"
-                onclick="sortingDropdown(event, this)"
               >
                 <span>정렬 기준:</span>
                 <img
@@ -120,10 +118,7 @@
 
         <div class="subheading is_mobile">
           <div class="subheading__result-count">61개의 결과</div>
-          <button
-            class="subheading__filter-toggle subheading__action-button"
-            onclick="filterMobileToggle(event)"
-          >
+          <button class="subheading__filter-toggle subheading__action-button">
             <span>필터</span>
             <img
               src="/assets/icons/button24px/filter.svg"
@@ -189,9 +184,9 @@
 
             <ul class="filter-select">
               <li class="filter collapse-container">
-                <div class="filter-title collapse-button">
+                <button class="filter-title collapse-button">
                   <span>성별</span>
-                </div>
+                </button>
                 <div class="filter-group collapse-content">
                   <div class="filter-item">
                     <div class="filter-checkbox">
@@ -306,11 +301,7 @@
               적용
             </button>
           </div>
-          <button
-            class="close-btn"
-            aria-label="필터 메뉴 닫기"
-            onclick="filterMobileToggle(event)"
-          >
+          <button class="close-btn" aria-label="필터 메뉴 닫기">
             <img
               src="/assets/icons/buttons/l-fill-x.svg"
               alt="닫기"
@@ -341,7 +332,6 @@
                 <button
                   class="filter-title collapse-button"
                   aria-label="필터 드롭다운"
-                  onclick="toggleCollapse(this)"
                 >
                   <span>성별</span>
                   <img
@@ -391,7 +381,6 @@
                 <button
                   class="filter-title collapse-button"
                   aria-label="가격대 필터 드롭다운"
-                  onclick="toggleCollapse(this)"
                 >
                   <span>가격대</span>
                   <img
@@ -742,6 +731,5 @@
       <!-- <footer id="footer"></footer> -->
     </div>
     <script type="module" src="./list.js"></script>
-    <script src="./uiHandler.js"></script>
   </body>
 </html>

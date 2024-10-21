@@ -1,16 +1,3 @@
-// 필터 토글
-function filterToggle(e, el) {
-  e.preventDefault();
-
-  const expanded = el.getAttribute('aria-expanded') === 'true';
-  const asideNode = document.querySelector('.sidebar');
-  const toggleTextNode = document.querySelector('.header__filter-toggle span');
-
-  el.setAttribute('aria-expanded', !expanded);
-  asideNode.setAttribute('aria-expanded', !expanded);
-  toggleTextNode.textContent = expanded ? '필터 표시' : '필터 숨기기';
-}
-
 // 필터 모바일 토글
 function filterMobileToggle(e) {
   e.preventDefault();
@@ -44,6 +31,9 @@ function toggleCollapse(el) {
     : '/assets/icons/button24px/down.svg';
   collapseContentNode.classList.toggle('hidden');
 }
+document
+  .querySelector('.collapse-button')
+  .addEventListener('click', (e, el) => toggleCollapse(el));
 
 // components
 // script.js
