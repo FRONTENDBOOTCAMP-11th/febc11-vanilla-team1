@@ -32,6 +32,11 @@ async function getEmail(userEmail) {
       params: {
         email: userEmail,
       },
+
+      headers: {
+        'Content-Type': 'application/json',
+        'client-id': 'vanilla01',
+      }
     });
 
     if (response.data.ok === 0) {

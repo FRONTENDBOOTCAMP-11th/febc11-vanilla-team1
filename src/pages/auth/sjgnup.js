@@ -38,6 +38,9 @@ toggleOpen.addEventListener('click', function () {
   toggleOpen.style.display = 'none';
 });
 
+const today = new Date().toISOString().split("T")[0];
+document.querySelector('#inputCalendar').setAttribute('max', today)
+
 function regPassword(userPw) {
   if (userPw === '') {
     loginTxtFirst.innerHTML = `<p style="color:var(--color-gray-500)">X 최소 8자 이상 *</p>`;
@@ -69,7 +72,14 @@ async function userSign(userPw, userName, userBirth, userEmail) {
       extra: {
         userBirth
       },
-    });
+    },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'client-id': 'vanilla01',
+        }
+      },
+    );
 
     if (response.data) {
       loginUser(userEmail, userPw);
@@ -90,7 +100,14 @@ async function loginUser(userEmail, userPw) {
     const response = await axios.post('https://11.fesp.shop/users/login', {
       email: userEmail,
       password: userPw,
-    });
+    },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'client-id': 'vanilla01',
+        }
+      },
+    );
 
     if (response.data.item.token) {
       const { accessToken, refreshToken } = response.data.item.token

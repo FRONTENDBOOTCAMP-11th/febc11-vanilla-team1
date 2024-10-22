@@ -242,7 +242,6 @@ input[type='checkbox']:checked + label {
 #authInput[type='text'] {
   margin: 20px 0;
   width: 100%;
-  min-width: 360px;
   padding-right: 30px;
 }
 
@@ -309,6 +308,10 @@ input[type='checkbox']:checked + label {
 /* SignUp form */
 .signUp-title {
   margin-bottom: 57px;
+}
+
+.signUp-text {
+  margin-left: 12px;
 }
 
 .signup {
@@ -579,11 +582,11 @@ label {
 }
 
 .edit-btn {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .social-auth {
-  margin-top: 20px;
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -598,7 +601,7 @@ label {
 }
 
 .social-cancel {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .social-auth span {
@@ -613,5 +616,15 @@ label {
 @media (max-width: 500px) {
   .l_wrapper {
     padding: 0 36px;
+  }
+
+  .signUp-title {
+    margin-bottom: 30px;
+  }
+  .signUp-btn {
+    margin-top: 20px;
+  }
+  .signUp-agreement {
+    margin-top: 10px;
   }
 }

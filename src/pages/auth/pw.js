@@ -62,10 +62,19 @@ async function loginUser(userEmail, userPw) {
     const response = await axios.post('https://11.fesp.shop/users/login', {
       email: userEmail,
       password: userPw,
-    });
+    },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'client-id': 'vanilla01',
+        }
+      }
+    );
 
     if (response.data.item.token) {
+      console.log(response.data.item);
       const { accessToken, refreshToken } = response.data.item.token;
+
 
       if (accessToken && refreshToken) {
         sessionStorage.setItem('accessToken', accessToken);
@@ -98,6 +107,8 @@ async function issueToken() {
     const response = await axios.get('https://11.fesp.shop/auth/refresh', {
       headers: {
         'Authorization': `Bearer ${sessionStorage.getItem('refreshToken')}`,
+        'Content-Type': 'application/json',
+        'client-id': 'vanilla01',
       },
     });
     return response.data.item.accessToken;
