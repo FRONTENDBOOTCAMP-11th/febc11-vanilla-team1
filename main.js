@@ -1,4 +1,3 @@
-
 var act = document.getElementsByClassName("active_button"); 
 var val; //변수 val
 
