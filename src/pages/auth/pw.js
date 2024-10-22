@@ -73,7 +73,7 @@ async function loginUser(userEmail, userPw) {
         window.location.href = 'complete.html';
       } else {
         console.error('로그인 실패');
-        validPassword(userPw);
+        checkPassword(userPw);
       }
     } else {
       console.error('정보가 응답에 없습니다.');
@@ -117,11 +117,11 @@ loginBtn.addEventListener('click', function (e) {
     loginUser(userEmail, userPw);
   } else {
     console.error('이메일 또는 비밀번호가 없습니다.');
-    validPassword(userPw);
+    checkPassword(userPw);
   }
 });
 
-function validPassword(userPw) {
+function checkPassword(userPw) {
   if (!userPw) {
     regContainer.style.display = 'block';
     regTxt.innerHTML = `<p>비밀번호를 입력해주세요 *</p>`;

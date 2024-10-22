@@ -28,14 +28,13 @@ authInput.addEventListener('input', function () {
 
 async function getEmail(userEmail) {
   try {
-
     const response = await axios.get('https://11.fesp.shop/users/email', {
       params: {
         email: userEmail,
       },
     });
 
-    if (response.data.ok === 0 && response.data.message === "이미 등록된 이메일입니다.") {
+    if (response.data.ok === 0) {
       sessionStorage.setItem('email', userEmail);
       window.location.href = 'pw.html';
     } else {

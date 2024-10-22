@@ -38,7 +38,7 @@ toggleOpen.addEventListener('click', function () {
   toggleOpen.style.display = 'none';
 });
 
-function validatePassword(userPw) {
+function regPassword(userPw) {
   if (userPw === '') {
     loginTxtFirst.innerHTML = `<p style="color:var(--color-gray-500)">X 최소 8자 이상 *</p>`;
     loginTxtSecond.innerHTML = '<p style="color:var(--color-gray-500)">X 알파벳 대문자 및 소문자 조합, 최소 1개 이상의 숫자 *</p>';
@@ -56,7 +56,7 @@ function validatePassword(userPw) {
 
 inputPassword.addEventListener('input', function () {
   const userPw = inputPassword.value;
-  validatePassword(userPw);
+  regPassword(userPw);
 });
 
 async function userSign(userPw, userName, userBirth, userEmail) {
@@ -116,11 +116,11 @@ signUpBtn.addEventListener('click', function (e) {
   const userEmail = sessionStorage.getItem('email');
 
   if (regFirstName.test(inputFirstName.value) && regLastName.test(inputLastName.value) && regPw.test(userPw)) {
-    validatePassword(userPw);
+    regPassword(userPw);
     userSign(userPw, userName, userBirth, userEmail);
 
   } else {
-    validatePassword(userPw);
+    regPassword(userPw);
   }
 });
 
