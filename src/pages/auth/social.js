@@ -41,80 +41,53 @@ socialFindPw.addEventListener('click', function () {
   window.location.href = 'https://accounts.kakao.com/weblogin/find_password?continue=%2Flogin%3Fcontinue%3Dhttps%253A%252F%252Fkauth.kakao.com%252Foauth%252Fauthorize%253Fgrant_type%253Dauthorization_code%2526scope%253D%2526response_type%253Dcode%2526redirect_uri%253Dhttps%25253A%25252F%25252Fbrunch.co.kr%25252Fcallback%25252Fauth%25252Fkakao%2526state%253DaHR0cHM6Ly9icnVuY2guY28ua3Ivc2lnbmluL2ZpbmlzaD91cmw9JTJG%2526client_id%253De0201caea90cafbb237e250f63a519b5%2526through_account%253Dtrue&lang=ko'
 })
 
+socialBtn.addEventListener('click', function () {
+  kakaoLogin();
+})
 
-Kakao.init('767d2ee7d574933c25acdbe3edd6bc87')
 
-function loginWithKakao() {
-  Kakao.Auth.authorize({
-    redirectUri: 'https://developers.kakao.com/tool/demo/oauth',
-  });
+Kakao.init('767d2ee7d574933c25acdbe3edd6bc87');
+
+console.log(Kakao.isInitialized());
+
+function kakaoLogin() {
+
+  Kakao.Auth.login({
+    success: function (response) {
+      Kakao.API.request({
+        url: '/v2/user/me',
+        success: function (response) {
+          console.log(response);
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+    },
+    fail: function (error) {
+      console.log(error)
+    },
+  })
 }
 
-function displayToken() {
-  var token = getCookie('authorize-access-token');
+Kakao.Auth.authorize({
+  redirectUri: 'http://localhost:5173/src/pages/auth/complete.html',
+});
 
-  if (token) {
-    Kakao.Auth.setAccessToken(token);
-    Kakao.Auth.getStatusInfo()
-      .then(function (res) {
-        if (res.status === 'connected') {
-          document.getElementById('token-result').innerText
-            = 'login success, token: ' + Kakao.Auth.getAccessToken();
-        }
-      })
-      .catch(function (err) {
-        Kakao.Auth.setAccessToken(null);
-      });
+//카카오로그아웃  
+function kakaoLogout() {
+  if (Kakao.Auth.getAccessToken()) {
+    Kakao.API.request({
+      url: '/v1/user/unlink',
+      success: function (response) {
+        console.log(response)
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+    Kakao.Auth.setAccessToken(undefined)
   }
 }
 
-function getCookie(name) {
-  var parts = document.cookie.split(name + '=');
-  if (parts.length === 2) { return parts[1].split(';')[0]; }
-}
 
-socialBtn.addEventListener('click', function () {
-
-  loginWithKakao()
-})
-
-// logoutBtn.addEventListener('click', function () {
-//   kakaoLogout();
-// })
-
-
-// console.log(Kakao.isInitialized());
-
-// function kakaoLogin() {
-//   Kakao.Auth.login({
-//     success: function (response) {
-//       Kakao.API.request({
-//         url: '/v2/user/me',
-//         success: function (response) {
-//           console.log(response)
-//         },
-//         fail: function (error) {
-//           console.log(error)
-//         },
-//       })
-//     },
-//     fail: function (error) {
-//       console.log(error)
-//     },
-//   })
-// }
-// //카카오로그아웃  
-// function kakaoLogout() {
-//   if (Kakao.Auth.getAccessToken()) {
-//     Kakao.API.request({
-//       url: '/v1/user/unlink',
-//       success: function (response) {
-//         console.log(response)
-//       },
-//       fail: function (error) {
-//         console.log(error)
-//       },
-//     })
-//     Kakao.Auth.setAccessToken(undefined)
-//   }
-// }  
