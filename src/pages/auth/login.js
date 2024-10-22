@@ -1,4 +1,3 @@
-'use strict'
 import axios from 'axios';
 
 const authInput = document.querySelector('#emailInput');
@@ -7,10 +6,6 @@ const emailRegex = /^[A-Za-z0-9]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const regText = document.querySelector('.reg-Text');
 const socialBtn = document.querySelector('#socialBtn');
 
-socialBtn.addEventListener('click', function (e) {
-  e.preventDefault();
-  window.location.href = 'social.html'
-})
 
 authInput.addEventListener('input', function () {
   const userEmail = authInput.value.trim();
@@ -69,3 +64,55 @@ authBtn.addEventListener('click', function (e) {
     regText.textContent = '잘못된 이메일 주소입니다.';
   }
 });
+
+// 소셜로그인
+
+socialBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+  if (kakaoLogin()) {
+    window.location.href = 'complete.html'
+  }
+})
+
+// logoutBtn.addEventListener('click', function () {
+//   kakaoLogout();
+// })
+
+const APIKey = '767d2ee7d574933c25acdbe3edd6bc87';
+Kakao.init(APIKey);
+
+console.log(Kakao.isInitialized());
+
+function kakaoLogin() {
+  Kakao.Auth.login({
+    success: function (response) {
+      Kakao.API.request({
+        url: '/v2/user/me',
+        success: function (response) {
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+    },
+    fail: function (error) {
+      console.log(error)
+    },
+  })
+}
+
+//카카오로그아웃  
+function kakaoLogout() {
+  if (Kakao.Auth.getAccessToken()) {
+    Kakao.API.request({
+      url: '/v1/user/unlink',
+      success: function (response) {
+        console.log(response)
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+    Kakao.Auth.setAccessToken(undefined)
+  }
+}  
