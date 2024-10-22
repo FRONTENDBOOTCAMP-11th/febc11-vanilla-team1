@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>소셜 로그인</title>
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="l_wrapper social_wrapper">
+      <div id="socialForm" class="soical-form">
+        <div class="social-title">
+          <p>계정 정보 입력으로도 로그인할 수 있어요.</p>
+        </div>
+
+        <div class="social-login">
+          <input class="auth-input social-idInput" id="inputCalendar" placeholder="카카오메일, 이메일, 전화번호" type="text"
+            required tabindex="1" />
+
+          <input class="auth-input social-pwInput" id="inputCalendar" placeholder="비밀번호" type="text" required
+            tabindex="1" />
+        </div>
+
+
+        <div class="social-save">
+          <img id="socialIcon" src="/assets/icons/buttons/social.svg" tabindex="1">
+          <img id="socialBlank" src="/assets/icons/buttons/blank-social.svg" tabindex="1" />
+          <p>간편 로그인 정보 저장</p>
+          <img id="socialQuestion" src="/assets/icons/buttons/question.svg " tabindex="1" />
+        </div>
+
+
+        <button type="button" id="cancel-btn" class="btn login-btn social-cancel" tabindex="1">취소</button>
+        <button type="button" id="socialBtn" class="btn social-btn edit-btn" tabindex="1">로그인</button>
+
+        <div class="social-auth">
+          <a class="social-sign" tabindex="1">회원가입</a>
+          <span>|</span>
+          <a class="social-id-find" tabindex="1">계정 찾기</a>
+          <span>|</span>
+          <a class="social-pw-find" tabindex="1">비밀번호 찾기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./social.js"></script>
+
+
+</body>
+
+</html>

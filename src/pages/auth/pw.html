@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>login</title>
+  <link rel="stylesheet" href="../../../style.css">
+  <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="l_wrapper">
+      <div id="login-form" class="auth-form">
+        <header class="auth-header login-header">
+          <div class="auth-logo">
+            <img src="/assets/icons/logo/nike.svg" alt="nike-logo" />
+          </div>
+          <div class="login-container">
+            <h1 class="auth-title pw-title">비밀번호를 입력하세요.</h1>
+            <div class="edit-container">
+              <p class="auth-email"></p>
+              <a class="edit-email" tabindex="1">편집</a>
+            </div>
+            <div id="regContainer">
+              <p id="regPw"></p>
+            </div>
+          </div>
+        </header>
+        <section class="input-form login">
+          <div class="password-container">
+            <input class="auth-input pw-input" id="authInput" placeholder="비밀번호" type="password" maxlength="32" required
+              tabindex="1" />
+            <img class="close" id="toggleClose" src="/assets/icons/eye-icon/closeeye.svg" tabindex="1">
+            <img class="open" id="toggleOpen" src="/assets/icons/eye-icon/openeye.svg" tabindex="1">
+          </div>
+          <a class="find-password" tabindex="1">비밀번호 찾기</a>
+        </section>
+        <div class="button-container">
+          <button type="button" id="prevBtn" class="btn prev-btn" tabindex="1">이전</button>
+          <button type="button" id="loginBtn" class="btn next-btn" tabindex="1">로그인</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./pw.js"></script>
+
+
+
+</body>
+
+</html>

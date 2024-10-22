@@ -1,0 +1,617 @@
+/* reset */
+body,
+p {
+  margin: unset;
+  padding: unset;
+}
+
+body {
+  min-width: 375px;
+}
+
+a {
+  color: unset;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+h1,
+h2,
+h3 {
+  margin: unset;
+  font-size: unset;
+  font-weight: unset;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: top;
+}
+
+button,
+input {
+  all: unset;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Variable */
+
+/* Typography */
+:root {
+  font-size: 62.5%;
+}
+
+/* Layouts */
+.l_wrapper {
+  max-width: 512px;
+  margin: 0 auto;
+  padding: 0 5px;
+}
+
+.social_wrapper {
+  margin-top: 40px;
+}
+
+/* Commons */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-input {
+  letter-spacing: -0.5px;
+}
+
+.auth-logo {
+  width: 76px;
+  height: 60px;
+  aspect-ratio: 76 / 60;
+  margin: 20px 0;
+}
+
+.auth-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.auth-title {
+  font-size: 2.8rem;
+  line-height: 3.2rem;
+}
+
+.auth-input {
+  height: 56px;
+  padding: 16px 12px 16px 12px;
+  box-sizing: border-box;
+  font-size: 1.6rem;
+  color: var(--color-gray-500);
+  border-radius: 8px;
+  border: 1px solid var(--color-gray-500);
+}
+
+.auth-validation {
+  margin-left: 8px;
+  font-size: 1.2rem;
+  color: #707072;
+  line-height: 1.8;
+}
+
+.btn {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-size: 1.6rem;
+}
+
+label {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-image: url(/assets/icons/buttons/m-check.svg);
+  cursor: pointer;
+}
+
+input[type='checkbox'] {
+  display: none;
+}
+
+input[type='checkbox']:checked + label {
+  background-image: url(/assets/icons/buttons/m-checked.svg);
+}
+
+.spacing {
+  margin: 0 5px;
+}
+
+/* Components */
+
+/* Login form */
+#emailInput[type='email'] {
+  width: 100%;
+  margin-top: 57px;
+}
+
+.reg-Text {
+  margin: 5px 0 20px 10px;
+  color: red;
+  font-size: 1.2rem;
+}
+
+.login-agreement {
+  font-size: 1.6rem;
+  line-height: 2.4;
+  color: #757575;
+}
+
+.login-btn {
+  width: 100%;
+  height: 52px;
+  font-size: 1.6rem;
+  line-height: 2.8;
+  border-radius: 25px;
+  text-align: center;
+  margin-top: 70px;
+}
+
+.social-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 52px;
+  font-size: 1.6rem;
+  line-height: 2.8;
+  margin-top: 20px;
+  border-radius: 25px;
+  text-align: center;
+  background-color: #ffe500;
+  color: #333;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.social-btn:hover {
+  background-color: #afa43f;
+}
+
+.social-btn:focus {
+  border: 1px solid blue;
+}
+
+.login-btn:hover {
+  background-color: #737374;
+}
+
+.login-btn:focus {
+  border: 1px solid blue;
+}
+
+/* Password form */
+.edit-container {
+  display: flex;
+}
+
+.pw-title {
+  margin-bottom: 10px;
+}
+.auth-email {
+  font-size: 1.6rem;
+  line-height: 2.4;
+}
+
+.edit-email {
+  font-size: 1.6rem;
+  line-height: 2.4;
+  margin-left: 5px;
+  font-weight: 400;
+  color: var(--color-gray-500);
+  cursor: pointer;
+}
+
+.find-password {
+  font-size: 1.6rem;
+  line-height: 2.4;
+  font-weight: 400;
+  color: var(--color-gray-500);
+}
+
+#regContainer {
+  min-width: 360px;
+  height: 40px;
+  background-color: rgb(231, 229, 229);
+  margin-top: 20px;
+  padding-left: 20px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#regPw {
+  font-size: 1.6rem;
+  line-height: 40px;
+  color: red;
+}
+
+.password-container {
+  position: relative;
+}
+
+#authInput[type='password'],
+#authInput[type='text'] {
+  margin: 20px 0;
+  width: 100%;
+  min-width: 360px;
+  padding-right: 30px;
+}
+
+.close,
+.open {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.prev-btn,
+.next-btn {
+  width: 90px;
+  height: 52px;
+  font-size: 1.6rem;
+  line-height: 52px;
+  border-radius: 25px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.prev-btn {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border: 1px solid var(--color-gray-300);
+}
+
+.next-btn {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border: none;
+}
+
+.find-password:hover {
+  cursor: pointer;
+}
+
+.prev-btn:hover {
+  border: 1px solid var(--color-black);
+}
+
+.next-btn:hover {
+  background-color: #737374;
+}
+
+.prev-btn:focus,
+.next-btn:focus {
+  border: 1px solid blue;
+}
+
+/* SignUp form */
+.signUp-title {
+  margin-bottom: 57px;
+}
+
+.signup {
+  max-width: 502px;
+  display: flex;
+  flex-direction: column;
+}
+.name-container {
+  display: flex;
+  gap: 12px;
+}
+
+#inputFirstName[type='text'],
+#inputLastName[type='text'] {
+  width: 100%;
+}
+
+#inputPassword[type='password'],
+#inputPassword[type='text'],
+#inputCalendar[type='date'] {
+  width: 100%;
+  margin: 20px 0 16px 0;
+}
+
+input[type='date'] {
+  margin-top: 20px;
+  position: relative;
+  background: url(/assets/icons/button24px/calendar.svg) no-repeat right 16px
+    center;
+  width: 100%;
+}
+
+input[type='date']::-webkit-clear-button,
+input[type='date']::-webkit-inner-spin-button {
+  display: none;
+}
+input[type='date']::-webkit-calendar-picker-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  color: transparent;
+  cursor: pointer;
+}
+
+input[type='date']:valid::before {
+  display: none;
+}
+
+.signUp-agreement {
+  margin-top: 22px;
+  display: flex;
+  font-size: 1.6rem;
+}
+
+.signUp-btn {
+  width: 100%;
+  height: 46px;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.6rem;
+  border-radius: 30px;
+  margin-top: 70px;
+}
+
+.signUp-btn:focus {
+  border: 1px solid blue;
+}
+
+.valid {
+  color: var(--color-secondary);
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.invalid {
+  color: var(--color-primary);
+}
+
+.login-first {
+  color: var(--color-gray-500);
+  display: inline-flex;
+}
+
+.login-first .icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+.login-second {
+  color: var(--color-gray-500);
+  display: inline-flex;
+}
+
+.login-second .icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+/* Check form */
+
+.check-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.check-title {
+  margin: 26px 0;
+}
+
+.check-contents {
+  margin-bottom: 36px;
+}
+
+.check-container p {
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  font-weight: 700;
+  margin-left: 12px;
+  margin: 0 0 12px 12px;
+}
+
+.check-container .last {
+  margin-bottom: 36px;
+}
+
+.check-contents {
+  font-size: 1.4rem;
+  line-height: 2.1rem;
+  color: #757575;
+}
+
+.check-section {
+  display: flex;
+  flex-direction: row;
+}
+
+.line {
+  max-width: 502px;
+  height: 42px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 24px;
+}
+
+label {
+  flex-shrink: 0;
+}
+
+.label-hover {
+  position: relative; /* 가상 요소를 위한 relative 설정 */
+  display: inline-block;
+  cursor: pointer;
+}
+
+.label-hover::before {
+  content: '';
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  width: 34px;
+  height: 34px;
+  background-color: rgba(99, 99, 99, 0.1);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* label을 hover할 때 스타일 */
+.label-hover:hover::before {
+  transform: translate(-50%, -50%) scale(1.2);
+  opacity: 1;
+}
+
+.agree-btn {
+  width: 100%;
+  height: 46px;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.6rem;
+  border-radius: 30px;
+}
+
+.agree-btn:hover {
+  background-color: #737374;
+}
+
+.cancel-btn:hover {
+  border: 1px solid var(--color-black);
+}
+
+.agree-btn:focus,
+.cancel-btn:focus {
+  border: 1px solid blue;
+}
+
+.cancel-btn {
+  width: 100%;
+  height: 46px;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.6rem;
+  border-radius: 30px;
+  margin-top: 12px;
+  color: black;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-300);
+}
+
+/* Social Login */
+.social-title p {
+  font-size: 2.8rem;
+  line-height: 3.2;
+}
+
+.social-idInput {
+  padding-left: 0;
+  border-radius: 0;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid black;
+  color: var(--color-gray-500);
+}
+
+.social-pwInput {
+  padding-left: 0;
+  border-radius: 0;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid black;
+  color: var(--color-gray-500);
+}
+
+.social-save {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.social-save p {
+  font-size: 1.4rem;
+  line-height: 2;
+  color: var(--color-gray-500);
+}
+
+#socialIcon {
+  display: block;
+  cursor: pointer;
+}
+
+#socialBlank {
+  display: none;
+  cursor: pointer;
+}
+
+#socialQuestion {
+  cursor: pointer;
+}
+
+.edit-btn {
+  margin-top: 20px;
+}
+
+.social-auth {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  color: var(--color-gray-500);
+}
+
+.social-auth a {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.social-cancel {
+  margin-top: 30px;
+}
+
+.social-auth span {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: var(--color-gray-300);
+}
+
+/* 기본 스타일 설정 (375px 이상) */
+
+/* 375px 이하의 화면 크기에 적용할 스타일 */
+@media (max-width: 500px) {
+  .l_wrapper {
+    padding: 0 36px;
+  }
+}
