@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 
 async function getDB(clientId) {
-  const url = `${process.env.DB_URL}/${clientId}?authSource=admin`;
+  const url = `${process.env.DB_URL}/${clientId}`;
 
   console.log(`DB 접속 시도`, url);
 

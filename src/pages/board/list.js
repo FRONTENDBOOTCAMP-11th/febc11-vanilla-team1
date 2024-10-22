@@ -1,5 +1,5 @@
 'use strict';
-import axios from 'axios';
+import api from '@/api.js';
 
 // 정렬 드롭다운
 function sortingDropdown(e, el) {
@@ -71,37 +71,57 @@ filterMobileToggleButtons.forEach(el => {
   el.addEventListener('click', e => filterMobileToggle(e));
 });
 
-// 게시글 목록 조회
+// GET /api/products
 async function getList() {
-  const res = await axios.get('https://11.fesp.shop/posts', {
-    params: {
-      type: 'test',
-    },
-  });
-  return res.data;
-}
+  try {
+    const { data } = await api('get', 'products');
 
-// 게시글 출력
-async function renderList() {
-  const list = getList();
-  if (!list) {
-    return;
+    return data;
+  } catch (error) {
+    console.error(error);
   }
+}
+// 상품 목록 출력
+async function renderList() {
+  const listNode = document.querySelector('.product-list');
 
-  const { item } = await getList();
+  const { item, pagination } = await getList();
 
-  // type Post = {
-  //   _id: string;
-  //   title: string;
-  //   user: {
-  //     _id: string;
-  //     name: string;
-  //   };
-  //   content: string;
-  //   views: number;
-  //   createdAt: string;
-  // };
-  console.log(item);
+  const list = item
+    .map(product => {
+      return `
+      <li class="product">
+        <figure>
+          <a href="">
+            <div class="product__image">
+              <img 
+                src="https://11.fesp.shop${product.mainImages[0].path}" 
+                alt="${product.mainImages[0].name}" 
+              />
+            </div>
+
+            <div class="product__info">
+              <div class="product-title">
+                ${product.extra.isNew ? '<span class="isNew">신제품</span>' : ''}
+                ${product.extra.isBest ? '<span class="isHot">인기</span>' : ''}
+                <div class="product__name">${product.name}</div>
+                <div class=""product__content">
+                  ${product.content || ''}
+                </div>
+              </div>
+              ${product.options ? `<div class="product__count">${product.options}개 색상</div>` : ''}              
+              <p class="product__price">${product.price.toLocaleString()} 원</p>
+            </div>
+          </a>
+        </figure>
+      </li>
+    `;
+    })
+    .join('');
+  listNode.innerHTML = list;
 }
 
-// renderList();
+// 초기 실행
+document.addEventListener('DOMContentLoaded', () => {
+  renderList();
+});
