@@ -1,6 +1,94 @@
 'use strict';
 import api from '@/api.js';
 
+class Params {
+  gender = [];
+
+  // g가 gender에 포함되어 있으면 제거, 아니면 추가
+  setGender(g) {
+    const index = this.gender.indexOf(g);
+    index !== -1 ? this.gender.splice(index, 1) : this.gender.push(g);
+  }
+  getGender() {
+    if (this.gender.length === 0) {
+      return null;
+    }
+    const genderParams = {
+      'extra.gender': {
+        $in: [],
+      },
+    };
+    this.gender.forEach(g => {
+      genderParams['extra.gender'].$in.push(g);
+    });
+
+    return genderParams;
+  }
+
+  getParams() {
+    return {
+      ...this.getGender(),
+    };
+  }
+}
+const params = new Params();
+
+// `{"$or": ${JSON.stringify(params.getParams())}}`
+// {"extra.isNew":{"$in":[true, false]},"_id":{"$in":[1,2,3]}}
+// GET /api/products
+async function getList() {
+  try {
+    const custom = params.getParams() || null;
+
+    const { data } = await api('get', 'products', {
+      custom: JSON.stringify(custom),
+    });
+
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+// 상품 목록 출력
+async function renderList() {
+  const listNode = document.querySelector('.product-list');
+
+  const { item, pagination } = await getList();
+
+  const list = item
+    .map(product => {
+      return `
+      <li class="product">
+        <figure>
+          <a href="">
+            <div class="product__image">
+              <img 
+                src="https://11.fesp.shop${product.mainImages[0].path}" 
+                alt="${product.mainImages[0].name}" 
+              />
+            </div>
+
+            <div class="product__info">
+              <div class="product-title">
+                ${product.extra.isNew ? '<span class="isNew">신제품</span>' : ''}
+                ${product.extra.isBest ? '<span class="isHot">인기</span>' : ''}
+                <div class="product__name">${product.name}</div>
+                <div class=""product__content">
+                  ${product.content || ''}
+                </div>
+              </div>
+              ${product.options ? `<div class="product__count">${product.options}개 색상</div>` : ''}              
+              <p class="product__price">${product.price.toLocaleString()} 원</p>
+            </div>
+          </a>
+        </figure>
+      </li>
+    `;
+    })
+    .join('');
+  listNode.innerHTML = list;
+}
+
 // 정렬 드롭다운
 function sortingDropdown(e, el) {
   e.preventDefault();
@@ -71,55 +159,19 @@ filterMobileToggleButtons.forEach(el => {
   el.addEventListener('click', e => filterMobileToggle(e));
 });
 
-// GET /api/products
-async function getList() {
-  try {
-    const { data } = await api('get', 'products');
+// 필터 메뉴 선택
+function filterMenuSelect(e) {
+  e.preventDefault();
 
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
+  params.setGender(e.currentTarget.value);
+
+  renderList();
 }
-// 상품 목록 출력
-async function renderList() {
-  const listNode = document.querySelector('.product-list');
-
-  const { item, pagination } = await getList();
-
-  const list = item
-    .map(product => {
-      return `
-      <li class="product">
-        <figure>
-          <a href="">
-            <div class="product__image">
-              <img 
-                src="https://11.fesp.shop${product.mainImages[0].path}" 
-                alt="${product.mainImages[0].name}" 
-              />
-            </div>
-
-            <div class="product__info">
-              <div class="product-title">
-                ${product.extra.isNew ? '<span class="isNew">신제품</span>' : ''}
-                ${product.extra.isBest ? '<span class="isHot">인기</span>' : ''}
-                <div class="product__name">${product.name}</div>
-                <div class=""product__content">
-                  ${product.content || ''}
-                </div>
-              </div>
-              ${product.options ? `<div class="product__count">${product.options}개 색상</div>` : ''}              
-              <p class="product__price">${product.price.toLocaleString()} 원</p>
-            </div>
-          </a>
-        </figure>
-      </li>
-    `;
-    })
-    .join('');
-  listNode.innerHTML = list;
-}
+document
+  .querySelectorAll('.filter-checkbox input[type="checkbox"]')
+  .forEach(el => {
+    el.addEventListener('change', e => filterMenuSelect(e));
+  });
 
 // 초기 실행
 document.addEventListener('DOMContentLoaded', () => {
