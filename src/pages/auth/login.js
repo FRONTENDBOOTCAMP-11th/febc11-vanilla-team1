@@ -1,4 +1,5 @@
 import axios from 'axios';
+import config from './apikey'
 
 const authInput = document.querySelector('#emailInput');
 const authBtn = document.querySelector('#loginBtn');
@@ -66,7 +67,7 @@ socialBtn.addEventListener('click', function () {
   loginWithKakao();
 });
 
-const KaApiKey = 'c92207c96c9981919cf89ccca1a383c7';
+const KaApiKey = config.KAKAO_API_KEY;
 Kakao.init(KaApiKey);
 Kakao.isInitialized();
 console.log(Kakao.isInitialized());
