@@ -82,7 +82,7 @@ function loginWithKakao() {
   Kakao.Auth.login({
     success: function (authObj) {
       Kakao.Auth.setAccessToken(authObj.access_token);
-      getInfo();  // 사용자 정보 요청
+      getInfo();
     },
     fail: function (err) {
       console.error('로그인 실패:', err);
