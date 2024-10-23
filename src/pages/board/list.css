@@ -263,32 +263,33 @@ ul.product-list {
 
   padding: 0 48px 0 40px;
 
-  & .product-item {
+  & .product {
     display: flex;
     flex-direction: column;
     padding: 0 8px;
   }
 }
-.product-image img {
+.product__image img {
   width: 100%;
   height: auto;
 }
-.product-info {
+.product__info {
   padding: 12px 0 25px;
   font-weight: 500;
   line-height: 2.4rem;
 
-  & .isNew {
+  & .isNew,
+  .isHot {
     color: var(--color-primary);
   }
 
-  & .product-card_subtitle,
-  .product-count {
+  & .product__content,
+  .product__count {
     font-weight: 400;
     color: var(--color-gray-500);
   }
 
-  & .product-price {
+  & .product__price {
     margin-top: 10px;
   }
 }
