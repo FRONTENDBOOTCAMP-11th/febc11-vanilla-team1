@@ -6,9 +6,6 @@ const emailRegex = /^[A-Za-z0-9]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const regText = document.querySelector('.reg-Text');
 const socialBtn = document.querySelector('#socialBtn');
 
-
-
-
 authInput.addEventListener('input', function () {
   const userEmail = authInput.value.trim();
   if (userEmail === '') {
@@ -33,7 +30,7 @@ async function getEmail(userEmail) {
       headers: {
         'Content-Type': 'application/json',
         'client-id': 'vanilla01',
-      }
+      },
     });
 
     if (response.data.ok === 0) {
@@ -44,9 +41,7 @@ async function getEmail(userEmail) {
       window.location.href = 'check.html';
     }
   } catch (error) {
-    if (error.status === 409)
-      window.location.href = 'pw.html';
-
+    if (error.status === 409) window.location.href = 'pw.html';
   }
 }
 
@@ -69,8 +64,7 @@ authBtn.addEventListener('click', function (e) {
 
 socialBtn.addEventListener('click', function () {
   loginWithKakao();
-
-})
+});
 
 const KaApiKey = 'c92207c96c9981919cf89ccca1a383c7';
 Kakao.init(KaApiKey);
@@ -100,7 +94,7 @@ function getInfo() {
       const account_name = res.kakao_account.name;
       localStorage.setItem('email', account_email);
       localStorage.setItem('name', account_name);
-      window.location.href = 'complete.html'
+      window.location.href = 'complete.html';
     },
     fail: function (error) {
       console.error('사용자 정보 요청 실패:', error);
@@ -119,7 +113,3 @@ function kakaoLogOut() {
     localStorage.clear();
   });
 }
-
-
-
-
