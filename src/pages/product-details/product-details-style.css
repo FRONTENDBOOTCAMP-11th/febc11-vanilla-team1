@@ -428,7 +428,7 @@ flex-shrink: 0;
 
 
 .active_button::after { 
-  content: url(./src/assets/product-details-img/arrow_bottom.svg);
+  content: url(../../../public/assets/icons/button/arrow_bottom.svg);
   font-size: 13px;
   color: #777;
   float: right; 
@@ -436,7 +436,7 @@ flex-shrink: 0;
 }
 
 .on::after {    
-  content: url(./src/assets/product-details-img/arrow_top.svg); 
+  content: url(../../../public/assets/icons/button/arrow_top.svg); 
 }
 
 .rev-button_layout{
