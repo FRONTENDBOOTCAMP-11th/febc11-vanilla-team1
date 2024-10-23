@@ -72,8 +72,8 @@ async function loginUser(userEmail, userPw) {
     );
 
     if (response.data.item.token) {
-      console.log(response.data.item);
       const { accessToken, refreshToken } = response.data.item.token;
+      console.log(response.data.item);
 
 
       if (accessToken && refreshToken) {

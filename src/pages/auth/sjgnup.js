@@ -83,6 +83,7 @@ async function userSign(userPw, userName, userBirth, userEmail) {
 
     if (response.data) {
       loginUser(userEmail, userPw);
+
     }
 
   } catch (error) {
@@ -145,5 +146,4 @@ cancelBtn.addEventListener('click', function () {
   window.location.href = 'login.html'
   sessionStorage.removeItem('email');
 });
-
 
