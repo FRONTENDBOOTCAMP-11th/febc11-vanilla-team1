@@ -4,10 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/swiper/swiper-bundle.min.css"
-    />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="product-details-style.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
   </head>
@@ -68,20 +65,12 @@
           />
         </div>
         <div class="shoes_img_right">
-          <img
-            src="../../../public/assets/icons/etc/high-reputation.svg"
-            alt=""
-            class="reputation"
-          />
+          <img onclick="" src="../../../public/assets/icons/etc/high-reputation.svg"alt="" class="reputation"/>
           <!-- <div class="testrightleft">
                     <img src="./src/assets/product-details-img/Button - 이전.svg" alt="" class="before_botton">
                     <img src="./src/assets/product-details-img/Button - 다음.svg" alt="" class="next_botton">
                 </div> -->
-          <img
-            src="../../../public/assets/icons/shoes/test.svg"
-            alt=""
-            class="nike_shoes"
-          />
+          <img src="../../../public/assets/icons/shoes/(big)NIKE+JAM_braun.svg" alt="" class="nike_shoes" />
         </div>
       </div>
       <div class="nike_shoes_mobaile">
@@ -142,31 +131,19 @@
             />
           </div>
           <div class="det_shoes_img">
-            <button>
-              <img
-                src="../../../public/assets/icons/shoes/NIKE_JAM_braun.svg"
-                alt=""
-              />
+            <button onclick="toggleImg()">
+              <img src="../../../public/assets/icons/shoes/NIKE_JAM_braun.svg" alt=""/ class="side_first-shoes">
             </button>
             <button>
-              <img
-                src="../../../public/assets/icons/shoes/NIKE_JAM_black.svg"
-                alt=""
-              />
+              <img src="../../../public/assets/icons/shoes/NIKE_JAM_black.svg" alt=""/>
             </button>
           </div>
           <div class="det_shoes_img_mobaile">
             <button>
-              <img
-                src="../../../public/assets/icons/shoes/NIKE_JAM_braun.svg"
-                alt=""
-              />
+              <img src="../../../public/assets/icons/shoes/NIKE_JAM_braun.svg" alt=""/>
             </button>
             <button>
-              <img
-                src="../../../public/assets/icons/shoes/NIKE_JAM_black.svg"
-                alt=""
-              />
+              <img src="../../../public/assets/icons/shoes/NIKE_JAM_black.svg" alt=""/>
             </button>
           </div>
           <div class="det_size">
@@ -363,35 +340,6 @@
             </button>
           </div>
         </div>
-        <!-- <div class="re_description">
-          <div class="product_content">
-            <img src="../../../public/assets/icons/shoes/Nike_zoom.svg" alt=""/>
-            <div class="des_list">
-              <p class="des_member hide">맴버 엑세스</p>
-              <p class="des_title">나이키 줌 보메로 5</p>
-              <p class="des_type">남성 신발</p>
-            </div>
-            <p class="des_payment">189,000 원</p>
-          </div>
-          <div class="product_content">
-            <img src="../../../public/assets/icons/shoes/Nike_club.svg"alt=""/>
-            <div class="des_list">
-              <p class="des_member hide">맴버 엑세스</p>
-              <p class="des_title">나이키 클럽</p>
-              <p class="des_type">언스트럭처 데님 캡</p>
-            </div>
-            <p class="des_payment">39,000 원</p>
-          </div>
-          <div class="product_content">
-            <img src="../../../public/assets/icons/shoes/Nike_Airfoce.svg" alt=""/>
-            <div class="des_list">
-              <p class="des_member">맴버 엑세스</p>
-              <p class="des_title">나이키 에어 포스 1 '07</p>
-              <p class="des_type">남성 신발</p>
-            </div>
-            <p class="des_payment">139,000 원</p>
-          </div>
-        </div> -->
         <div class="swiper mySwiper">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
@@ -443,38 +391,45 @@
         </div>
       </div>
     </div>
+    </div>
     <footer>footer area</footer>
   </body>
-  <script src="main.js"></script>
+  <script src="./main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   
   <!-- swiper JS -->
   <script>
-    var swiper = new Swiper(".mySwiper", {
-      slidesPerView: 3,
-      spaceBetween: 10,
-      loop: false,
-      autoHeight : true,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
+    var swiper = new Swiper('.mySwiper', {
+    slidesPerView: 3,
+    spaceBetween: 10,
+    loop: false,
+    autoHeight: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.right_button',
+      prevEl: '.left_button',
+    },
+    breakpoints: {
+      500: {
+        slidesPerView: 1,
+        spaceBetween: 40,
       },
-      navigation: {
-        nextEl: ".right_button",
-        prevEl: ".left_button",
+      959: {
+        slidesPerView: 3,
+        spaceBetween: 10,
       },
-      breakpoints: {
-        
-        500: {
-          slidesPerView: 1, 
-          spaceBetween: 40,
-        },
-        959: {
-          slidesPerView: 3,  
-          spaceBetween: 10,
-        },
-      },
-    });
+    },
+  });
   </script>
+
+  <script>
+    function toggleImg() {
+    document.getElementsByClassName('nike_shoes').src ='../../../public/assets/icons/shoes/(big)NIKE+JAM_black.png';
+  }
+  </script>
+
 </html>

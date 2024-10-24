@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 import axios from 'axios';
 
 const authInput = document.querySelector('#emailInput');
@@ -9,8 +9,8 @@ const socialBtn = document.querySelector('#socialBtn');
 
 socialBtn.addEventListener('click', function (e) {
   e.preventDefault();
-  window.location.href = 'social.html'
-})
+  window.location.href = 'social.html';
+});
 
 authInput.addEventListener('input', function () {
   const userEmail = authInput.value.trim();
@@ -42,9 +42,7 @@ async function getEmail(userEmail) {
       window.location.href = 'check.html';
     }
   } catch (error) {
-    if (error.status === 409)
-      window.location.href = 'pw.html';
-
+    if (error.status === 409) window.location.href = 'pw.html';
   }
 }
 

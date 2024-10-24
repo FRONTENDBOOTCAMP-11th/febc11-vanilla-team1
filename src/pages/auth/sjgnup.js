@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 import axios from 'axios';
 
 const inputFirstName = document.querySelector('#inputFirstName');
@@ -17,7 +17,6 @@ const regLastName = /^[가-힣a-zA-Z]{1,30}$/;
 const regPw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 const regEight = /^.{8,}$/;
 const regMin = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
-
 
 document.addEventListener('DOMContentLoaded', function () {
   const savedEmail = sessionStorage.getItem('email');
@@ -41,16 +40,22 @@ toggleOpen.addEventListener('click', function () {
 function regPassword(userPw) {
   if (userPw === '') {
     loginTxtFirst.innerHTML = `<p style="color:var(--color-gray-500)">X 최소 8자 이상 *</p>`;
-    loginTxtSecond.innerHTML = '<p style="color:var(--color-gray-500)">X 알파벳 대문자 및 소문자 조합, 최소 1개 이상의 숫자 *</p>';
+    loginTxtSecond.innerHTML =
+      '<p style="color:var(--color-gray-500)">X 알파벳 대문자 및 소문자 조합, 최소 1개 이상의 숫자 *</p>';
   } else if (!regEight.test(userPw)) {
     loginTxtFirst.innerHTML = '<p style="color: red">X 최소 8자 이상 *</p>';
-    loginTxtSecond.innerHTML = '<p style="color: red">X 알파벳 대문자 및 소문자 조합, 최소 1개 이상의 숫자 *</p>';
+    loginTxtSecond.innerHTML =
+      '<p style="color: red">X 알파벳 대문자 및 소문자 조합, 최소 1개 이상의 숫자 *</p>';
   } else if (!regMin.test(userPw)) {
-    loginTxtFirst.innerHTML = '<p style="color: var(--color-secondary)">V 최소 8자 이상 *</p>';
-    loginTxtSecond.innerHTML = '<p style="color: red">X 알파벳 대문자 및 소문자 조합, 최소 1개 이상의 숫자 *</p>';
+    loginTxtFirst.innerHTML =
+      '<p style="color: var(--color-secondary)">V 최소 8자 이상 *</p>';
+    loginTxtSecond.innerHTML =
+      '<p style="color: red">X 알파벳 대문자 및 소문자 조합, 최소 1개 이상의 숫자 *</p>';
   } else {
-    loginTxtFirst.innerHTML = '<p style="color: var(--color-secondary)">V 최소 8자 이상 *</p>';
-    loginTxtSecond.innerHTML = '<p style="color: var(--color-secondary)">V 알파벳 대문자 및 소문자 조합, 최소 1개 이상의 숫자 *</p>';
+    loginTxtFirst.innerHTML =
+      '<p style="color: var(--color-secondary)">V 최소 8자 이상 *</p>';
+    loginTxtSecond.innerHTML =
+      '<p style="color: var(--color-secondary)">V 알파벳 대문자 및 소문자 조합, 최소 1개 이상의 숫자 *</p>';
   }
 }
 
@@ -67,14 +72,13 @@ async function userSign(userPw, userName, userBirth, userEmail) {
       name: userName,
       type: 'user',
       extra: {
-        userBirth
+        userBirth,
       },
     });
 
     if (response.data) {
       loginUser(userEmail, userPw);
     }
-
   } catch (error) {
     if (error.response) {
       console.error('서버 응답 오류:', error.response.data);
@@ -83,7 +87,7 @@ async function userSign(userPw, userName, userBirth, userEmail) {
       console.error('정보가 없습니다.', error);
     }
   }
-};
+}
 
 async function loginUser(userEmail, userPw) {
   try {
@@ -93,7 +97,7 @@ async function loginUser(userEmail, userPw) {
     });
 
     if (response.data.item.token) {
-      const { accessToken, refreshToken } = response.data.item.token
+      const { accessToken, refreshToken } = response.data.item.token;
 
       if (accessToken && refreshToken) {
         sessionStorage.setItem('accessToken', accessToken);
@@ -115,18 +119,19 @@ signUpBtn.addEventListener('click', function (e) {
   const userBirth = inputCalendar.value;
   const userEmail = sessionStorage.getItem('email');
 
-  if (regFirstName.test(inputFirstName.value) && regLastName.test(inputLastName.value) && regPw.test(userPw)) {
+  if (
+    regFirstName.test(inputFirstName.value) &&
+    regLastName.test(inputLastName.value) &&
+    regPw.test(userPw)
+  ) {
     regPassword(userPw);
     userSign(userPw, userName, userBirth, userEmail);
-
   } else {
     regPassword(userPw);
   }
 });
 
 cancelBtn.addEventListener('click', function () {
-  window.location.href = 'login.html'
+  window.location.href = 'login.html';
   sessionStorage.removeItem('email');
 });
-
-
