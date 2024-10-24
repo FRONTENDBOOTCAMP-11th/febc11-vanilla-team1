@@ -23,8 +23,7 @@ const regMin = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
 checkbox.addEventListener('change', function () {
   check.checked = checkbox.checked;
   console.log(checkbox.checked);
-})
-
+});
 
 document.addEventListener('DOMContentLoaded', function () {
   const savedEmail = sessionStorage.getItem('email');
@@ -151,7 +150,8 @@ signUpBtn.addEventListener('click', function (e) {
   if (
     regFirstName.test(inputFirstName.value) &&
     regLastName.test(inputLastName.value) &&
-    regPw.test(userPw) && checkbox.checked === true
+    regPw.test(userPw) &&
+    checkbox.checked === true
   ) {
     regPassword(userPw);
     userSign(userPw, userName, userBirth, userEmail);
