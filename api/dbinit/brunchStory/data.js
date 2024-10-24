@@ -1,7 +1,10 @@
 import moment from 'moment';
 
 function getTime(day = 0, second = 0) {
-  return moment().add(day, 'days').add(second, 'seconds').format('YYYY.MM.DD HH:mm:ss');
+  return moment()
+    .add(day, 'days')
+    .add(second, 'seconds')
+    .format('YYYY.MM.DD HH:mm:ss');
 }
 
 export const initData = async (clientId, nextSeq) => {
@@ -11,7 +14,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('user'),
         email: 'admin@fesp.shop',
-        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password:
+          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '무지',
         type: 'admin',
         loginType: 'email',
@@ -20,12 +24,13 @@ export const initData = async (clientId, nextSeq) => {
         updatedAt: getTime(-100, -60 * 60 * 3),
         extra: {
           job: '관리자',
-        }
+        },
       },
       {
         _id: await nextSeq('user'),
         email: 'w1@gmail.com',
-        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password:
+          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: 'AB',
         type: 'seller',
         loginType: 'email',
@@ -41,7 +46,8 @@ export const initData = async (clientId, nextSeq) => {
       {
         _id: await nextSeq('user'),
         email: 'w2@gmail.com',
-        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password:
+          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: '자기반성',
         type: 'seller',
         loginType: 'email',
@@ -50,14 +56,16 @@ export const initData = async (clientId, nextSeq) => {
         updatedAt: getTime(-30, -60 * 20),
         extra: {
           job: '자기탐구인문학 크리에이터',
-          biography: '공상가, AB형, ENFP 성향을 똑 닮은 딸을 키우고 있는 해외맘. 세상의 모든 할머니, 엄마와 딸을 응원합니다. 열심히 일하며 생명체를 키워나가고 있습니다. 자기 탐구 인문학자',
+          biography:
+            '공상가, AB형, ENFP 성향을 똑 닮은 딸을 키우고 있는 해외맘. 세상의 모든 할머니, 엄마와 딸을 응원합니다. 열심히 일하며 생명체를 키워나가고 있습니다. 자기 탐구 인문학자',
           keyword: ['인문학', '공상가', '엄마'],
         },
       },
       {
         _id: await nextSeq('user'),
         email: 'w3@gmail.com',
-        password: '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
+        password:
+          '$2b$10$S.8GNMDyvUF0xzujPtHBu.j5gtS19.OhRmYbpJBnCHg2S83WLx1T2',
         name: 'AI러 이채문',
         type: 'seller',
         loginType: 'kakao',
@@ -541,10 +549,10 @@ export const initData = async (clientId, nextSeq) => {
             user: {
               _id: 2,
               name: 'AB',
-              image: `/files/${clientId}/user-neo.webp`
+              image: `/files/${clientId}/user-neo.webp`,
             },
             createdAt: getTime(-2, -60 * 60 * 20),
-            updatedAt: getTime(-2, -60 * 60 * 2)
+            updatedAt: getTime(-2, -60 * 60 * 2),
           },
           {
             _id: await nextSeq('reply'),
@@ -552,22 +560,17 @@ export const initData = async (clientId, nextSeq) => {
             user: {
               _id: 3,
               name: '자기반성',
-              image: `/files/${clientId}/user-jayg.webp`
+              image: `/files/${clientId}/user-jayg.webp`,
             },
             createdAt: getTime(-2, -60 * 60 * 20),
-            updatedAt: getTime(-2, -60 * 60 * 20)
+            updatedAt: getTime(-2, -60 * 60 * 20),
           },
-
-
-        ]
-      }
+        ],
+      },
     ],
     // 코드
-    code: [
-    ],
+    code: [],
     // 설정
-    config: [
-
-    ],
-  }
+    config: [],
+  };
 };

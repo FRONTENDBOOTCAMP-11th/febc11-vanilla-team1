@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from './apikey'
+import config from './apikey';
 
 const authInput = document.querySelector('#emailInput');
 const authBtn = document.querySelector('#loginBtn');
