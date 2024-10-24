@@ -6,10 +6,6 @@ body {
   font-family: var(--font-primary);
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 32567bfe43aab71431058322954f9c9e28456553
 /* 헤더 스타일 */
 .headerMenu {
   background: var(--F5F5F5, #F5F5F5);
