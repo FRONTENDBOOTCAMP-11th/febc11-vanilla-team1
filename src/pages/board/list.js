@@ -4,6 +4,7 @@ import api from '@/api.js';
 class Params {
   gender = [];
   price = [];
+  category = [];
 
   // g가 gender에 포함되어 있으면 제거, 아니면 추가
   setGender(g) {
@@ -67,16 +68,18 @@ async function getMainCategory() {
   const url = new URL(window.location.href);
 
   // 쿼리 파라미터를 파싱합니다.
-  const params = new URLSearchParams(url.search);
+  const URLparams = new URLSearchParams(url.search);
 
   // 특정 쿼리 파라미터의 값을 가져옵니다.
   // category=depth1-depth2-depth3 형태로 되어 있습니다.
   // Men-신발-조던
-  const paramValue = params.get('category');
+  const paramValue = URLparams.get('category');
+  console.log(paramValue);
 
   let categoryList = null;
   if (paramValue) {
     categoryList = paramValue.split('-');
+    params.category = categoryList;
   }
 
   try {
@@ -169,6 +172,7 @@ async function getList() {
   try {
     const custom = params.getCustomParams() || null;
     // console.log(custom);
+    console.log(params.category);
 
     const { data } = await api('get', 'products', {
       custom: JSON.stringify(custom),

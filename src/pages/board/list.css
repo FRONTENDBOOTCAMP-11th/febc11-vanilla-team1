@@ -324,7 +324,6 @@ ul.product-list {
   /* mobile category, filter */
   .is_mobile.categories {
     display: flex;
-    justify-content: space-between;
     padding: 0 16px 14px;
     border-bottom: 1px solid var(--color-gray-200);
     overflow-x: auto;

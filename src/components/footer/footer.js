@@ -2,8 +2,6 @@
 const footerDrop = document.querySelectorAll('.footer-drop');
 
 footerDrop.forEach(el => {
-  console.log(el);
-
   el.addEventListener('click', e => {
     e.preventDefault();
     const footerTab = el.parentElement;
