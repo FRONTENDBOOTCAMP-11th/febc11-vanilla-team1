@@ -35,13 +35,13 @@ async function getEmail(userEmail) {
 
     if (response.data.ok === 0) {
       sessionStorage.setItem('email', userEmail);
-      window.location.href = '/pw.html';
+      window.location.href = '/pages/auth/pw.html';
     } else {
       sessionStorage.setItem('email', userEmail);
-      window.location.href = '/check.html';
+      window.location.href = '/pages/auth/check.html';
     }
   } catch (error) {
-    if (error.status === 409) window.location.href = '/pw.html';
+    if (error.status === 409) window.location.href = '/pages/auth/pw.html';
   }
 }
 
@@ -95,7 +95,7 @@ function getInfo() {
       const account_name = res.kakao_account.name;
       localStorage.setItem('email', account_email);
       localStorage.setItem('name', account_name);
-      window.location.href = '/complete.html';
+      window.location.href = '/pages/auth/complete.html';
     })
     .catch(function (error) {
       console.error('사용자 정보 요청 실패:', error);

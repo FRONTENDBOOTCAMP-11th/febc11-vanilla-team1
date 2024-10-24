@@ -29,7 +29,7 @@ checkbox.addEventListener('change', function () {
 document.addEventListener('DOMContentLoaded', function () {
   const savedEmail = sessionStorage.getItem('email');
   if (!savedEmail) {
-    window.location.href = '/login.html';
+    window.location.href = '/pages/auth/login.html';
   }
 });
 
@@ -161,6 +161,6 @@ signUpBtn.addEventListener('click', function (e) {
 });
 
 cancelBtn.addEventListener('click', function () {
-  window.location.href = '/login.html';
+  window.location.href = '/pages/auth/login.html';
   sessionStorage.removeItem('email');
 });
