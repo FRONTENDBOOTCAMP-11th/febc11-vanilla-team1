@@ -8,7 +8,11 @@ body {
 
 
 
+<<<<<<< HEAD
 /* header 가장 위     css */
+=======
+/* header 가장 위   css */
+>>>>>>> 32567bfe43aab71431058322954f9c9e28456553
 .headerMenu {
   background: var(--F5F5F5, #F5F5F5);
 }
@@ -343,6 +347,7 @@ body {
 }
 
 
+<<<<<<< HEAD
 /* 푸터 */
 #footer {
   margin: 50px;
@@ -415,6 +420,82 @@ body {
   line-height: 24.5px;
   color: #707072;
   }
+=======
+
+/* 푸터 */
+#footer {
+ margin: 50px;
+ padding: 50px 0;
+ border-top: 1px solid #E5E5E5;
+ font-size: 14px;
+}
+
+.footer-layout {
+ display: flex;
+ gap: 100px;
+ margin-bottom: 100px;
+}
+.footer-tab {
+ width: 30%;
+ }
+ 
+ .footer-drop {
+ display: flex;
+ position: relative;
+ }
+ 
+ .footer-title {
+ flex-grow: 1;
+ }
+ 
+ .drop-icon,
+ .drop-icon-about,
+ .drop-icon-order {
+ display: none;
+ width: 24px;
+ height: 24px;
+ cursor: pointer;
+ }
+ 
+ .up-icon,
+ .up-icon-about,
+ .up-icon-order {
+ display: none;
+ width: 24px;
+ height: 24px;
+ cursor: pointer;
+ }
+ 
+ .drop-container,
+ .drop-container-order,
+ .drop-container-about {
+ display: block;
+ }
+ 
+ .footer-rights p,
+ .footer-rights a {
+ display: inline;
+ margin-right: 24px;
+ }
+ 
+ .footer-rights {
+ border-bottom: 1px solid #e5e5e5;
+ padding-bottom: 72px;
+ margin-bottom: 24px;
+ }
+ 
+ #footer h4 {
+ font-weight: bold;
+ margin-bottom: 30px;
+ }
+ 
+ #footer li {
+ margin-bottom: 12px;
+ line-height: 24.5px;
+ color: #707072;
+ }
+
+>>>>>>> 32567bfe43aab71431058322954f9c9e28456553
 
 @media (max-width: 768px) {
   .l_wrapper {
@@ -540,6 +621,7 @@ body {
 
 }
 
+<<<<<<< HEAD
 /*푸터*/
   #footer {
     border: 0;
@@ -605,4 +687,72 @@ body {
     word-break: normal;
     color: var(--color-gray-500);
   }
+=======
+ 
+  /*푸터*/
+  #footer {
+   border: 0;
+   margin: 20px;
+   padding: 20px 0;
+ }
+ 
+ #footer h4 {
+   margin-bottom: 0;
+ }
+ 
+ .footer-layout {
+   flex-direction: column;
+   margin-bottom: 64px;
+   gap: 0px;
+ }
+ 
+ .footer-tab {
+   width: 100%;
+   border-top: 1px solid #e5e5e5;
+ }
+ 
+ .footer-tab:last-child {
+   border-bottom: 1px solid #e5e5e5;
+ }
+ 
+ .footer-drop {
+   margin: 20px 0;
+ }
+ 
+ .drop-icon,
+ .drop-icon-about,
+ .drop-icon-order {
+   display: none;
+ }
+ 
+ .up-icon,
+ .up-icon-about,
+ .up-icon-order {
+   display: block;
+ }
+ 
+ .footer-rights {
+   border-bottom: none;
+   padding-bottom: 64px;
+   margin-bottom: 23px;
+   text-align: left;
+   border-bottom: 1px solid #e5e5e5;
+ }
+ 
+ .footer-rights p,
+ .footer-rights a {
+   display: block;
+   margin-right: 0;
+   margin-bottom: 8px;
+   color: var(--color-gray-500);
+ }
+ 
+ #footer div:last-of-type p {
+   font-size: 12px;
+   line-height: 2.2;
+   text-align: left;
+   word-break: normal;
+   color: var(--color-gray-500);
+ }
+>>>>>>> 32567bfe43aab71431058322954f9c9e28456553
 }
