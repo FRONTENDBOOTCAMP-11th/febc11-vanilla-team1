@@ -1,20 +1,3 @@
-// fetch header component
-// fetch('/src/components/header/header.html')
-//   .then(res => res.text())
-//   .then(html => {
-//     document.getElementById('header-wrap').innerHTML = html;
-//   })
-//   .then(() => {
-//     // fetch header component's js
-//     fetch('/src/components/header/header.js')
-//       .then(res => res.text())
-//       .then(js => {
-//         const script = document.createElement('script');
-//         script.type = 'module';
-//         script.innerHTML = js;
-//         document.body.appendChild(script);
-//       });
-//   });
 async function getHeader() {
   const res = await fetch('/src/components/header/header.html');
   if (!res.ok) {
