@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const usersEmail = sessionStorage.getItem('email');
   authEmail.textContent = usersEmail;
   if (!usersEmail) {
-    window.location.href = '/src/pages/auth/login.html';
+    window.location.href = 'login.html';
   }
 });
 
@@ -23,7 +23,7 @@ editEmail.addEventListener('click', function (e) {
   e.preventDefault();
   sessionStorage.clear();
   localStorage.clear();
-  window.location.href = '/src/pages/auth/login.html';
+  window.location.href = 'login.html';
 });
 
 toggleClose.addEventListener('click', function () {
@@ -42,14 +42,14 @@ prevBtn.addEventListener('click', function (e) {
   e.preventDefault();
   sessionStorage.clear();
   localStorage.clear();
-  window.location.href = '/src/pages/auth/login.html';
+  window.location.href = 'login.html';
 });
 
 function tokenError(error) {
   if (error.response && error.response.status === 401) {
     alert('다시 로그인 해주세요.');
     sessionStorage.removeItem('email');
-    window.location.href = '/src/pages/auth/login.html';
+    window.location.href = 'login.html';
   } else {
     console.log('오류', error);
   }
