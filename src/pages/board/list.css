@@ -111,6 +111,7 @@ header.header {
     display: flex;
   }
 }
+
 button.header__action-button,
 button.subheading__action-button {
   margin-left: 25px;

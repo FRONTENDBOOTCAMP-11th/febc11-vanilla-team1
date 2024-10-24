@@ -1,15 +1,7 @@
-// 필터 모바일 토글
-function filterMobileToggle(e) {
-  e.preventDefault();
-
-  const dialogNode = document.querySelector('.dialog');
-  dialogNode.classList.toggle('active');
-}
-
 // 정렬 드롭다운
 function sortingDropdown(e, el) {
   e.preventDefault();
-  console.log(el.getAttribute('aria-expanded'));
+
   el.setAttribute(
     'aria-expanded',
     el.getAttribute('aria-expanded') === 'true' ? 'false' : 'true',
@@ -20,38 +12,58 @@ function sortingDropdown(e, el) {
     ? '/assets/icons/button24px/down.svg'
     : '/assets/icons/button24px/up.svg';
 }
+const sortingButton = document.querySelector(
+  '.header__action-button.header__sorting-dropdown',
+);
+sortingButton.addEventListener('click', e =>
+  sortingDropdown(e, e.currentTarget),
+);
 
-function toggleCollapse(el) {
-  const collapseContainerNode = el.parentElement;
+// filter toggle
+function filterToggle(e) {
+  e.preventDefault();
+
+  const expanded = e.currentTarget.getAttribute('aria-expanded') === 'true';
+  const asideNode = document.querySelector('.sidebar');
+  const toggleTextNode = document.querySelector('.header__filter-toggle span');
+
+  e.currentTarget.setAttribute('aria-expanded', !expanded);
+  asideNode.setAttribute('aria-expanded', !expanded);
+  toggleTextNode.textContent = expanded ? '필터 표시' : '필터 숨기기';
+}
+const filterToggleButton = document.querySelector('.header__filter-toggle');
+filterToggleButton.addEventListener('click', e => filterToggle(e));
+
+// filter menu dropdown
+function dropdownFilterCollapse(e) {
+  const collapseContainerNode = e.currentTarget.parentElement;
   const collapseContentNode =
     collapseContainerNode.querySelector('.collapse-content');
 
-  el.querySelector('img').src = el.querySelector('img').src.includes('down')
+  e.currentTarget.querySelector('img').src = e.currentTarget
+    .querySelector('img')
+    .src.includes('down')
     ? '/assets/icons/button24px/up.svg'
     : '/assets/icons/button24px/down.svg';
   collapseContentNode.classList.toggle('hidden');
 }
-document
-  .querySelector('.collapse-button')
-  .addEventListener('click', (e, el) => toggleCollapse(el));
+const filterCollapseButtons =
+  document.querySelectorAll('.collapse-button') || [];
+filterCollapseButtons.forEach(el => {
+  el.addEventListener('click', e => dropdownFilterCollapse(e));
+});
 
-// components
-// script.js
-// document.addEventListener('DOMContentLoaded', () => {
-//   console.log('DOMContentLoaded');
+// filter mobile toggle
+function filterMobileToggle(e) {
+  e.preventDefault();
 
-//   loadComponent('/src/pages/board/components/footer/footer.html', 'footer');
-// });
-
-// function loadComponent(url, elementId) {
-//   fetch(url)
-//     .then(response => {
-//       console.log('response:', response);
-
-//       return response.text();
-//     })
-//     .then(data => {
-//       document.getElementById(elementId).innerHTML = data;
-//     })
-//     .catch(error => console.error('Error loading component:', error));
-// }
+  const dialogNode = document.querySelector('.dialog');
+  dialogNode.classList.toggle('active');
+}
+const filterMobileToggleButtons =
+  document.querySelectorAll(
+    '.subheading__filter-toggle, .close-btn[aria-label="필터 메뉴 닫기"]',
+  ) || [];
+filterMobileToggleButtons.forEach(el => {
+  el.addEventListener('click', e => filterMobileToggle(e));
+});

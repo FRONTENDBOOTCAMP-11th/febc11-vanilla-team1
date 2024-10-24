@@ -3,6 +3,7 @@ import api from '@/api.js';
 
 class Params {
   gender = [];
+  price = [];
 
   // g가 gender에 포함되어 있으면 제거, 아니면 추가
   setGender(g) {
@@ -25,7 +26,33 @@ class Params {
     return genderParams;
   }
 
-  getParams() {
+  // p가 price에 포함되어 있으면 제거, 아니면 추가
+  setPrice(p) {
+    const index = this.price.indexOf(p);
+    index !== -1 ? this.price.splice(index, 1) : this.price.push(p);
+  }
+  getPrice() {
+    if (this.price.length === 0) {
+      return null;
+    }
+    const MIN = [];
+    const MAX = [];
+
+    // p = min-max형태의 문자열
+    this.price.forEach(p => {
+      const [min, max] = p.split('-');
+      MIN.push(min);
+      MAX.push(max);
+    });
+
+    const priceParams = {
+      minPrice: Math.min(...MIN),
+      maxPrice: Math.max(...MAX),
+    };
+    return priceParams;
+  }
+
+  getCustomParams() {
     return {
       ...this.getGender(),
     };
@@ -33,28 +60,146 @@ class Params {
 }
 const params = new Params();
 
+// GET /api/codes
+// get main category
+async function getMainCategory() {
+  // 현재 페이지의 URL을 가져옵니다.
+  const url = new URL(window.location.href);
+
+  // 쿼리 파라미터를 파싱합니다.
+  const params = new URLSearchParams(url.search);
+
+  // 특정 쿼리 파라미터의 값을 가져옵니다.
+  // category=depth1-depth2-depth3 형태로 되어 있습니다.
+  // Men-신발-조던
+  const paramValue = params.get('category');
+
+  let categoryList = null;
+  if (paramValue) {
+    categoryList = paramValue.split('-');
+  }
+
+  try {
+    const {
+      data: {
+        item: { codes },
+      },
+    } = await api('get', 'codes/productCategory', {
+      code: categoryList && categoryList[categoryList.length - 1],
+      depth: categoryList ? categoryList.length : 1,
+    });
+
+    // data.item.codes[0] or data.item.productCategory.codes[0]
+    // codes[0]만 사용
+    const headerTitle = document.querySelector('.header__title .title');
+    headerTitle.textContent = codes[0].desc || codes[0].value;
+
+    getSubCategory(codes[0].code);
+    // renderCategoryList(data.item?.codes[0]);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// get sub category
+async function getSubCategory(code) {
+  try {
+    const {
+      data: {
+        item: { codes },
+      },
+    } = await api('get', 'codes/productCategory', {
+      parent: code,
+    });
+
+    console.log(codes);
+
+    renderCategoryList(codes);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// 카테고리 목록 출력
+function renderCategoryList(codes) {
+  console.log(codes);
+  const url = new URL(window.location.href);
+  const baseURI = url.origin + url.pathname;
+
+  const categoryList = document.querySelector('ul.categories');
+  const sidebar__categoryList = document.querySelector(
+    'ul.sidebar__categories',
+  );
+
+  codes.forEach(code => {
+    categoryList.innerHTML += `
+      <li class="categories__item">
+        <a href="${baseURI}?category=${code.code}">
+          ${code.desc || code.value}
+        </a>
+      </li>
+    `;
+    sidebar__categoryList.innerHTML += `
+      <li class="sidebar__category">
+        <a href="${baseURI}?category=${code.code}">
+          ${code.desc || code.value}
+        </a>
+      </li>
+    `;
+  });
+  // categoryList.forEach(el => {
+  //   const sub = data.sub || [];
+  //   const list = sub.map(item => {
+  //     return `
+  //       <li class="${el.classList.contains('is_mobile') ? 'categories' : 'sidebar__category'}">
+  //         <a href="${baseURI}?category=${data.code}-${item.code}">
+  //           ${item.desc || item.value}
+  //         </a>
+  //       </li>
+  //     `;
+  //   });
+  //   el.innerHTML = list.join('');
+  // });
+}
+
 // `{"$or": ${JSON.stringify(params.getParams())}}`
 // {"extra.isNew":{"$in":[true, false]},"_id":{"$in":[1,2,3]}}
 // GET /api/products
 async function getList() {
   try {
-    const custom = params.getParams() || null;
+    const custom = params.getCustomParams() || null;
+    // console.log(custom);
 
     const { data } = await api('get', 'products', {
       custom: JSON.stringify(custom),
+      minPrice: params?.getPrice()?.minPrice || null,
+      maxPrice: params?.getPrice()?.maxPrice || null,
     });
 
-    return data;
+    renderList(data);
   } catch (error) {
     console.error(error);
   }
 }
+
 // 상품 목록 출력
-async function renderList() {
+async function renderList(data) {
   const listNode = document.querySelector('.product-list');
+  const countNode = document.querySelectorAll(
+    '.result-count .count, .subheading__result-count .count',
+  );
 
-  const { item, pagination } = await getList();
+  const { item, pagination } = data || { item: [], pagination: {} };
 
+  // item의 price를 기준으로 오름차순 정렬
+  // item.sort((a, b) => a.price - b.price);
+
+  // 상품 개수 출력
+  countNode.forEach(el => {
+    el.textContent = pagination.total;
+  });
+
+  // 상품 목록 출력
   const list = item
     .map(product => {
       return `
@@ -89,83 +234,22 @@ async function renderList() {
   listNode.innerHTML = list;
 }
 
-// 정렬 드롭다운
-function sortingDropdown(e, el) {
-  e.preventDefault();
-
-  el.setAttribute(
-    'aria-expanded',
-    el.getAttribute('aria-expanded') === 'true' ? 'false' : 'true',
-  );
-
-  const buttonIcon = document.querySelector('.header__sorting-dropdown img');
-  buttonIcon.src = buttonIcon.src.includes('up')
-    ? '/assets/icons/button24px/down.svg'
-    : '/assets/icons/button24px/up.svg';
-}
-const sortingButton = document.querySelector(
-  '.header__action-button.header__sorting-dropdown',
-);
-sortingButton.addEventListener('click', e =>
-  sortingDropdown(e, e.currentTarget),
-);
-
-// filter toggle
-function filterToggle(e) {
-  e.preventDefault();
-
-  const expanded = e.currentTarget.getAttribute('aria-expanded') === 'true';
-  const asideNode = document.querySelector('.sidebar');
-  const toggleTextNode = document.querySelector('.header__filter-toggle span');
-
-  e.currentTarget.setAttribute('aria-expanded', !expanded);
-  asideNode.setAttribute('aria-expanded', !expanded);
-  toggleTextNode.textContent = expanded ? '필터 표시' : '필터 숨기기';
-}
-const filterToggleButton = document.querySelector('.header__filter-toggle');
-filterToggleButton.addEventListener('click', e => filterToggle(e));
-
-// filter menu dropdown
-function dropdownFilterCollapse(e) {
-  const collapseContainerNode = e.currentTarget.parentElement;
-  const collapseContentNode =
-    collapseContainerNode.querySelector('.collapse-content');
-
-  e.currentTarget.querySelector('img').src = e.currentTarget
-    .querySelector('img')
-    .src.includes('down')
-    ? '/assets/icons/button24px/up.svg'
-    : '/assets/icons/button24px/down.svg';
-  collapseContentNode.classList.toggle('hidden');
-}
-const filterCollapseButtons =
-  document.querySelectorAll('.collapse-button') || [];
-filterCollapseButtons.forEach(el => {
-  el.addEventListener('click', e => dropdownFilterCollapse(e));
-});
-
-// filter mobile toggle
-function filterMobileToggle(e) {
-  e.preventDefault();
-
-  const dialogNode = document.querySelector('.dialog');
-  dialogNode.classList.toggle('active');
-}
-const filterMobileToggleButtons =
-  document.querySelectorAll(
-    '.subheading__filter-toggle, .close-btn[aria-label="필터 메뉴 닫기"]',
-  ) || [];
-filterMobileToggleButtons.forEach(el => {
-  el.addEventListener('click', e => filterMobileToggle(e));
-});
-
 // 필터 메뉴 선택
 function filterMenuSelect(e) {
   e.preventDefault();
 
-  params.setGender(e.currentTarget.value);
+  switch (e.currentTarget.name) {
+    case 'price__filter':
+      params.setPrice(e.currentTarget.value);
+      break;
+    case 'gender__filter':
+      params.setGender(e.currentTarget.value);
+      break;
+    default:
+      break;
+  }
 
-  renderList();
+  getList();
 }
 document
   .querySelectorAll('.filter-checkbox input[type="checkbox"]')
@@ -173,7 +257,10 @@ document
     el.addEventListener('change', e => filterMenuSelect(e));
   });
 
+// 카테고리
+
 // 초기 실행
 document.addEventListener('DOMContentLoaded', () => {
-  renderList();
+  getMainCategory();
+  getList();
 });
