@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 import axios from 'axios';
 
 const passwordInput = document.querySelector('#authInput');
@@ -25,7 +25,7 @@ editEmail.addEventListener('click', function (e) {
   sessionStorage.clear();
   localStorage.clear();
   window.location.href = 'login.html';
-})
+});
 
 toggleClose.addEventListener('click', function () {
   passwordInput.type = 'text';
@@ -59,13 +59,23 @@ function tokenError(error) {
 // 로그인 요청 함수
 async function loginUser(userEmail, userPw) {
   try {
-    const response = await axios.post('https://11.fesp.shop/users/login', {
-      email: userEmail,
-      password: userPw,
-    });
+    const response = await axios.post(
+      'https://11.fesp.shop/users/login',
+      {
+        email: userEmail,
+        password: userPw,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'client-id': 'vanilla01',
+        },
+      },
+    );
 
     if (response.data.item.token) {
       const { accessToken, refreshToken } = response.data.item.token;
+      console.log(response.data.item);
 
       if (accessToken && refreshToken) {
         sessionStorage.setItem('accessToken', accessToken);
@@ -85,10 +95,10 @@ async function loginUser(userEmail, userPw) {
         sessionStorage.setItem('accessToken', reToken);
         return loginUser(userEmail, userPw);
       } else {
-        tokenError(error)
+        tokenError(error);
       }
     } else {
-      tokenError(error)
+      tokenError(error);
     }
   }
 }
@@ -97,15 +107,16 @@ async function issueToken() {
   try {
     const response = await axios.get('https://11.fesp.shop/auth/refresh', {
       headers: {
-        'Authorization': `Bearer ${sessionStorage.getItem('refreshToken')}`,
+        Authorization: `Bearer ${sessionStorage.getItem('refreshToken')}`,
+        'Content-Type': 'application/json',
+        'client-id': 'vanilla01',
       },
     });
     return response.data.item.accessToken;
   } catch (error) {
-    tokenError(error)
+    tokenError(error);
   }
 }
-
 
 // loginBtn 클릭 이벤트 리스너
 loginBtn.addEventListener('click', function (e) {
@@ -132,5 +143,5 @@ function checkPassword(userPw) {
 }
 
 alertMessage.addEventListener('click', function () {
-  alert('아직 구현하지 않은 페이지입니다.')
-})
+  alert('아직 구현하지 않은 페이지입니다.');
+});
