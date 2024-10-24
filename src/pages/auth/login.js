@@ -95,7 +95,7 @@ function getInfo() {
       const account_name = res.kakao_account.name;
       localStorage.setItem('email', account_email);
       localStorage.setItem('name', account_name);
-      window.location.href = 'complete.html';
+      window.location.href = '/complete.html';
     })
     .catch(function (error) {
       console.error('사용자 정보 요청 실패:', error);

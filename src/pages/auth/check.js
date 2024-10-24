@@ -36,7 +36,7 @@ function updateAgreeButtonState() {
 
 agreeBtn.addEventListener('click', function () {
   const savedEmail = sessionStorage.getItem('email');
-  if (savedEmail) {
+  if (savedEmail && checkAll.checked === true) {
     window.location.href = 'signup.html';
   }
 });

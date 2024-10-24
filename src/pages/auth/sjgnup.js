@@ -1,5 +1,6 @@
 'use strict';
 import axios from 'axios';
+import { check } from 'prettier/standalone.js';
 
 const inputFirstName = document.querySelector('#inputFirstName');
 const inputLastName = document.querySelector('#inputLastName');
@@ -11,12 +12,19 @@ const loginTxtFirst = document.querySelector('.first');
 const loginTxtSecond = document.querySelector('.second');
 const toggleOpen = document.querySelector('#toggleOpen');
 const toggleClose = document.querySelector('#toggleClose');
+const checkbox = document.querySelector('#check');
 
 const regFirstName = /^[가-힣a-zA-Z]{1,30}$/;
 const regLastName = /^[가-힣a-zA-Z]{1,30}$/;
 const regPw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 const regEight = /^.{8,}$/;
 const regMin = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
+
+checkbox.addEventListener('change', function () {
+  check.checked = checkbox.checked;
+  console.log(checkbox.checked);
+})
+
 
 document.addEventListener('DOMContentLoaded', function () {
   const savedEmail = sessionStorage.getItem('email');
@@ -143,7 +151,7 @@ signUpBtn.addEventListener('click', function (e) {
   if (
     regFirstName.test(inputFirstName.value) &&
     regLastName.test(inputLastName.value) &&
-    regPw.test(userPw)
+    regPw.test(userPw) && checkbox.checked === true
   ) {
     regPassword(userPw);
     userSign(userPw, userName, userBirth, userEmail);
