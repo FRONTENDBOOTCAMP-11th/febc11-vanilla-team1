@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const savedEmail = sessionStorage.getItem('email');
 
   if (!savedEmail) {
-    window.location.href = 'login.html';
+    window.location.href = '/pages/auth/login.html';
   }
 });
 
@@ -36,12 +36,12 @@ function updateAgreeButtonState() {
 
 agreeBtn.addEventListener('click', function () {
   const savedEmail = sessionStorage.getItem('email');
-  if (savedEmail) {
-    window.location.href = 'signup.html';
+  if (savedEmail && checkAll.checked === true) {
+    window.location.href = '/pages/auth/signup.html';
   }
 });
 
 cancelBtn.addEventListener('click', function () {
-  window.location.href = 'login.html';
+  window.location.href = '/pages/auth/login.html';
   sessionStorage.removeItem('email');
 });
