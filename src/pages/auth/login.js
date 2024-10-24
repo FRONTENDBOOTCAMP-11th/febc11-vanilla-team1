@@ -35,13 +35,13 @@ async function getEmail(userEmail) {
 
     if (response.data.ok === 0) {
       sessionStorage.setItem('email', userEmail);
-      window.location.href = 'pw.html';
+      window.location.href = '/pw.html';
     } else {
       sessionStorage.setItem('email', userEmail);
-      window.location.href = 'check.html';
+      window.location.href = '/check.html';
     }
   } catch (error) {
-    if (error.status === 409) window.location.href = 'pw.html';
+    if (error.status === 409) window.location.href = '/pw.html';
   }
 }
 
