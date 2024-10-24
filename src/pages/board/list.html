@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>나이키</title>
     <link rel="stylesheet" href="list.css" />
-    <link rel="stylesheet" href="./components/footer/footer.css" />
+    <link rel="stylesheet" href="/src/components/header/header.css" />
+    <link rel="stylesheet" href="/src/components/footer/footer.css" />
   </head>
   <body>
     <div id="app">
+      <div id="header-wrap"></div>
       <div class="wrapper">
         <header class="header">
           <h1 class="header__title">
@@ -462,8 +464,27 @@
           <ul class="product-list"></ul>
         </main>
       </div>
-      <!-- <footer id="footer"></footer> -->
+      <div id="footer-wrap"></div>
     </div>
     <script type="module" src="./list.js"></script>
+    <script>
+      // fetch footer component
+      fetch('/src/components/footer/footer.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('footer-wrap').innerHTML = html;
+        })
+        .then(() => {
+          // fetch footer component's js
+          fetch('/src/components/footer/footer.js')
+            .then(res => res.text())
+            .then(js => {
+              const script = document.createElement('script');
+              script.type = 'module';
+              script.innerHTML = js;
+              document.body.appendChild(script);
+            });
+        });
+    </script>
   </body>
 </html>
