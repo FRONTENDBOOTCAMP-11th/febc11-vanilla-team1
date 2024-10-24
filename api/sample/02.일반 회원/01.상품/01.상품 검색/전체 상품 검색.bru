@@ -1,0 +1,15 @@
+meta {
+  name: 전체 상품 검색
+  type: http
+  seq: 10
+}
+
+get {
+  url: {{url}}/products?limit=15
+  body: none
+  auth: none
+}
+
+params:query {
+  limit: 15
+}
