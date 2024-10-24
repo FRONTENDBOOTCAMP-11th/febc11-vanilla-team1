@@ -8,6 +8,7 @@ async function getFooter() {
 
 async function renderFooter() {
   const html = await getFooter();
+
   document.getElementById('footer-wrap').innerHTML = html;
 
   // footer
