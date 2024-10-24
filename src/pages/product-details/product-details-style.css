@@ -548,9 +548,49 @@ button:focus {
   filter: brightness(0.9);
 }
 
+.re_container {
+  /* box-shadow: inset 0 0 20px yellow; */
+  margin: 50px;
+}
+
 .re_description {
   display: flex;
   gap: 12px;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-wrapper {
+  /* box-shadow: inset 0 0 20px red; */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  filter: brightness(0.9);
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  display: none;
+}
+
+.swiper-pagination {
 }
 
 .product_content img {
