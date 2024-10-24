@@ -99,9 +99,8 @@ function getInfo() {
     })
     .catch(function (error) {
       console.error('사용자 정보 요청 실패:', error);
-    })
-};
-
+    });
+}
 
 // 카카오 로그아웃 함수
 function kakaoLogOut() {
