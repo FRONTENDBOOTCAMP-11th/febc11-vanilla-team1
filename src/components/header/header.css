@@ -110,6 +110,11 @@
   transform: translateX(100%); /* 기본 상태에서는 오른쪽으로 숨김 */
   z-index: 1000; /* 헤더보다 위에 위치 */
   padding: 20px;
+  overflow-y: auto;
+
+  & .close-btn {
+    padding: 0;
+  }
 }
 
 /* 메뉴 사이드바가 활성화되면 화면에 표시 */
@@ -169,6 +174,8 @@
 }
 
 #menu-sidebar ul li a {
+  display: flex;
+  align-items: center;
   text-decoration: none;
   font-size: 24px;
   color: var(--color-black);
@@ -192,4 +199,143 @@
   color: var(--color-black);
   font-weight: medium;
   line-height: 28px;
+}
+/* 미디어 쿼리 (모바일) */
+@media (max-width: 960px) {
+  .l_wrapper {
+    padding: 10px;
+  }
+
+  .headerMenu {
+    display: none;
+  }
+  h1 {
+    font-size: 1.5em;
+  }
+  .menu-button {
+    display: flex;
+  }
+  #menu-sidebar ul.menu-icons li a {
+    font-size: 1.6rem;
+  }
+
+  .hidden {
+    display: block;
+  }
+
+  .search-box,
+  .nav-links,
+  .heart {
+    display: none;
+  }
+
+  #main {
+    align-items: left;
+    justify-content: left;
+    padding: 58px 20px;
+  }
+
+  .sec1,
+  .sec3 {
+    align-items: flex-start;
+  }
+
+  .sec1 h3,
+  .sec1 p,
+  .sec3 h5,
+  .sec3 h3,
+  .sec3 p {
+    text-align: left;
+  }
+
+  .sec1-icon img,
+  .sec3-icon img {
+    margin-left: 0;
+  }
+
+  .sec2 ul {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    width: 100%;
+  }
+
+  .sec2 li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hidden {
+    display: block;
+  }
+
+  .nav-links menu-nav {
+    display: none; /* 작은 화면에서는 기존 내비게이션 링크 숨기기 */
+  }
+
+  /*푸터*/
+  #footer {
+    border: 0;
+    margin: 20px;
+    padding: 20px 0;
+  }
+
+  #footer h4 {
+    margin-bottom: 0;
+  }
+
+  .footer-layout {
+    flex-direction: column;
+    margin-bottom: 64px;
+    gap: 0px;
+  }
+
+  .footer-tab {
+    width: 100%;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .footer-tab:last-child {
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .footer-drop {
+    margin: 20px 0;
+  }
+
+  .drop-icon,
+  .drop-icon-about,
+  .drop-icon-order {
+    display: none;
+  }
+
+  .up-icon,
+  .up-icon-about,
+  .up-icon-order {
+    display: block;
+  }
+
+  .footer-rights {
+    border-bottom: none;
+    padding-bottom: 64px;
+    margin-bottom: 23px;
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .footer-rights p,
+  .footer-rights a {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 8px;
+    color: var(--color-gray-500);
+  }
+
+  #footer div:last-of-type p {
+    font-size: 12px;
+    line-height: 2.2;
+    text-align: left;
+    word-break: normal;
+    color: var(--color-gray-500);
+  }
 }

@@ -1,14 +1,14 @@
 <header>
   <div class="headerMenu">
     <ul>
-      <li><a href="#">매장 찾기</a></li>
+      <li><a href="/src/pages/FindStore/FindStore.html">매장 찾기</a></li>
       <li><a href="#">고객 센터</a></li>
-      <li><a href="#">가입하기</a></li>
-      <li><a href="#">로그인</a></li>
+      <li><a href="/src/pages/auth/login.html">가입하기</a></li>
+      <li><a href="/src/pages/auth/login.html">로그인</a></li>
     </ul>
   </div>
   <nav id="nav">
-    <a href="#" class="logo">
+    <a href="/src/pages/MainHome/home.html" class="logo">
       <img src="/assets/icons/logo/nike.svg" alt="나이키 로고" id="logo" />
     </a>
     <ul class="nav-links">
@@ -35,17 +35,16 @@
       <a href="#" class="icon heart">
         <img src="/assets/icons/button36px/white-heart.svg" alt="하트 아이콘" />
       </a>
-      <a href="#" class="icon cart">
+      <a href="/src/pages/cart/cart.html" class="icon cart">
         <img src="/assets/icons/button36px/cart-36.svg" alt="장바구니 아이콘" />
       </a>
-      <button class="icon hidden" id="menu-icon" onclick="toggleMenu()">
+      <button class="icon hidden" id="menu-icon">
         <img src="/assets/icons/button36px/menu.svg" alt="메뉴 아이콘" />
       </button>
     </div>
   </nav>
 
   <!--✨메뉴 사이드바-->
-
   <div id="menu-sidebar">
     <!-- X 닫기 버튼 -->
     <img
@@ -56,62 +55,84 @@
 
     <ul>
       <li class="menu-button">
-        <img src="/assets/images/access.png" alt="가입버튼" class="access" />
-        <img src="/assets/images/login.png" alt="로그인버튼" class="login" />
+        <a href="/src/pages/auth/login.html"
+          ><img src="/assets/images/access.png" alt="가입버튼" class="access"
+        /></a>
+        <a href="/src/pages/auth/login.html"
+          ><img src="/assets/images/login.png" alt="로그인버튼" class="login"
+        /></a>
       </li>
       <li>
-        <a href="#">New & Featured</a>
-        <img src="/assets/icons/button36px/next.svg" class="next-btn" />
+        <a href="#">
+          New & Featured
+          <img src="/assets/icons/button36px/next.svg" class="next-btn" />
+        </a>
       </li>
       <li>
-        <a href="#">Men</a>
-        <img src="/assets/icons/button36px/next.svg" class="next-btn" />
+        <a href="#">
+          Men
+          <img src="/assets/icons/button36px/next.svg" class="next-btn" />
+        </a>
       </li>
       <li>
-        <a href="#">Women</a>
-        <img src="/assets/icons/button36px/next.svg" class="next-btn" />
+        <a href="#">
+          Women
+          <img src="/assets/icons/button36px/next.svg" class="next-btn" />
+        </a>
       </li>
       <li>
-        <a href="#">Kids</a>
-        <img src="/assets/icons/button36px/next.svg" class="next-btn" />
+        <a href="#">
+          Kids
+          <img src="/assets/icons/button36px/next.svg" class="next-btn" />
+        </a>
       </li>
       <li>
-        <a href="#">Sale</a>
-        <img src="/assets/icons/button36px/next.svg" class="next-btn" />
+        <a href="#">
+          Sale
+          <img src="/assets/icons/button36px/next.svg" class="next-btn" />
+        </a>
       </li>
 
       <ul class="menu-icons">
         <li>
-          <img
-            src="/assets/icons/button24px/question.svg"
-            alt="고객센터 아이콘"
-            class="menu-icon"
-          />
-          <a href="#">고객센터</a>
+          <a href="#">
+            <img
+              src="/assets/icons/button24px/question.svg"
+              alt="고객센터 아이콘"
+              class="menu-icon"
+            />
+            고객센터
+          </a>
         </li>
         <li>
-          <img
-            src="/assets/icons/button24px/cart-24.svg"
-            alt="장바구니 아이콘"
-            class="menu-icon"
-          />
-          <a href="#">장바구니</a>
+          <a href="/src/pages/cart/cart.html">
+            <img
+              src="/assets/icons/button24px/cart-24.svg"
+              alt="장바구니 아이콘"
+              class="menu-icon"
+            />
+            장바구니
+          </a>
         </li>
         <li>
-          <img
-            src="/assets/icons/button24px/order.svg"
-            alt="주문 아이콘"
-            class="menu-icon"
-          />
-          <a href="#">주문</a>
+          <a href="#">
+            <img
+              src="/assets/icons/button24px/order.svg"
+              alt="주문 아이콘"
+              class="menu-icon"
+            />
+            주문
+          </a>
         </li>
         <li>
-          <img
-            src="/assets/icons/button24px/store.svg"
-            alt="위치 아이콘"
-            class="menu-icon"
-          />
-          <a href="#">매장찾기</a>
+          <a href="/src/pages/FindStore/FindStore.html">
+            <img
+              src="/assets/icons/button24px/store.svg"
+              alt="위치 아이콘"
+              class="menu-icon"
+            />
+            매장찾기
+          </a>
         </li>
       </ul>
     </ul>
