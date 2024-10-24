@@ -3,55 +3,50 @@ const footerContainer = document.querySelector('.drop-container');
 const footerContainerOrder = document.querySelector('.drop-container-order');
 const footerContainerAbout = document.querySelector('.drop-container-about');
 
-
 const footerUp = document.querySelector('.up-icon');
 const footerDown = document.querySelector('.drop-icon');
 
-const dropOrder = document.querySelector('.drop-icon-order')
+const dropOrder = document.querySelector('.drop-icon-order');
 const upOrder = document.querySelector('.up-icon-order');
 
 const dropAbout = document.querySelector('.drop-icon-about');
-const upAbout = document.querySelector('.up-icon-about')
-
+const upAbout = document.querySelector('.up-icon-about');
 
 footerDown.addEventListener('click', function () {
   footerContainer.style.display = 'block';
   footerUp.style.display = 'block';
   footerDown.style.display = 'none';
-
-})
+});
 
 footerUp.addEventListener('click', function () {
   footerContainer.style.display = 'none';
   footerUp.style.display = 'none';
   footerDown.style.display = 'block';
-})
+});
 
 dropOrder.addEventListener('click', function () {
   footerContainerOrder.style.display = 'block';
   upOrder.style.display = 'block';
   dropOrder.style.display = 'none';
-})
+});
 
 upOrder.addEventListener('click', function () {
   footerContainerOrder.style.display = 'none';
   upOrder.style.display = 'none';
   dropOrder.style.display = 'block';
-})
+});
 
 dropAbout.addEventListener('click', function () {
   footerContainerAbout.style.display = 'block';
   upAbout.style.display = 'block';
   dropAbout.style.display = 'none';
-})
+});
 
 upAbout.addEventListener('click', function () {
   footerContainerAbout.style.display = 'none';
   upAbout.style.display = 'none';
   dropAbout.style.display = 'block';
-})
-
-
+});
 
 //✨메뉴패널 구현*/
 // 요소 선택
