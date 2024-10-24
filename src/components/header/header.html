@@ -1,0 +1,119 @@
+<header>
+  <div class="headerMenu">
+    <ul>
+      <li><a href="#">매장 찾기</a></li>
+      <li><a href="#">고객 센터</a></li>
+      <li><a href="#">가입하기</a></li>
+      <li><a href="#">로그인</a></li>
+    </ul>
+  </div>
+  <nav id="nav">
+    <a href="#" class="logo">
+      <img src="/assets/icons/logo/nike.svg" alt="나이키 로고" id="logo" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#">New & Featured</a></li>
+      <li><a href="#">Men</a></li>
+      <li><a href="#">Women</a></li>
+      <li><a href="#">Kids</a></li>
+      <li><a href="#">Sale</a></li>
+    </ul>
+    <div class="search-cart">
+      <div class="search-box">
+        <input type="text" placeholder="검색" />
+        <span class="search-icon">
+          <img src="/assets/icons/button36px/search.svg" alt="돋보기 아이콘" />
+        </span>
+      </div>
+
+      <span class="icon hidden">
+        <img src="/assets/icons/button36px/search.svg" alt="돋보기 아이콘" />
+      </span>
+      <a href="#" class="icon hidden">
+        <img src="/assets/icons/button36px/profile.svg" alt="프로필 아이콘" />
+      </a>
+      <a href="#" class="icon heart">
+        <img src="/assets/icons/button36px/white-heart.svg" alt="하트 아이콘" />
+      </a>
+      <a href="#" class="icon cart">
+        <img src="/assets/icons/button36px/cart-36.svg" alt="장바구니 아이콘" />
+      </a>
+      <button class="icon hidden" id="menu-icon" onclick="toggleMenu()">
+        <img src="/assets/icons/button36px/menu.svg" alt="메뉴 아이콘" />
+      </button>
+    </div>
+  </nav>
+
+  <!--✨메뉴 사이드바-->
+
+  <div id="menu-sidebar">
+    <!-- X 닫기 버튼 -->
+    <img
+      src="/assets/icons/buttons/s-x.svg"
+      alt="닫기 아이콘"
+      class="close-btn"
+    />
+
+    <ul>
+      <li class="menu-button">
+        <img src="/assets/images/access.png" alt="가입버튼" class="access" />
+        <img src="/assets/images/login.png" alt="로그인버튼" class="login" />
+      </li>
+      <li>
+        <a href="#">New & Featured</a>
+        <img src="/assets/icons/button36px/next.svg" class="next-btn" />
+      </li>
+      <li>
+        <a href="#">Men</a>
+        <img src="/assets/icons/button36px/next.svg" class="next-btn" />
+      </li>
+      <li>
+        <a href="#">Women</a>
+        <img src="/assets/icons/button36px/next.svg" class="next-btn" />
+      </li>
+      <li>
+        <a href="#">Kids</a>
+        <img src="/assets/icons/button36px/next.svg" class="next-btn" />
+      </li>
+      <li>
+        <a href="#">Sale</a>
+        <img src="/assets/icons/button36px/next.svg" class="next-btn" />
+      </li>
+
+      <ul class="menu-icons">
+        <li>
+          <img
+            src="/assets/icons/button24px/question.svg"
+            alt="고객센터 아이콘"
+            class="menu-icon"
+          />
+          <a href="#">고객센터</a>
+        </li>
+        <li>
+          <img
+            src="/assets/icons/button24px/cart-24.svg"
+            alt="장바구니 아이콘"
+            class="menu-icon"
+          />
+          <a href="#">장바구니</a>
+        </li>
+        <li>
+          <img
+            src="/assets/icons/button24px/order.svg"
+            alt="주문 아이콘"
+            class="menu-icon"
+          />
+          <a href="#">주문</a>
+        </li>
+        <li>
+          <img
+            src="/assets/icons/button24px/store.svg"
+            alt="위치 아이콘"
+            class="menu-icon"
+          />
+          <a href="#">매장찾기</a>
+        </li>
+      </ul>
+    </ul>
+  </div>
+</header>
