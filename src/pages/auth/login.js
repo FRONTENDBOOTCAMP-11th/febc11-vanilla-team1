@@ -6,7 +6,7 @@ const emailRegex = /^[A-Za-z0-9]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const regText = document.querySelector('.reg-Text');
 const socialBtn = document.querySelector('#socialBtn');
 
-authInput.addEventListener('input', function () {
+function checkEmail() {
   const userEmail = authInput.value.trim();
   if (userEmail === '') {
     authInput.style.borderColor = 'red';
@@ -18,7 +18,21 @@ authInput.addEventListener('input', function () {
     authInput.style.borderColor = 'red';
     regText.textContent = '잘못된 이메일 주소입니다.';
   }
+};
+
+authInput.addEventListener('input', function () {
+  checkEmail();
 });
+
+authBtn.addEventListener('click', function () {
+  checkEmail();
+  const userEmail = authInput.value.trim();
+  if (emailRegex.test(userEmail)) {
+    sessionStorage.setItem('email', userEmail);
+    getEmail(userEmail);
+  }
+});
+
 
 async function getEmail(userEmail) {
   try {
@@ -44,23 +58,6 @@ async function getEmail(userEmail) {
     if (error.status === 409) window.location.href = 'pw.html';
   }
 }
-
-authBtn.addEventListener('click', function (e) {
-  e.preventDefault();
-  const userEmail = authInput.value.trim();
-  if (userEmail === '') {
-    authInput.style.borderColor = 'red';
-    regText.textContent = '필수';
-  } else if (emailRegex.test(userEmail)) {
-    authInput.style.borderColor = 'black';
-    regText.textContent = '';
-    sessionStorage.setItem('email', userEmail);
-    getEmail(userEmail);
-  } else {
-    authInput.style.borderColor = 'red';
-    regText.textContent = '잘못된 이메일 주소입니다.';
-  }
-});
 
 socialBtn.addEventListener('click', function () {
   loginWithKakao();
