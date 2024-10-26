@@ -1,7 +1,9 @@
+// LOGIN 부분
 import axios from 'axios';
 
+const loginSession = document.querySelector('.login-session')
 const authInput = document.querySelector('#emailInput');
-const authBtn = document.querySelector('#loginBtn');
+const authBtn = document.querySelector('#loginEmailBtn');
 const emailRegex = /^[A-Za-z0-9]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const regText = document.querySelector('.reg-Text');
 const socialBtn = document.querySelector('#socialBtn');
@@ -27,8 +29,8 @@ authInput.addEventListener('input', function () {
 authBtn.addEventListener('click', function () {
   checkEmail();
   const userEmail = authInput.value.trim();
+  authEmail.textContent = userEmail;
   if (emailRegex.test(userEmail)) {
-    sessionStorage.setItem('email', userEmail);
     getEmail(userEmail);
   }
 });
@@ -48,16 +50,22 @@ async function getEmail(userEmail) {
     });
 
     if (response.data.ok === 0) {
-      sessionStorage.setItem('email', userEmail);
-      window.location.href = 'pw.html';
+      loginSession.style.display = 'none';
+      passwordSession.style.display = 'block';
     } else {
-      sessionStorage.setItem('email', userEmail);
       window.location.href = 'check.html';
     }
   } catch (error) {
-    if (error.status === 409) window.location.href = 'pw.html';
+    if (error.response && error.response.status === 409) {
+      loginSession.style.display = 'none';
+      passwordSession.style.display = 'block';
+      return;
+    } else {
+      console.error('오류 발생:', error);
+    }
   }
 }
+
 
 socialBtn.addEventListener('click', function () {
   loginWithKakao();
@@ -110,3 +118,152 @@ function kakaoLogOut() {
     localStorage.clear();
   });
 }
+
+// PASSWORD
+
+const passwordSession = document.querySelector('.password-session');
+const passwordInput = document.querySelector('#authInput');
+const toggleOpen = document.querySelector('#toggleOpen');
+const toggleClose = document.querySelector('#toggleClose');
+const prevBtn = document.querySelector('#prevBtn');
+const loginPasswordBtn = document.querySelector('#loginPasswordBtn');
+const authEmail = document.querySelector('.auth-email');
+const alertMessage = document.querySelector('.find-password');
+const regTxt = document.querySelector('#regPw');
+const editEmail = document.querySelector('.edit-email');
+const regContainer = document.querySelector('#regContainer');
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  if (!authEmail) {
+    loginSession.style.display = 'block';
+    passwordSession.style.display = 'none';
+  }
+});
+
+editEmail.addEventListener('click', function (e) {
+  e.preventDefault();
+  loginSession.style.display = 'block';
+  passwordSession.style.display = 'none';
+  authInput.value = '';
+});
+
+toggleClose.addEventListener('click', function () {
+  passwordInput.type = 'text';
+  toggleClose.style.display = 'none';
+  toggleOpen.style.display = 'block';
+});
+
+toggleOpen.addEventListener('click', function () {
+  passwordInput.type = 'password';
+  toggleClose.style.display = 'block';
+  toggleOpen.style.display = 'none';
+});
+
+prevBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+  loginSession.style.display = 'block';
+  passwordSession.style.display = 'none';
+  authInput.value = '';
+});
+
+function tokenError(error) {
+  if (error.response && error.response.status === 401) {
+    alert('다시 로그인 해주세요.');
+    sessionStorage.removeItem('email');
+    loginSession.style.display = 'block';
+    passwordSession.style.display = 'none';
+  } else {
+    console.log('오류', error);
+  }
+}
+
+function checkPassword(userPw) {
+  if (!userPw) {
+    regContainer.style.display = 'block';
+    regTxt.innerHTML = `<p>비밀번호를 입력해주세요 *</p>`;
+  } else {
+    regContainer.style.display = 'block';
+    regTxt.innerHTML = `<p>비밀번호가 일치하지 않습니다. *</p>`;
+  }
+}
+
+// 로그인 요청 함수
+async function loginUser(userEmail, userPw) {
+  try {
+    const response = await axios.post(
+      'https://11.fesp.shop/users/login',
+
+      {
+        email: userEmail,
+        password: userPw,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'client-id': 'vanilla01',
+        },
+      },
+    );
+
+    if (response.data.item.token) {
+      const { accessToken, refreshToken } = response.data.item.token;
+      console.log(response.data.item);
+
+      if (accessToken && refreshToken) {
+        sessionStorage.setItem('accessToken', accessToken);
+        sessionStorage.setItem('refreshToken', refreshToken);
+        window.location.href = 'complete.html';
+      } else {
+        console.error('로그인 실패');
+        checkPassword(userPw);
+      }
+    } else {
+      console.error('정보가 응답에 없습니다.');
+    }
+  } catch (error) {
+    if (error.response.status === 422) {
+      checkPassword(userPw)
+    } if (error.response && error.response.status === 401) {
+      const reToken = await issueToken();
+      if (reToken) {
+        sessionStorage.setItem('accessToken', reToken);
+        return loginUser(userEmail, userPw);
+      } else {
+        tokenError(error);
+      }
+    } else {
+      tokenError(error);
+    }
+  }
+}
+
+async function issueToken() {
+  try {
+    const response = await axios.get('https://11.fesp.shop/auth/refresh', {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('refreshToken')}`,
+        'Content-Type': 'application/json',
+        'client-id': 'vanilla01',
+      },
+    });
+    return response.data.item.accessToken;
+  } catch (error) {
+    tokenError(error);
+  }
+}
+
+// loginPasswordBtn 클릭 이벤트 리스너
+loginPasswordBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const userEmail = authInput.value.trim();
+  const userPw = passwordInput.value.trim();
+
+  if (userEmail && userPw) {
+    loginUser(userEmail, userPw);
+  }
+});
+alertMessage.addEventListener('click', function () {
+  alert('아직 구현하지 않은 페이지입니다.');
+});
