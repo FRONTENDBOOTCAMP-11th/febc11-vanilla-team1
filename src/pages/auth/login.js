@@ -29,6 +29,7 @@ authInput.addEventListener('input', function () {
 authBtn.addEventListener('click', function () {
   checkEmail();
   const userEmail = authInput.value.trim();
+  sessionStorage.setItem('email', userEmail);
   authEmail.textContent = userEmail;
   if (emailRegex.test(userEmail)) {
     getEmail(userEmail);
@@ -50,6 +51,7 @@ async function getEmail(userEmail) {
     });
 
     if (response.data.ok === 0) {
+      sessionStorage.setItem('email', userEmail);
       loginSession.style.display = 'none';
       passwordSession.style.display = 'block';
     } else {
@@ -57,6 +59,7 @@ async function getEmail(userEmail) {
     }
   } catch (error) {
     if (error.response && error.response.status === 409) {
+      sessionStorage.setItem('email', userEmail);
       loginSession.style.display = 'none';
       passwordSession.style.display = 'block';
       return;
@@ -146,6 +149,7 @@ editEmail.addEventListener('click', function (e) {
   loginSession.style.display = 'block';
   passwordSession.style.display = 'none';
   authInput.value = '';
+  sessionStorage.clear();
 });
 
 toggleClose.addEventListener('click', function () {
@@ -165,12 +169,12 @@ prevBtn.addEventListener('click', function (e) {
   loginSession.style.display = 'block';
   passwordSession.style.display = 'none';
   authInput.value = '';
+  sessionStorage.clear();
 });
 
 function tokenError(error) {
   if (error.response && error.response.status === 401) {
     alert('다시 로그인 해주세요.');
-    sessionStorage.removeItem('email');
     loginSession.style.display = 'block';
     passwordSession.style.display = 'none';
   } else {
@@ -191,6 +195,7 @@ function checkPassword(userPw) {
 // 로그인 요청 함수
 async function loginUser(userEmail, userPw) {
   try {
+
     const response = await axios.post(
       'https://11.fesp.shop/users/login',
 
@@ -214,6 +219,7 @@ async function loginUser(userEmail, userPw) {
         sessionStorage.setItem('accessToken', accessToken);
         sessionStorage.setItem('refreshToken', refreshToken);
         window.location.href = 'complete.html';
+        sessionStorage.removeItem('email');
       } else {
         console.error('로그인 실패');
         checkPassword(userPw);
