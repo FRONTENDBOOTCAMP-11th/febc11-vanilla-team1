@@ -126,7 +126,6 @@ input[type='checkbox']:checked + label {
 }
 
 /* Components */
-
 /* Login form */
 .login-session {
   display: block;

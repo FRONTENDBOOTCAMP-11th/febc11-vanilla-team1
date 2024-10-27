@@ -8,6 +8,16 @@ const emailRegex = /^[A-Za-z0-9]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const regText = document.querySelector('.reg-Text');
 const socialBtn = document.querySelector('#socialBtn');
 
+function switchLogin() {
+  loginSession.style.display = 'block';
+  passwordSession.style.display = 'none';
+}
+
+function switchPw() {
+  loginSession.style.display = 'none';
+  passwordSession.style.display = 'block';
+}
+
 function checkEmail() {
   const userEmail = authInput.value.trim();
   if (userEmail === '') {
@@ -49,19 +59,14 @@ async function getEmail(userEmail) {
         'client-id': 'vanilla01',
       },
     });
-
-    if (response.data.ok === 0) {
-      sessionStorage.setItem('email', userEmail);
-      loginSession.style.display = 'none';
-      passwordSession.style.display = 'block';
-    } else {
+    if (response.data.ok === 1) {
       window.location.href = 'check.html';
     }
+
   } catch (error) {
     if (error.response && error.response.status === 409) {
       sessionStorage.setItem('email', userEmail);
-      loginSession.style.display = 'none';
-      passwordSession.style.display = 'block';
+      switchPw();
       return;
     } else {
       console.error('오류 발생:', error);
@@ -123,7 +128,6 @@ function kakaoLogOut() {
 }
 
 // PASSWORD
-
 const passwordSession = document.querySelector('.password-session');
 const passwordInput = document.querySelector('#authInput');
 const toggleOpen = document.querySelector('#toggleOpen');
@@ -139,15 +143,13 @@ const regContainer = document.querySelector('#regContainer');
 
 document.addEventListener('DOMContentLoaded', function () {
   if (!authEmail) {
-    loginSession.style.display = 'block';
-    passwordSession.style.display = 'none';
+    switchLogin()
   }
 });
 
 editEmail.addEventListener('click', function (e) {
   e.preventDefault();
-  loginSession.style.display = 'block';
-  passwordSession.style.display = 'none';
+  switchLogin();
   authInput.value = '';
   sessionStorage.clear();
 });
@@ -166,8 +168,7 @@ toggleOpen.addEventListener('click', function () {
 
 prevBtn.addEventListener('click', function (e) {
   e.preventDefault();
-  loginSession.style.display = 'block';
-  passwordSession.style.display = 'none';
+  switchLogin()
   authInput.value = '';
   sessionStorage.clear();
 });
@@ -175,8 +176,8 @@ prevBtn.addEventListener('click', function (e) {
 function tokenError(error) {
   if (error.response && error.response.status === 401) {
     alert('다시 로그인 해주세요.');
-    loginSession.style.display = 'block';
-    passwordSession.style.display = 'none';
+    localStorage.clear();
+    switchLogin()
   } else {
     console.log('오류', error);
   }
@@ -230,16 +231,15 @@ async function loginUser(userEmail, userPw) {
   } catch (error) {
     if (error.response.status === 422) {
       checkPassword(userPw)
-    } if (error.response && error.response.status === 401) {
+    } else if (error.response && error.response.status === 401) {
       const reToken = await issueToken();
       if (reToken) {
         sessionStorage.setItem('accessToken', reToken);
         return loginUser(userEmail, userPw);
       } else {
+        localStorage.clear();
         tokenError(error);
       }
-    } else {
-      tokenError(error);
     }
   }
 }
