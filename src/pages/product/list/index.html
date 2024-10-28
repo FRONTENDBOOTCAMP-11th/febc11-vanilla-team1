@@ -109,15 +109,7 @@
           </div>
         </header>
 
-        <ul class="categories is_mobile">
-          <!-- <li class="categories__item"><a href="">신발</a></li>
-          <li class="categories__item"><a href="">팬츠 & 타이츠</a></li>
-          <li class="categories__item"><a href="">팬츠 & 타이츠</a></li>
-          <li class="categories__item"><a href="">팬츠 & 타이츠</a></li>
-          <li class="categories__item"><a href="">팬츠 & 타이츠</a></li>
-          <li class="categories__item"><a href="">점프수트 & 롬퍼스</a></li>
-          <li class="categories__item"><a href="">스커트 & 드레스</a></li> -->
-        </ul>
+        <ul class="categories is_mobile"></ul>
 
         <div class="subheading is_mobile">
           <div class="subheading__result-count">
@@ -337,19 +329,7 @@
         <main class="result-container">
           <!-- sidebar -->
           <aside id="sidebar" class="sidebar active" aria-expanded="true">
-            <ul class="sidebar__categories">
-              <!-- <li class="sidebar__category"><a href="">신발</a></li>
-              <li class="sidebar__category"><a href="">팬츠 & 타이츠</a></li>
-              <li class="sidebar__category"><a href="">팬츠 & 타이츠</a></li>
-              <li class="sidebar__category"><a href="">팬츠 & 타이츠</a></li>
-              <li class="sidebar__category"><a href="">팬츠 & 타이츠</a></li>
-              <li class="sidebar__category">
-                <a href="">점프수트 & 롬퍼스</a>
-              </li>
-              <li class="sidebar__category">
-                <a href="">스커트 & 드레스</a>
-              </li> -->
-            </ul>
+            <ul class="sidebar__categories"></ul>
 
             <ul class="filter-select">
               <li class="filter collapse-container">
@@ -489,26 +469,6 @@
     <script type="module" src="./index.js"></script>
     <script type="module" src="./uiHandler.js"></script>
     <script type="module" src="/src/components/header/header.js"></script>
-    <script>
-      // fetch header component
-
-      // fetch footer component
-      fetch('/src/components/footer/footer.html')
-        .then(res => res.text())
-        .then(html => {
-          document.getElementById('footer-wrap').innerHTML = html;
-        })
-        .then(() => {
-          // fetch footer component's js
-          fetch('/src/components/footer/footer.js')
-            .then(res => res.text())
-            .then(js => {
-              const script = document.createElement('script');
-              script.type = 'module';
-              script.innerHTML = js;
-              document.body.appendChild(script);
-            });
-        });
-    </script>
+    <script type="module" src="/src/components/footer/footer.js"></script>
   </body>
 </html>

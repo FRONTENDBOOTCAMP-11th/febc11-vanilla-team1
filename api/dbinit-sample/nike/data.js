@@ -335,7 +335,7 @@ export const initData = async (clientId, nextSeq) => {
           depth: 1,
           isNew: false,
           isBest: false,
-          category: ['PC01', 'PC0103', 'PC010305'], // Men > 의류 > 트랙수트
+          category: ['PC01', 'PC0102', 'PC010305'], // Men > 의류 > 트랙수트
           primeCost: 179000,
           gender: 'men',
         },
