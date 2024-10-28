@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="../../../style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/components/header/header.css" />
+    <link rel="stylesheet" href="/src/components/footer/footer.css" />
+  </head>
+
+  <body>
+    <div id="app">
+      <div id="header-wrap"></div>
+
+      <!--main-->
+
+      <main id="main">
+        <div class="sidebar">
+          <h1>나이키 매장 찾기</h1>
+
+          <div class="search-map">
+            <div class="search-map-box">
+              <span class="search-map-icon">
+                <img
+                  src="../../../public/assets/icons/button36px/search.svg"
+                  alt="돋보기 아이콘"
+                />
+              </span>
+              <input type="text" placeholder="위치 검색" />
+            </div>
+            <p>근처매장:15개</p>
+
+            <div class="select-tap">
+              <a href="#" class="map-tap">Map</a>
+              <a href="#" class="list-tap">List</a>
+            </div>
+          </div>
+
+          <ul class="card-container">
+            <li class="card">
+              <h3>Nike House of Innovation NYC</h3>
+              <p>
+                650 5th Avenue<br />
+                New York, NY, 10019-6108, US
+              </p>
+              <p>영업 종료 • 익일 오전 10:00에 영업 시작</p>
+            </li>
+
+            <li class="card">
+              <h3>Nike House of Innovation NYC</h3>
+              <p>
+                650 5th Avenue<br />
+                New York, NY, 10019-6108, US
+              </p>
+              <p>영업 종료 • 익일 오전 10:00에 영업 시작</p>
+            </li>
+
+            <li class="card">
+              <h3>Nike House of Innovation NYC</h3>
+              <p>
+                650 5th Avenue<br />
+                New York, NY, 10019-6108, US
+              </p>
+              <p>영업 종료 • 익일 오전 10:00에 영업 시작</p>
+            </li>
+            <li class="card">
+              <h3>Nike House of Innovation NYC</h3>
+              <p>
+                650 5th Avenue<br />
+                New York, NY, 10019-6108, US
+              </p>
+              <p>영업 종료 • 익일 오전 10:00에 영업 시작</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="map">
+          <img src="../../../public/assets/images/map.png" alt="지도" />
+        </div>
+      </main>
+
+      <div id="footer-wrap"></div>
+    </div>
+    <script src="index.js"></script>
+    <script type="module" src="/src/components/header/header.js"></script>
+    <script type="module" src="/src/components/footer/footer.js"></script>
+  </body>
+</html>
