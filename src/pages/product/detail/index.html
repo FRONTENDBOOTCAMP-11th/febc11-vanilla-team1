@@ -8,10 +8,12 @@
       rel="stylesheet"
       href="https://unpkg.com/swiper/swiper-bundle.min.css"
     />
-    <link rel="stylesheet" href="product-details-style.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/src/components/header/header.css" />
+    <link rel="stylesheet" href="/src/components/footer/footer.css" />
   </head>
   <body>
-    <header>header area</header>
+    <div id="header-wrap"></div>
     <!-- 신발 레이아웃 -->
     <div class="shoes_l_wrapper">
       <div class="det_header_mobaile">
@@ -415,9 +417,11 @@
       <!--re_container close-->
     </div>
     <!--recommend_product_container close-->
-    <footer>footer area</footer>
+    <div id="footer-wrap"></div>
   </body>
   <script src="main.js"></script>
   <script src="swiper.js"></script>
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script type="module" src="/src/components/header/header.js"></script>
+  <script type="module" src="/src/components/footer/footer.js"></script>
 </html>
