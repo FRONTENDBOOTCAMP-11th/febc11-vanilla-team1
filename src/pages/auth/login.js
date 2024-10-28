@@ -106,8 +106,8 @@ function getInfo() {
       console.log('사용자 정보:', res);
       const account_email = res.kakao_account.email;
       const account_name = res.kakao_account.name;
-      localStorage.setItem('email', account_email);
-      localStorage.setItem('name', account_name);
+      sessionStorage.setItem('email', account_email);
+      sessionStorage.setItem('name', account_name);
       window.location.href = 'complete.html';
     })
     .catch(function (error) {
@@ -231,7 +231,9 @@ async function loginUser(userEmail, userPw) {
     }
   } catch (error) {
     if (error.response.status === 422) {
-      checkPassword(userPw)
+      checkPassword(userPw);
+    } else if (error.response.status === 403) {
+      checkPassword(userPw);
     } else if (error.response && error.response.status === 401) {
       const reToken = await issueToken();
       if (reToken) {
