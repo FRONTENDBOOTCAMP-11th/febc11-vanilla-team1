@@ -425,6 +425,14 @@ input[type='date']:valid::before {
   margin-right: 4px;
 }
 
+#toggleClose {
+  display: block;
+}
+
+#toggleOpen {
+  display: none;
+}
+
 /* Check form */
 
 .check-form {
