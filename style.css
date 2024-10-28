@@ -35,7 +35,6 @@ img {
 }
 
 button {
-  all: unset;
   border: none;
   background-color: transparent;
   cursor: pointer;

@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+@import '../../../../index.css';
+@import '../../../../style.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
 :root {
   font-family: 'Noto Sans KR';
@@ -22,12 +24,9 @@ li {
   list-style: none;
   padding: 0;
   margin: 0;
+  text-decoration-line: none;
 }
-
-a {
-  border-bottom: 1px solid #000;
-  color: var(--color-black);
-  font-weight: bold;
+material_introduce a {
   text-decoration: none;
 }
 
@@ -68,7 +67,24 @@ p {
 .hide {
   display: none;
 }
-/* 
+
+button {
+  /* all: initial; */
+}
+
+.seemore {
+  border-bottom: 1px solid #000;
+  color: var(--color-black);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+header {
+  width: auto;
+  height: 96px;
+  border: 1px solid #000;
+  margin-bottom: 156px;
+}
 
 /*-----color------*/
 :root {
@@ -77,22 +93,6 @@ p {
   --color-subcolor: #707072;
   --color-white: #ffffff;
 }
-
-/* 헤더,푸터 */
-header {
-  width: auto;
-  height: 96px;
-  border: 1px solid #000;
-  margin-bottom: 156px;
-}
-
-footer {
-  width: auto;
-  height: 604px;
-  border: 1px solid #000;
-  margin-top: 90px;
-}
-
 /* ---------------제품 상세--------------- */
 /* 신발 wrapper */
 .shoes_l_wrapper {
@@ -355,6 +355,7 @@ button:focus {
   padding: 24px 21.16px 24px 21.34px;
   text-align: center;
   font-weight: 400;
+  font-size: 16px;
   margin: 32px 0 60px 0;
 }
 
@@ -407,6 +408,7 @@ button:focus {
   transition: max-height 0.2s ease-out;
   line-height: 30px;
   padding: 0;
+  font-size: 14px;
 }
 
 .shoes_panel ul li {
@@ -419,7 +421,7 @@ button:focus {
 }
 
 .active_button::after {
-  content: url(../../../public/assets/icons/button/arrow_bottom.svg);
+  content: url(../../../../public/assets/icons/button/arrow_bottom.svg);
   font-size: 13px;
   color: #777;
   float: right;
@@ -427,7 +429,7 @@ button:focus {
 }
 
 .on::after {
-  content: url(../../../public/assets/icons/button/arrow_top.svg);
+  content: url(../../../../public/assets/icons/button/arrow_top.svg);
 }
 
 .rev-button_layout {
@@ -451,15 +453,18 @@ button:focus {
 
 .shoes_type {
   font-weight: 500;
+  font-size: 16px;
 }
 
 .det_payment {
   font-weight: 500;
   margin: 32px 0;
+  font-size: 16px;
 }
 
 .size_header {
   margin-top: 27px;
+  font-size: 16px;
 }
 
 .detail_introduce {
@@ -474,6 +479,7 @@ button:focus {
 .additianal_info {
   padding-inline-start: 20px;
   margin: 28px 0 30px 0;
+  font-size: 14px;
 }
 
 .basket {
