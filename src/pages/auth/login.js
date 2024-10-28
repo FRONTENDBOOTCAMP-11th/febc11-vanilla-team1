@@ -214,11 +214,12 @@ async function loginUser(userEmail, userPw) {
 
     if (response.data.item.token) {
       const { accessToken, refreshToken } = response.data.item.token;
-      console.log(response.data.item);
+      const userName = response.data.item.name;
 
       if (accessToken && refreshToken) {
         sessionStorage.setItem('accessToken', accessToken);
         sessionStorage.setItem('refreshToken', refreshToken);
+        sessionStorage.setItem('name', userName);
         window.location.href = 'complete.html';
         sessionStorage.removeItem('email');
       } else {
