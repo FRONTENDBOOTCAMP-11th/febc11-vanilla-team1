@@ -57,6 +57,7 @@ function checkLoginState() {
 function userOut() {
   const logOut = document.querySelector('.log-out');
   logOut.addEventListener('click', function () {
+    window.top.location.href = window.location.href = 'login.html';
     sessionStorage.clear();
   })
 }
