@@ -69,7 +69,11 @@ p {
 }
 
 button {
-  /* all: initial; */
+  all: unset;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .seemore {
