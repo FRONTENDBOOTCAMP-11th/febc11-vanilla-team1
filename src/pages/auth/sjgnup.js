@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 'use strict';
+=======
+>>>>>>> dev
 import axios from 'axios';
+import { check } from 'prettier/standalone.js';
 
 const inputFirstName = document.querySelector('#inputFirstName');
 const inputLastName = document.querySelector('#inputLastName');
@@ -11,6 +15,7 @@ const loginTxtFirst = document.querySelector('.first');
 const loginTxtSecond = document.querySelector('.second');
 const toggleOpen = document.querySelector('#toggleOpen');
 const toggleClose = document.querySelector('#toggleClose');
+const checkbox = document.querySelector('#check');
 
 const regFirstName = /^[가-힣a-zA-Z]{1,30}$/;
 const regLastName = /^[가-힣a-zA-Z]{1,30}$/;
@@ -18,10 +23,18 @@ const regPw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 const regEight = /^.{8,}$/;
 const regMin = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
 
+<<<<<<< HEAD
+=======
+checkbox.addEventListener('change', function () {
+  check.checked = checkbox.checked;
+  console.log(checkbox.checked);
+});
+
+>>>>>>> dev
 document.addEventListener('DOMContentLoaded', function () {
   const savedEmail = sessionStorage.getItem('email');
   if (!savedEmail) {
-    window.location.href = 'login.html';
+    window.location.href = '/src/pages/auth/login.html';
   }
 });
 
@@ -36,6 +49,9 @@ toggleOpen.addEventListener('click', function () {
   toggleClose.style.display = 'block';
   toggleOpen.style.display = 'none';
 });
+
+const today = new Date().toISOString().split('T')[0];
+document.querySelector('#inputCalendar').setAttribute('max', today);
 
 function regPassword(userPw) {
   if (userPw === '') {
@@ -66,6 +82,7 @@ inputPassword.addEventListener('input', function () {
 
 async function userSign(userPw, userName, userBirth, userEmail) {
   try {
+<<<<<<< HEAD
     const response = await axios.post('https://11.fesp.shop/users/', {
       email: userEmail,
       password: userPw,
@@ -73,8 +90,26 @@ async function userSign(userPw, userName, userBirth, userEmail) {
       type: 'user',
       extra: {
         userBirth,
+=======
+    const response = await axios.post(
+      'https://11.fesp.shop/users/',
+      {
+        email: userEmail,
+        password: userPw,
+        name: userName,
+        type: 'user',
+        extra: {
+          userBirth,
+        },
+>>>>>>> dev
       },
-    });
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'client-id': 'vanilla01',
+        },
+      },
+    );
 
     if (response.data) {
       loginUser(userEmail, userPw);
@@ -91,10 +126,19 @@ async function userSign(userPw, userName, userBirth, userEmail) {
 
 async function loginUser(userEmail, userPw) {
   try {
-    const response = await axios.post('https://11.fesp.shop/users/login', {
-      email: userEmail,
-      password: userPw,
-    });
+    const response = await axios.post(
+      'https://11.fesp.shop/users/login',
+      {
+        email: userEmail,
+        password: userPw,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'client-id': 'vanilla01',
+        },
+      },
+    );
 
     if (response.data.item.token) {
       const { accessToken, refreshToken } = response.data.item.token;
@@ -122,7 +166,12 @@ signUpBtn.addEventListener('click', function (e) {
   if (
     regFirstName.test(inputFirstName.value) &&
     regLastName.test(inputLastName.value) &&
+<<<<<<< HEAD
     regPw.test(userPw)
+=======
+    regPw.test(userPw) &&
+    checkbox.checked === true
+>>>>>>> dev
   ) {
     regPassword(userPw);
     userSign(userPw, userName, userBirth, userEmail);
@@ -132,6 +181,10 @@ signUpBtn.addEventListener('click', function (e) {
 });
 
 cancelBtn.addEventListener('click', function () {
+<<<<<<< HEAD
   window.location.href = 'login.html';
+=======
+  window.location.href = '/src/pages/auth/login.html';
+>>>>>>> dev
   sessionStorage.removeItem('email');
 });

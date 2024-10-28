@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 'use strict';
+=======
+>>>>>>> dev
 const checkAll = document.getElementById('checkAll');
 const checkboxes = document.querySelectorAll('#check1, #check2, #check3');
 const agreeBtn = document.querySelector('#agreeBtn');
@@ -8,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const savedEmail = sessionStorage.getItem('email');
 
   if (!savedEmail) {
-    window.location.href = 'login.html';
+    window.location.href = '/src/pages/auth/login.html';
   }
 });
 
@@ -36,12 +39,16 @@ function updateAgreeButtonState() {
 
 agreeBtn.addEventListener('click', function () {
   const savedEmail = sessionStorage.getItem('email');
-  if (savedEmail) {
-    window.location.href = 'signup.html';
+  if (savedEmail && checkAll.checked === true) {
+    window.location.href = '/src/pages/auth/signup.html';
   }
 });
 
 cancelBtn.addEventListener('click', function () {
+<<<<<<< HEAD
   window.location.href = 'login.html';
+=======
+  window.location.href = '/src/pages/auth/login.html';
+>>>>>>> dev
   sessionStorage.removeItem('email');
 });

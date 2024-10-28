@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 'use strict';
+=======
+>>>>>>> dev
 import axios from 'axios';
 
 const passwordInput = document.querySelector('#authInput');
@@ -16,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const usersEmail = sessionStorage.getItem('email');
   authEmail.textContent = usersEmail;
   if (!usersEmail) {
-    window.location.href = 'login.html';
+    window.location.href = '/src/pages/auth/login.html';
   }
 });
 
@@ -24,7 +27,11 @@ editEmail.addEventListener('click', function (e) {
   e.preventDefault();
   sessionStorage.clear();
   localStorage.clear();
+<<<<<<< HEAD
   window.location.href = 'login.html';
+=======
+  window.location.href = '/src/pages/auth/login.html';
+>>>>>>> dev
 });
 
 toggleClose.addEventListener('click', function () {
@@ -43,14 +50,14 @@ prevBtn.addEventListener('click', function (e) {
   e.preventDefault();
   sessionStorage.clear();
   localStorage.clear();
-  window.location.href = 'login.html';
+  window.location.href = '/src/pages/auth/login.html';
 });
 
 function tokenError(error) {
   if (error.response && error.response.status === 401) {
     alert('다시 로그인 해주세요.');
     sessionStorage.removeItem('email');
-    window.location.href = 'login.html';
+    window.location.href = '/src/pages/auth/login.html';
   } else {
     console.log('오류', error);
   }
@@ -59,13 +66,23 @@ function tokenError(error) {
 // 로그인 요청 함수
 async function loginUser(userEmail, userPw) {
   try {
-    const response = await axios.post('https://11.fesp.shop/users/login', {
-      email: userEmail,
-      password: userPw,
-    });
+    const response = await axios.post(
+      'https://11.fesp.shop/users/login',
+      {
+        email: userEmail,
+        password: userPw,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'client-id': 'vanilla01',
+        },
+      },
+    );
 
     if (response.data.item.token) {
       const { accessToken, refreshToken } = response.data.item.token;
+      console.log(response.data.item);
 
       if (accessToken && refreshToken) {
         sessionStorage.setItem('accessToken', accessToken);
@@ -98,6 +115,11 @@ async function issueToken() {
     const response = await axios.get('https://11.fesp.shop/auth/refresh', {
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem('refreshToken')}`,
+<<<<<<< HEAD
+=======
+        'Content-Type': 'application/json',
+        'client-id': 'vanilla01',
+>>>>>>> dev
       },
     });
     return response.data.item.accessToken;

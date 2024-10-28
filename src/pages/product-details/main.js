@@ -1,5 +1,6 @@
 'use strict';
-
+import Swiper from 'swiper';
+import 'swiper/css';
 // eslint-disable-next-line no-undef
 new Swiper('.mySwiper', {
   slidesPerView: 3,
@@ -43,7 +44,24 @@ for (val = 0; val < act.length; val++) {
     }
   });
 }
-function toggleImg() {
-  document.getElementsByClassName('nike_shoes')[0].src =
-    '../../../public/assets/icons/shoes/(big)NIKE+JAM_black.png';
-}
+
+// 버튼 이벤트 (신발이미지 클릭에 따른 이미지 변경)
+let imgchange_braun = document.querySelector('.nike_shoes');
+document.querySelector('.braun_button').addEventListener('click', function () {
+  imgchange_braun.setAttribute(
+    'src',
+    '../../../public/assets/icons/shoes/(big)NIKE+JAM_braun.svg',
+    'src',
+    '../../../public/assets/icons/shoes/middle-img-1.svg',
+  );
+});
+
+let imgchange_black = document.querySelector('.nike_shoes');
+document.querySelector('.black_button').addEventListener('click', function () {
+  imgchange_black.setAttribute(
+    'src',
+    '../../../public/assets/icons/shoes/(big)NIKE+JAM_black.svg',
+    'src',
+    '../../../public/assets/icons/shoes/middle-img-black-1.svg',
+  );
+});

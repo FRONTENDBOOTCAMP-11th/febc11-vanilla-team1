@@ -111,6 +111,7 @@ header.header {
     display: flex;
   }
 }
+
 button.header__action-button,
 button.subheading__action-button {
   margin-left: 25px;
@@ -303,6 +304,12 @@ ul.product-list {
   .is_mobile {
     display: block;
   }
+  header.header {
+    padding: 12px 20px;
+    & .header__title {
+      font-size: 2rem;
+    }
+  }
   .subheading__result-count {
     color: var(--color-gray-500);
   }
@@ -317,7 +324,6 @@ ul.product-list {
   /* mobile category, filter */
   .is_mobile.categories {
     display: flex;
-    justify-content: space-between;
     padding: 0 16px 14px;
     border-bottom: 1px solid var(--color-gray-200);
     overflow-x: auto;

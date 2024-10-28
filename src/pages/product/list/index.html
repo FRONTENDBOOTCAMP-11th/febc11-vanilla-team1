@@ -4,15 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>나이키</title>
-    <link rel="stylesheet" href="list.css" />
-    <link rel="stylesheet" href="./components/footer/footer.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/src/components/header/header.css" />
+    <link rel="stylesheet" href="/src/components/footer/footer.css" />
   </head>
   <body>
     <div id="app">
+      <div id="header-wrap"></div>
       <div class="wrapper">
         <header class="header">
           <h1 class="header__title">
-            신제품 <span class="result-count">(749)</span>
+            <span class="title">신제품</span>
+            <span class="result-count"> (<span class="count"></span>) </span>
           </h1>
 
           <!-- header button actions(filter, sorting) -->
@@ -61,7 +64,7 @@
                   role="menuitem"
                   tabindex="-1"
                   type="button"
-                  value=""
+                  value="beast"
                 >
                   추천순
                 </button>
@@ -107,17 +110,20 @@
         </header>
 
         <ul class="categories is_mobile">
-          <li class="categories__item"><a href="">신발</a></li>
+          <!-- <li class="categories__item"><a href="">신발</a></li>
           <li class="categories__item"><a href="">팬츠 & 타이츠</a></li>
           <li class="categories__item"><a href="">팬츠 & 타이츠</a></li>
           <li class="categories__item"><a href="">팬츠 & 타이츠</a></li>
           <li class="categories__item"><a href="">팬츠 & 타이츠</a></li>
           <li class="categories__item"><a href="">점프수트 & 롬퍼스</a></li>
-          <li class="categories__item"><a href="">스커트 & 드레스</a></li>
+          <li class="categories__item"><a href="">스커트 & 드레스</a></li> -->
         </ul>
 
         <div class="subheading is_mobile">
-          <div class="subheading__result-count">61개의 결과</div>
+          <div class="subheading__result-count">
+            <span class="count"></span>
+            개의 결과
+          </div>
           <button class="subheading__filter-toggle subheading__action-button">
             <span>필터</span>
             <img
@@ -192,9 +198,10 @@
                     <div class="filter-checkbox">
                       <input
                         type="checkbox"
-                        name=""
+                        name="gender__filter"
                         id="dialog__filter__male"
                         aria-label="남성으로 필터링"
+                        value="men"
                       />
                     </div>
                     <label for="dialog__filter__male">남성</label>
@@ -203,9 +210,10 @@
                     <div class="filter-checkbox">
                       <input
                         type="checkbox"
-                        name=""
+                        name="gender__filter"
                         id="dialog__filter__female"
                         aria-label="여성으로 필터링"
+                        value="women"
                       />
                     </div>
                     <label for="dialog__filter__female">여성</label>
@@ -214,9 +222,10 @@
                     <div class="filter-checkbox">
                       <input
                         type="checkbox"
-                        name=""
+                        name="gender__filter"
                         id="dialog__filter__unisex"
                         aria-label="유니섹스로 필터링"
+                        value="unisex"
                       />
                     </div>
                     <label for="dialog__filter__unisex">유니섹스</label>
@@ -232,66 +241,71 @@
                     <div class="filter-checkbox">
                       <input
                         type="checkbox"
-                        name=""
+                        name="price__filter"
                         id="dialog__filter__price-0-50"
                         aria-label="0 - 50,000 원(으)로 필터링"
+                        value="50000-100000"
                       />
                     </div>
-                    <label for="dialog__filter__price-0-50"
-                      >0 - 50,000 원</label
-                    >
+                    <label for="dialog__filter__price-0-50">
+                      0 - 50,000 원
+                    </label>
                   </div>
                   <div class="filter-item">
                     <div class="filter-checkbox">
                       <input
                         type="checkbox"
-                        name=""
+                        name="price__filter"
                         id="dialog__filter__price-50-100"
                         aria-label="50,000 - 100,000 원(으)로 필터링"
+                        value="50000-100000"
                       />
                     </div>
-                    <label for="dialog__filter__price-50-100"
-                      >50,000 - 100,000 원</label
-                    >
+                    <label for="dialog__filter__price-50-100">
+                      50,000 - 100,000 원
+                    </label>
                   </div>
                   <div class="filter-item">
                     <div class="filter-checkbox">
                       <input
                         type="checkbox"
-                        name=""
+                        name="price__filter"
                         id="dialog__filter__price-100-150"
                         aria-label="100,000 - 150,000 원(으)로 필터링"
+                        value="100000-150000"
                       />
                     </div>
-                    <label for="dialog__filter__price-100-150"
-                      >100,000 - 150,000 원</label
-                    >
+                    <label for="dialog__filter__price-100-150">
+                      100,000 - 150,000 원
+                    </label>
                   </div>
                   <div class="filter-item">
                     <div class="filter-checkbox">
                       <input
                         type="checkbox"
-                        name=""
+                        name="price__filter"
                         id="dialog__filter__price-150-200"
                         aria-label="150,000 - 200,000 원(으)로 필터링"
+                        value="150000-200000"
                       />
                     </div>
-                    <label for="dialog__filter__price-150-200"
-                      >150,000 - 200,000 원</label
-                    >
+                    <label for="dialog__filter__price-150-200">
+                      150,000 - 200,000 원
+                    </label>
                   </div>
                   <div class="filter-item">
                     <div class="filter-checkbox">
                       <input
                         type="checkbox"
-                        name=""
+                        name="price__filter"
                         id="dialog__filter__price-200-0"
                         aria-label="200,000 원 이상(으)로 필터링"
+                        value="200000-99999999999"
                       />
                     </div>
-                    <label for="dialog__filter__price-200-0"
-                      >200,000 원 +</label
-                    >
+                    <label for="dialog__filter__price-200-0">
+                      200,000 원 +
+                    </label>
                   </div>
                 </div>
               </li>
@@ -324,7 +338,7 @@
           <!-- sidebar -->
           <aside id="sidebar" class="sidebar active" aria-expanded="true">
             <ul class="sidebar__categories">
-              <li class="sidebar__category"><a href="">신발</a></li>
+              <!-- <li class="sidebar__category"><a href="">신발</a></li>
               <li class="sidebar__category"><a href="">팬츠 & 타이츠</a></li>
               <li class="sidebar__category"><a href="">팬츠 & 타이츠</a></li>
               <li class="sidebar__category"><a href="">팬츠 & 타이츠</a></li>
@@ -334,7 +348,7 @@
               </li>
               <li class="sidebar__category">
                 <a href="">스커트 & 드레스</a>
-              </li>
+              </li> -->
             </ul>
 
             <ul class="filter-select">
@@ -355,9 +369,10 @@
                     <div class="filter-checkbox">
                       <input
                         type="checkbox"
-                        name=""
+                        name="gender__filter"
                         id="male"
                         aria-label="남성으로 필터링"
+                        value="men"
                       />
                     </div>
                     <label for="male">남성</label>
@@ -366,9 +381,10 @@
                     <div class="filter-checkbox">
                       <input
                         type="checkbox"
-                        name=""
+                        name="gender__filter"
                         id="female"
                         aria-label="여성으로 필터링"
+                        value="women"
                       />
                     </div>
                     <label for="female">여성</label>
@@ -377,9 +393,10 @@
                     <div class="filter-checkbox">
                       <input
                         type="checkbox"
-                        name=""
+                        name="gender__filter"
                         id="unisex"
                         aria-label="유니섹스로 필터링"
+                        value="unisex"
                       />
                     </div>
                     <label for="unisex">유니섹스</label>
@@ -390,7 +407,7 @@
               <li class="filter collapse-container">
                 <button
                   class="filter-title collapse-button"
-                  aria-label="가격대 필터 드롭다운"
+                  aria-label="가격 필터 드롭다운"
                 >
                   <span>가격대</span>
                   <img
@@ -404,9 +421,10 @@
                     <div class="filter-checkbox">
                       <input
                         type="checkbox"
-                        name=""
+                        name="price__filter"
                         id="price-0-50"
                         aria-label="0 - 50,000 원(으)로 필터링"
+                        value="0-50000"
                       />
                     </div>
                     <label for="price-0-50">0 - 50,000 원</label>
@@ -415,9 +433,10 @@
                     <div class="filter-checkbox">
                       <input
                         type="checkbox"
-                        name=""
+                        name="price__filter"
                         id="price-50-100"
                         aria-label="50,000 - 100,000 원(으)로 필터링"
+                        value="50000-100000"
                       />
                     </div>
                     <label for="price-50-100">50,000 - 100,000 원</label>
@@ -426,9 +445,10 @@
                     <div class="filter-checkbox">
                       <input
                         type="checkbox"
-                        name=""
+                        name="price__filter"
                         id="price-100-150"
                         aria-label="100,000 - 150,000 원(으)로 필터링"
+                        value="100000-150000"
                       />
                     </div>
                     <label for="price-100-150">100,000 - 150,000 원</label>
@@ -437,9 +457,10 @@
                     <div class="filter-checkbox">
                       <input
                         type="checkbox"
-                        name=""
+                        name="price__filter"
                         id="price-150-200"
                         aria-label="150,000 - 200,000 원(으)로 필터링"
+                        value="150000-200000"
                       />
                     </div>
                     <label for="price-150-200">150,000 - 200,000 원</label>
@@ -448,9 +469,10 @@
                     <div class="filter-checkbox">
                       <input
                         type="checkbox"
-                        name=""
+                        name="price__filter"
                         id="price-200-0"
                         aria-label="200,000 원 이상(으)로 필터링"
+                        value="200000-99999999999"
                       />
                     </div>
                     <label for="price-200-0">200,000 원 +</label>
@@ -462,8 +484,11 @@
           <ul class="product-list"></ul>
         </main>
       </div>
-      <!-- <footer id="footer"></footer> -->
+      <div id="footer-wrap"></div>
     </div>
-    <script type="module" src="./list.js"></script>
+    <script type="module" src="./index.js"></script>
+    <script type="module" src="./uiHandler.js"></script>
+    <script type="module" src="/src/components/header/header.js"></script>
+    <script type="module" src="/src/components/footer/footer.js"></script>
   </body>
 </html>
