@@ -38,7 +38,6 @@ function checkLoginState() {
   const token = sessionStorage.getItem("accessToken");
   const userName = sessionStorage.getItem('name');
 
-
   const userLoginItems = document.querySelectorAll(".user-login");
   const userOutItems = document.querySelectorAll(".user-out");
   const userNameItems = document.querySelector('.user-name');
