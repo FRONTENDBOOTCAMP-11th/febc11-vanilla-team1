@@ -53,9 +53,21 @@ class Params {
     return priceParams;
   }
 
+  getCategory() {
+    if (this.category.length === 0) {
+      return null;
+    }
+    const categoryParams = {};
+    this.category.forEach((c, i) => {
+      categoryParams[`extra.category.${i}`] = c;
+    });
+    return categoryParams;
+  }
+
   getCustomParams() {
     return {
       ...this.getGender(),
+      ...this.getCategory(),
     };
   }
 }
@@ -74,7 +86,6 @@ async function getMainCategory() {
   // category=depth1-depth2-depth3 형태로 되어 있습니다.
   // Men-신발-조던
   const paramValue = URLparams.get('category');
-  console.log(paramValue);
 
   let categoryList = null;
   if (paramValue) {
@@ -115,8 +126,6 @@ async function getSubCategory(code) {
       parent: code,
     });
 
-    console.log(codes);
-
     renderCategoryList(codes);
   } catch (error) {
     console.error(error);
@@ -125,7 +134,6 @@ async function getSubCategory(code) {
 
 // 카테고리 목록 출력
 function renderCategoryList(codes) {
-  console.log(codes);
   const url = new URL(window.location.href);
   const baseURI = url.origin + url.pathname;
 
@@ -133,18 +141,23 @@ function renderCategoryList(codes) {
   const sidebar__categoryList = document.querySelector(
     'ul.sidebar__categories',
   );
+  const parentCategory = params.category.join('-');
+
+  if (codes.length === 0) {
+    return;
+  }
 
   codes.forEach(code => {
     categoryList.innerHTML += `
       <li class="categories__item">
-        <a href="${baseURI}?category=${code.code}">
+        <a href="${baseURI}?category=${parentCategory}-${code.code}">
           ${code.desc || code.value}
         </a>
       </li>
     `;
     sidebar__categoryList.innerHTML += `
       <li class="sidebar__category">
-        <a href="${baseURI}?category=${code.code}">
+        <a href="${baseURI}?category=${parentCategory}-${code.code}">
           ${code.desc || code.value}
         </a>
       </li>
@@ -172,7 +185,7 @@ async function getList() {
   try {
     const custom = params.getCustomParams() || null;
     // console.log(custom);
-    console.log(params.category);
+    // console.log(JSON.stringify(custom));
 
     const { data } = await api('get', 'products', {
       custom: JSON.stringify(custom),

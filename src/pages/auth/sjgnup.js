@@ -30,6 +30,7 @@ checkbox.addEventListener('change', function () {
   console.log(checkbox.checked);
 });
 
+<<<<<<< HEAD
 >>>>>>> dev
 document.addEventListener('DOMContentLoaded', function () {
   const savedEmail = sessionStorage.getItem('email');
@@ -38,6 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+=======
+>>>>>>> dev
 toggleClose.addEventListener('click', function () {
   inputPassword.type = 'text';
   toggleClose.style.display = 'none';
@@ -147,6 +150,7 @@ async function loginUser(userEmail, userPw) {
         sessionStorage.setItem('accessToken', accessToken);
         sessionStorage.setItem('refreshToken', refreshToken);
         window.location.href = 'complete.html';
+        sessionStorage.removeItem('email');
       } else {
         console.error('토큰을 받지 못했습니다. 로그인 실패');
       }
@@ -182,9 +186,14 @@ signUpBtn.addEventListener('click', function (e) {
 
 cancelBtn.addEventListener('click', function () {
 <<<<<<< HEAD
+<<<<<<< HEAD
   window.location.href = 'login.html';
 =======
   window.location.href = '/src/pages/auth/login.html';
 >>>>>>> dev
+=======
+  window.location.href = 'login.html';
+>>>>>>> dev
   sessionStorage.removeItem('email');
+  sessionStorage.clear()
 });

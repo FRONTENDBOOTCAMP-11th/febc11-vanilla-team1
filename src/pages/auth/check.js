@@ -1,19 +1,7 @@
-<<<<<<< HEAD
-'use strict';
-=======
->>>>>>> dev
 const checkAll = document.getElementById('checkAll');
 const checkboxes = document.querySelectorAll('#check1, #check2, #check3');
 const agreeBtn = document.querySelector('#agreeBtn');
 const cancelBtn = document.querySelector('#cancelBtn');
-
-document.addEventListener('DOMContentLoaded', function () {
-  const savedEmail = sessionStorage.getItem('email');
-
-  if (!savedEmail) {
-    window.location.href = '/src/pages/auth/login.html';
-  }
-});
 
 checkAll.addEventListener('change', function () {
   checkboxes.forEach(checkbox => {
@@ -33,22 +21,25 @@ checkboxes.forEach(checkbox => {
 
 function updateAgreeButtonState() {
   const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
-  const savedEmail = sessionStorage.getItem('email');
-  agreeBtn.disabled = !(allChecked && savedEmail);
+  agreeBtn.disabled = !(allChecked);
 }
 
 agreeBtn.addEventListener('click', function () {
-  const savedEmail = sessionStorage.getItem('email');
-  if (savedEmail && checkAll.checked === true) {
-    window.location.href = '/src/pages/auth/signup.html';
+  if (checkAll.checked === true) {
+    window.location.href = 'signup.html';
   }
 });
 
 cancelBtn.addEventListener('click', function () {
+<<<<<<< HEAD
 <<<<<<< HEAD
   window.location.href = 'login.html';
 =======
   window.location.href = '/src/pages/auth/login.html';
 >>>>>>> dev
   sessionStorage.removeItem('email');
+=======
+  window.location.href = 'login.html';
+  sessionStorage.clear();
+>>>>>>> dev
 });

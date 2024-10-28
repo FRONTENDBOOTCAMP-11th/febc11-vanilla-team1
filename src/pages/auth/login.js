@@ -1,15 +1,21 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 'use strict';
 =======
 >>>>>>> dev
+=======
+// LOGIN 부분
+>>>>>>> dev
 import axios from 'axios';
 
+const loginSession = document.querySelector('.login-session')
 const authInput = document.querySelector('#emailInput');
-const authBtn = document.querySelector('#loginBtn');
+const authBtn = document.querySelector('#loginEmailBtn');
 const emailRegex = /^[A-Za-z0-9]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const regText = document.querySelector('.reg-Text');
 const socialBtn = document.querySelector('#socialBtn');
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 socialBtn.addEventListener('click', function (e) {
   e.preventDefault();
@@ -19,6 +25,19 @@ socialBtn.addEventListener('click', function (e) {
 =======
 >>>>>>> dev
 authInput.addEventListener('input', function () {
+=======
+function switchLogin() {
+  loginSession.style.display = 'block';
+  passwordSession.style.display = 'none';
+}
+
+function switchPw() {
+  loginSession.style.display = 'none';
+  passwordSession.style.display = 'block';
+}
+
+function checkEmail() {
+>>>>>>> dev
   const userEmail = authInput.value.trim();
   if (userEmail === '') {
     authInput.style.borderColor = 'red';
@@ -30,7 +49,22 @@ authInput.addEventListener('input', function () {
     authInput.style.borderColor = 'red';
     regText.textContent = '잘못된 이메일 주소입니다.';
   }
+};
+
+authInput.addEventListener('input', function () {
+  checkEmail();
 });
+
+authBtn.addEventListener('click', function () {
+  checkEmail();
+  const userEmail = authInput.value.trim();
+  sessionStorage.setItem('email', userEmail);
+  authEmail.textContent = userEmail;
+  if (emailRegex.test(userEmail)) {
+    getEmail(userEmail);
+  }
+});
+
 
 async function getEmail(userEmail) {
   try {
@@ -44,15 +78,12 @@ async function getEmail(userEmail) {
         'client-id': 'vanilla01',
       },
     });
-
-    if (response.data.ok === 0) {
-      sessionStorage.setItem('email', userEmail);
-      window.location.href = '/src/pages/auth/pw.html';
-    } else {
-      sessionStorage.setItem('email', userEmail);
-      window.location.href = '/src/pages/auth/check.html';
+    if (response.data.ok === 1) {
+      window.location.href = 'check.html';
     }
+
   } catch (error) {
+<<<<<<< HEAD
 <<<<<<< HEAD
     if (error.status === 409) window.location.href = 'pw.html';
 =======
@@ -79,6 +110,18 @@ authBtn.addEventListener('click', function (e) {
 });
 <<<<<<< HEAD
 =======
+=======
+    if (error.response && error.response.status === 409) {
+      sessionStorage.setItem('email', userEmail);
+      switchPw();
+      return;
+    } else {
+      console.error('오류 발생:', error);
+    }
+  }
+}
+
+>>>>>>> dev
 
 socialBtn.addEventListener('click', function () {
   loginWithKakao();
@@ -113,7 +156,7 @@ function getInfo() {
       const account_name = res.kakao_account.name;
       localStorage.setItem('email', account_email);
       localStorage.setItem('name', account_name);
-      window.location.href = '/src/pages/auth/complete.html';
+      window.location.href = 'complete.html';
     })
     .catch(function (error) {
       console.error('사용자 정보 요청 실패:', error);
@@ -131,4 +174,154 @@ function kakaoLogOut() {
     localStorage.clear();
   });
 }
+<<<<<<< HEAD
+>>>>>>> dev
+=======
+
+// PASSWORD
+const passwordSession = document.querySelector('.password-session');
+const passwordInput = document.querySelector('#authInput');
+const toggleOpen = document.querySelector('#toggleOpen');
+const toggleClose = document.querySelector('#toggleClose');
+const prevBtn = document.querySelector('#prevBtn');
+const loginPasswordBtn = document.querySelector('#loginPasswordBtn');
+const authEmail = document.querySelector('.auth-email');
+const alertMessage = document.querySelector('.find-password');
+const regTxt = document.querySelector('#regPw');
+const editEmail = document.querySelector('.edit-email');
+const regContainer = document.querySelector('#regContainer');
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  if (!authEmail) {
+    switchLogin()
+  }
+});
+
+editEmail.addEventListener('click', function (e) {
+  e.preventDefault();
+  switchLogin();
+  authInput.value = '';
+  sessionStorage.clear();
+});
+
+toggleClose.addEventListener('click', function () {
+  passwordInput.type = 'text';
+  toggleClose.style.display = 'none';
+  toggleOpen.style.display = 'block';
+});
+
+toggleOpen.addEventListener('click', function () {
+  passwordInput.type = 'password';
+  toggleClose.style.display = 'block';
+  toggleOpen.style.display = 'none';
+});
+
+prevBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+  switchLogin()
+  authInput.value = '';
+  sessionStorage.clear();
+});
+
+function tokenError(error) {
+  if (error.response && error.response.status === 401) {
+    alert('다시 로그인 해주세요.');
+    localStorage.clear();
+    switchLogin()
+  } else {
+    console.log('오류', error);
+  }
+}
+
+function checkPassword(userPw) {
+  if (!userPw) {
+    regContainer.style.display = 'block';
+    regTxt.innerHTML = `<p>비밀번호를 입력해주세요 *</p>`;
+  } else {
+    regContainer.style.display = 'block';
+    regTxt.innerHTML = `<p>비밀번호가 일치하지 않습니다. *</p>`;
+  }
+}
+
+// 로그인 요청 함수
+async function loginUser(userEmail, userPw) {
+  try {
+
+    const response = await axios.post(
+      'https://11.fesp.shop/users/login',
+
+      {
+        email: userEmail,
+        password: userPw,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'client-id': 'vanilla01',
+        },
+      },
+    );
+
+    if (response.data.item.token) {
+      const { accessToken, refreshToken } = response.data.item.token;
+      console.log(response.data.item);
+
+      if (accessToken && refreshToken) {
+        sessionStorage.setItem('accessToken', accessToken);
+        sessionStorage.setItem('refreshToken', refreshToken);
+        window.location.href = 'complete.html';
+        sessionStorage.removeItem('email');
+      } else {
+        console.error('로그인 실패');
+        checkPassword(userPw);
+      }
+    } else {
+      console.error('정보가 응답에 없습니다.');
+    }
+  } catch (error) {
+    if (error.response.status === 422) {
+      checkPassword(userPw)
+    } else if (error.response && error.response.status === 401) {
+      const reToken = await issueToken();
+      if (reToken) {
+        sessionStorage.setItem('accessToken', reToken);
+        return loginUser(userEmail, userPw);
+      } else {
+        localStorage.clear();
+        tokenError(error);
+      }
+    }
+  }
+}
+
+async function issueToken() {
+  try {
+    const response = await axios.get('https://11.fesp.shop/auth/refresh', {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('refreshToken')}`,
+        'Content-Type': 'application/json',
+        'client-id': 'vanilla01',
+      },
+    });
+    return response.data.item.accessToken;
+  } catch (error) {
+    tokenError(error);
+  }
+}
+
+// loginPasswordBtn 클릭 이벤트 리스너
+loginPasswordBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const userEmail = authInput.value.trim();
+  const userPw = passwordInput.value.trim();
+
+  if (userEmail && userPw) {
+    loginUser(userEmail, userPw);
+  }
+});
+alertMessage.addEventListener('click', function () {
+  alert('아직 구현하지 않은 페이지입니다.');
+});
 >>>>>>> dev
