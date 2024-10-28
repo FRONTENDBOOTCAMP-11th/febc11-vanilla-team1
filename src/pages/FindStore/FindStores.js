@@ -73,3 +73,62 @@ function populateSidebar() {
 
 // 페이지가 로드될 때 사이드바에 nav-links 내용 추가
 window.addEventListener('DOMContentLoaded', populateSidebar);
+
+
+
+//📌셀렉터 탭 구현
+// 현재 선택된 탭
+let currentTab = null;
+
+function toggleView(showMap) {
+  if (window.innerWidth <= 768) {
+    // 앱 화면일 때만 toggle 기능 작동
+    if (showMap) {
+      document.querySelector('.map').style.display = 'block';
+      document.querySelector('.card-container').style.display = 'none';
+    } else {
+      document.querySelector('.map').style.display = 'none';
+      document.querySelector('.card-container').style.display = 'block';
+    }
+  } else {
+    // 웹 화면일 때는 모두 보임
+    document.querySelector('.map').style.display = 'block';
+    document.querySelector('.card-container').style.display = 'block';
+  }
+}
+
+function setActiveTab(tab) {
+  // 이전 선택된 탭의 스타일을 초기화
+  if (currentTab) {
+    currentTab.style.fontWeight = 'normal'; // 초기화: normal
+  }
+
+  // 현재 선택된 탭 설정
+  currentTab = tab;
+  currentTab.style.fontWeight = 'bold'; // 클릭된 탭 스타일 변경
+}
+
+// 초기 화면 크기에 맞게 설정
+window.addEventListener('load', function() {
+  toggleView(true); // 처음에는 Map을 보이게 설정
+  setActiveTab(document.querySelector('.map-tap')); // 처음 클릭된 탭 설정
+});
+
+// Map 탭 클릭 시
+document.querySelector('.map-tap').addEventListener('click', function(e) {
+  e.preventDefault();
+  toggleView(true);
+  setActiveTab(this); // 현재 클릭된 탭 설정
+});
+
+// List 탭 클릭 시
+document.querySelector('.list-tap').addEventListener('click', function(e) {
+  e.preventDefault();
+  toggleView(false);
+  setActiveTab(this); // 현재 클릭된 탭 설정
+});
+
+// 화면 크기 변경 시 웹 화면으로 돌아가면 둘 다 보이도록 설정
+window.addEventListener('resize', function() {
+  toggleView(true); // 크기 변경 시 다시 확인하여 둘 다 보이게 함
+});

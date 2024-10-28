@@ -226,8 +226,13 @@ body {
   justify-content: center;
 }
 
+
+/*📌셀렉터 탭*/
 .select-tap {
-  display: none;
+  display:none;
+}
+.map, .card-container {
+  display: block;
 }
 
 .sidebar {
@@ -315,6 +320,13 @@ body {
   width: 100%;
   background-repeat: no-repeat;
 }
+
+.map, .card-container {
+  display: block;
+}
+
+
+
 
 /* 푸터 */
 #footer {
@@ -411,6 +423,10 @@ body {
     display: none;
   }
 
+  .active {
+    display: block; /* active 클래스가 있으면 보이게 */
+  }
+
   /* ✨메인 */
   #main {
     min-height: 200px;
@@ -422,12 +438,23 @@ body {
     justify-content: center;
   }
 
-  .select-tap {
-    display: none;
-    margin-top: 52px;
+  /*📌셀렉터 탭*/
+  .card-container {
+    display: block;
   }
-  .select-tap a {
-    font-size: 17px;
+  .map{
+    display: none;
+  }
+
+  .select-tap {
+    display: block;
+    margin-top: 20px;
+  }
+
+  .select-tap a{
+    font-size: 16px;
+    line-height: 28px;
+    margin-right: 10px;
   }
 
   /* 검색창 스타일 */
@@ -466,31 +493,7 @@ body {
     line-height: 15px;
     color: #707072;
   }
-
-  /*🃏card*/
-  .card-container {
-    display: none;
-  }
-
-  /* .card{
-  box-sizing: border-box;
-  min-width: 640px;
-  height: 164px;
-  padding : 28px 0px;
-  border-bottom: 1px solid #E5E5E5;
-
-}
-
-.card h3{
-  font-size: 16px;
-}
-
-.card p{
-  color: #707072;
-  font-size: 16px;
-
-} */
-
+ 
   /*map*/
   .map {
     margin-top: 100px;
