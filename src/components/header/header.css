@@ -10,12 +10,25 @@
 }
 
 .headerMenu li::after {
+  content: '';
+  margin: 0 10px;
+}
+
+.headerMenu li:not(.user-line)::after {
   content: '|';
   margin: 0 10px;
 }
 
 .headerMenu li:last-child::after {
   content: '';
+}
+
+.user-login {
+  display: none;
+}
+
+.user-out {
+  display: none;
 }
 
 /* 내비게이션 */

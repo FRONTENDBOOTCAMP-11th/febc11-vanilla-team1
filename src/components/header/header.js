@@ -29,4 +29,36 @@ async function renderHeader() {
 // 페이지가 로드될 때 사이드바에 nav-links 내용 추가
 window.addEventListener('DOMContentLoaded', async () => {
   await renderHeader();
+  checkLoginState();
+  userOut();
 });
+
+// 로그인 시 헤더 변경
+function checkLoginState() {
+  const token = sessionStorage.getItem("accessToken");
+  const userName = sessionStorage.getItem('name');
+
+  const userLoginItems = document.querySelectorAll(".user-login");
+  const userOutItems = document.querySelectorAll(".user-out");
+  const userNameItems = document.querySelector('.user-name');
+
+  if (token) {
+    userLoginItems.forEach(item => item.style.display = 'none');
+    userOutItems.forEach(item => item.style.display = 'block');
+    userNameItems.innerHTML = `${userName}`
+  } else {
+    userLoginItems.forEach(item => item.style.display = 'block');
+    userOutItems.forEach(item => item.style.display = 'none');
+  }
+}
+
+// 로그아웃 시 세션 스토리지 삭제
+function userOut() {
+  const logOut = document.querySelector('.log-out');
+  logOut.addEventListener('click', function () {
+    window.top.location.href = window.location.href = 'login.html';
+    sessionStorage.clear();
+  })
+}
+
+
