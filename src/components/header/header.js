@@ -44,24 +44,23 @@ function checkLoginState() {
   const userOutItems = document.querySelectorAll('.user-out');
   const userNameItems = document.querySelector('.user-name');
   const userSocialName = document.querySelector('.social-name');
-  const loginMobile = document.querySelectorAll('.mobile-login')
-  const logoutMobile = document.querySelector('.mobile-logout')
+  const loginMobile = document.querySelectorAll('.mobile-login');
+  const logoutMobile = document.querySelector('.mobile-logout');
 
   if (token) {
-    userLoginItems.forEach(item => item.style.display = 'none');
-    userOutItems.forEach(item => item.style.display = 'block');
-    userNameItems.innerHTML = `${userName} 님, 안녕하세요`
+    userLoginItems.forEach(item => (item.style.display = 'none'));
+    userOutItems.forEach(item => (item.style.display = 'block'));
+    userNameItems.innerHTML = `${userName} 님, 안녕하세요`;
     logoutMobile.style.display = 'block';
-
   } else if (socialName) {
-    userLoginItems.forEach(item => item.style.display = 'none');
-    userOutItems.forEach(item => item.style.display = 'block');
-    userSocialName.innerHTML = `${socialName} 님, 안녕하세요`
+    userLoginItems.forEach(item => (item.style.display = 'none'));
+    userOutItems.forEach(item => (item.style.display = 'block'));
+    userSocialName.innerHTML = `${socialName} 님, 안녕하세요`;
     logoutMobile.style.display = 'block';
   } else {
-    userLoginItems.forEach(item => item.style.display = 'block');
-    userOutItems.forEach(item => item.style.display = 'none');
-    loginMobile.forEach(item => item.style.display = ' block');
+    userLoginItems.forEach(item => (item.style.display = 'block'));
+    userOutItems.forEach(item => (item.style.display = 'none'));
+    loginMobile.forEach(item => (item.style.display = ' block'));
   }
 }
 
@@ -76,7 +75,7 @@ function userOut() {
 }
 
 function mobileOut() {
-  const logoutMobile = document.querySelector('.mobile-logout')
+  const logoutMobile = document.querySelector('.mobile-logout');
   logoutMobile.addEventListener('click', function () {
     sessionStorage.clear();
     localStorage.clear();

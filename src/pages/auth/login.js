@@ -1,7 +1,8 @@
+// LOGIN 부분
 import axios from 'axios';
 
 // login 관련 요소
-const loginSession = document.querySelector('.login-session')
+const loginSession = document.querySelector('.login-session');
 const authInput = document.querySelector('#emailInput');
 const authBtn = document.querySelector('#loginEmailBtn');
 const emailRegex = /^[A-Za-z0-9]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -44,7 +45,7 @@ function checkEmail() {
     authInput.style.borderColor = 'red';
     regText.textContent = '잘못된 이메일 주소입니다.';
   }
-};
+}
 
 authInput.addEventListener('input', function () {
   checkEmail();
@@ -59,7 +60,6 @@ authBtn.addEventListener('click', function () {
     getEmail(userEmail);
   }
 });
-
 
 async function getEmail(userEmail) {
   try {
@@ -76,7 +76,6 @@ async function getEmail(userEmail) {
     if (response.data.ok === 1) {
       window.location.href = 'check.html';
     }
-
   } catch (error) {
     if (error.response && error.response.status === 409) {
       sessionStorage.setItem('email', userEmail);
@@ -87,7 +86,6 @@ async function getEmail(userEmail) {
     }
   }
 }
-
 
 socialBtn.addEventListener('click', function () {
   loginWithKakao();
@@ -144,7 +142,7 @@ function kakaoLogOut() {
 // PASSWORD
 document.addEventListener('DOMContentLoaded', function () {
   if (!authEmail) {
-    switchLogin()
+    switchLogin();
   }
 });
 
@@ -169,7 +167,7 @@ toggleOpen.addEventListener('click', function () {
 
 prevBtn.addEventListener('click', function (e) {
   e.preventDefault();
-  switchLogin()
+  switchLogin();
   authInput.value = '';
   sessionStorage.clear();
 });
@@ -178,7 +176,7 @@ function tokenError(error) {
   if (error.response && error.response.status === 401) {
     alert('다시 로그인 해주세요.');
     localStorage.clear();
-    switchLogin()
+    switchLogin();
   } else {
     console.log('오류', error);
   }
@@ -197,7 +195,6 @@ function checkPassword(userPw) {
 // 로그인 요청 함수
 async function loginUser(userEmail, userPw) {
   try {
-
     const response = await axios.post(
       'https://11.fesp.shop/users/login',
 
