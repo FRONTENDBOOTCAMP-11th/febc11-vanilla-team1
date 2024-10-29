@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="ko">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -60,30 +59,25 @@
         </div>
       </header>
 
-      <ul class="categories is_mobile"></ul>
-
-      <div class="subheading is_mobile">
-        <div class="subheading__result-count">
-          <span class="count"></span>
-          개의 결과
-        </div>
-        <button class="subheading__filter-toggle subheading__action-button">
-          <span>필터</span>
-          <img src="/assets/icons/button24px/filter.svg" alt="필터토글" srcset="" />
-        </button>
-      </div>
-
-      <div class="dialog is_mobile">
-        <div class="dialog-wrapper">
-          <div class="dialog__header">필터</div>
-          <fieldset aria-label="정렬 기준">
-            <legend>
-              <h3>정렬 기준:</h3>
-            </legend>
-            <div class="selection-list">
-              <div class="radio-item">
-                <div class="sort-input">
-                  <input type="radio" name="sortBy" id="sort-by-best" checked aria-label="추천순" />
+        <div class="dialog is_mobile">
+          <div class="dialog-wrapper">
+            <div class="dialog__header">필터</div>
+            <fieldset aria-label="정렬 기준">
+              <legend>
+                <h3>정렬 기준:</h3>
+              </legend>
+              <div class="selection-list">
+                <div class="radio-item">
+                  <div class="sort-input">
+                    <input
+                      type="radio"
+                      name="sortBy"
+                      id="sort-by-best"
+                      checked
+                      aria-label="추천순"
+                    />
+                  </div>
+                  <label for="sort-by-best">추천순</label>
                 </div>
                 <label for="sort-by-best">추천순</label>
               </div>
@@ -287,12 +281,10 @@
         <ul class="product-list"></ul>
       </main>
     </div>
-    <div id="footer-wrap"></div>
-  </div>
-  <script type="module" src="./index.js"></script>
-  <script type="module" src="./uiHandler.js"></script>
-  <script type="module" src="/src/components/header/header.js"></script>
-  <script type="module" src="/src/components/footer/footer.js"></script>
-</body>
-
+    <script type="module" src="./index.js"></script>
+    <script type="module" src="./uiHandler.js"></script>
+    <script type="module" src="./category.js"></script>
+    <script type="module" src="/src/components/header/header.js"></script>
+    <script type="module" src="/src/components/footer/footer.js"></script>
+  </body>
 </html>
