@@ -150,7 +150,7 @@
 }
 
 .menu-button {
-  display: inline;
+  display: flex;
   margin-left: 42px;
   margin-bottom: 40px;
 }
@@ -234,6 +234,9 @@
     padding: 10px;
   }
 
+  .search-cart.hidden {
+    display: block;
+  }
   .headerMenu {
     display: none;
   }
@@ -245,10 +248,6 @@
   }
   #menu-sidebar ul.menu-icons li a {
     font-size: 1.6rem;
-  }
-
-  .hidden {
-    display: block;
   }
 
   .search-box,
@@ -293,12 +292,14 @@
     justify-content: center;
   }
 
-  .hidden {
-    display: block;
-  }
-
   .nav-links menu-nav {
     display: none; /* 작은 화면에서는 기존 내비게이션 링크 숨기기 */
+  }
+
+  @media (max-width: 768px) {
+    .search-cart.hidden {
+      display: block;
+    }
   }
 
   /*푸터*/
