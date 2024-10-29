@@ -106,8 +106,6 @@ function renderList() {
       codes = category.middle;
       break;
     case 2:
-      codes = category.sub;
-      break;
     default:
       codes = category.sub;
   }
