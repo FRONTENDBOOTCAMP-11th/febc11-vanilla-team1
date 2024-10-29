@@ -106,19 +106,19 @@
   height: 24px;
 }
 
-.hidden {
+.mobile-header {
   display: none;
 }
+
 /*✨메뉴 사이드바*/
 /*✨ 메뉴 아이콘 클릭 시 나오는 사이드 메뉴 */
-#menu-sidebar {
+#menu-side {
   position: fixed;
   right: 0;
   top: 0;
   width: 300px; /* 너비 300px */
   height: 100vh; /* 화면 전체 높이 */
   background-color: white;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
   transform: translateX(100%); /* 기본 상태에서는 오른쪽으로 숨김 */
   z-index: 1000; /* 헤더보다 위에 위치 */
@@ -145,11 +145,11 @@
 }
 
 /* 메뉴 사이드바가 활성화되면 화면에 표시 */
-#menu-sidebar.active {
+#menu-side.active {
   transform: translateX(0);
 }
 
-.menu-button {
+.menu-line {
   display: flex;
   margin-left: 42px;
   margin-bottom: 40px;
@@ -187,20 +187,20 @@
 }
 
 /* 사이드바 내 링크 스타일 */
-#menu-sidebar ul {
+#menu-side ul {
   list-style: none;
   padding: 0;
   margin-top: 50px;
 }
 
-#menu-sidebar ul li {
+#menu-side ul li {
   margin-top: 50px;
   margin-left: 20px;
   margin-bottom: 20px;
   margin-right: auto;
 }
 
-#menu-sidebar ul li a {
+#menu-side ul li a {
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -234,7 +234,7 @@
     padding: 10px;
   }
 
-  .search-cart.hidden {
+  .mobile-header {
     display: block;
   }
   .headerMenu {
@@ -243,10 +243,15 @@
   h1 {
     font-size: 1.5em;
   }
-  .menu-button {
+  .menu-line {
     display: flex;
   }
-  #menu-sidebar ul.menu-icons li a {
+
+  #menu-side {
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+  }
+
+  #menu-side ul.menu-icons li a {
     font-size: 1.6rem;
   }
 
@@ -297,7 +302,7 @@
   }
 
   @media (max-width: 768px) {
-    .search-cart.hidden {
+    .mobile-header {
       display: block;
     }
   }
