@@ -31,34 +31,52 @@ window.addEventListener('DOMContentLoaded', async () => {
   await renderHeader();
   checkLoginState();
   userOut();
+  mobileOut();
 });
 
-// 로그인 시 헤더 변경
+// 로그인, 소셜로그인 시 헤더 변경
 function checkLoginState() {
-  const token = sessionStorage.getItem("accessToken");
+  const token = sessionStorage.getItem('accessToken');
   const userName = sessionStorage.getItem('name');
+  const socialName = sessionStorage.getItem('name');
 
-  const userLoginItems = document.querySelectorAll(".user-login");
-  const userOutItems = document.querySelectorAll(".user-out");
+  const userLoginItems = document.querySelectorAll('.user-login');
+  const userOutItems = document.querySelectorAll('.user-out');
   const userNameItems = document.querySelector('.user-name');
+  const userSocialName = document.querySelector('.social-name');
+  const loginMobile = document.querySelectorAll('.mobile-login');
+  const logoutMobile = document.querySelector('.mobile-logout');
 
   if (token) {
-    userLoginItems.forEach(item => item.style.display = 'none');
-    userOutItems.forEach(item => item.style.display = 'block');
-    userNameItems.innerHTML = `${userName}`
+    userLoginItems.forEach(item => (item.style.display = 'none'));
+    userOutItems.forEach(item => (item.style.display = 'block'));
+    userNameItems.innerHTML = `${userName} 님, 안녕하세요`;
+    logoutMobile.style.display = 'block';
+  } else if (socialName) {
+    userLoginItems.forEach(item => (item.style.display = 'none'));
+    userOutItems.forEach(item => (item.style.display = 'block'));
+    userSocialName.innerHTML = `${socialName} 님, 안녕하세요`;
+    logoutMobile.style.display = 'block';
   } else {
-    userLoginItems.forEach(item => item.style.display = 'block');
-    userOutItems.forEach(item => item.style.display = 'none');
+    userLoginItems.forEach(item => (item.style.display = 'block'));
+    userOutItems.forEach(item => (item.style.display = 'none'));
+    loginMobile.forEach(item => (item.style.display = ' block'));
   }
 }
 
-// 로그아웃 시 세션 스토리지 삭제
+// 로그아웃 시 세션, 로컬 스토리지 삭제
 function userOut() {
   const logOut = document.querySelector('.log-out');
   logOut.addEventListener('click', function () {
-    window.top.location.href = window.location.href = 'login.html';
     sessionStorage.clear();
-  })
+    localStorage.clear();
+  });
 }
 
-
+function mobileOut() {
+  const logoutMobile = document.querySelector('.mobile-logout');
+  logoutMobile.addEventListener('click', function () {
+    sessionStorage.clear();
+    localStorage.clear();
+  });
+}
