@@ -84,6 +84,7 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
+  height: 100%;
 }
 .is_mobile {
   display: none;
@@ -237,9 +238,7 @@ aside.sidebar {
     background: #555;
   }
 }
-.sidebar-wrapper {
-  overflow-y: hidden;
-}
+
 .sidebar__categories {
   padding-bottom: 40px;
 
