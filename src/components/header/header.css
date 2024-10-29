@@ -28,6 +28,10 @@
   content: '';
 }
 
+.log-out {
+  cursor: pointer;
+}
+
 .user-login {
   display: none;
 }

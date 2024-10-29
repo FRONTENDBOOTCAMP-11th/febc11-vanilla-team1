@@ -19,6 +19,12 @@ const regPw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 const regEight = /^.{8,}$/;
 const regMin = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
 
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('input, textarea').forEach(input => {
+    input.value = ''; // 페이지 로드 시 폼 초기화
+  });
+});
+
 checkbox.addEventListener('change', function () {
   check.checked = checkbox.checked;
   console.log(checkbox.checked);
@@ -158,5 +164,5 @@ signUpBtn.addEventListener('click', function (e) {
 cancelBtn.addEventListener('click', function () {
   window.location.href = 'login.html';
   sessionStorage.removeItem('email');
-  sessionStorage.clear()
+  sessionStorage.clear();
 });
