@@ -15,6 +15,11 @@
 }
 
 .headerMenu li::after {
+  content: '';
+  margin: 0 10px;
+}
+
+.headerMenu li:not(.user-line)::after {
   content: '|';
   margin: 0 10px;
 }
