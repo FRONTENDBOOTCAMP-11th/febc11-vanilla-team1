@@ -106,7 +106,7 @@ input {
 
 label {
   display: block;
-  width: 24px;
+  min-width: 375px;
   height: 24px;
   background-repeat: no-repeat;
   background-image: url(/assets/icons/buttons/m-check.svg);
@@ -472,6 +472,12 @@ input[type='date']:valid::before {
   flex-direction: row;
 }
 
+.label-text {
+  margin-left: 30px;
+  font-size: 1.6rem;
+  vertical-align: top;
+}
+
 .line {
   max-width: 502px;
   height: 42px;
@@ -487,13 +493,14 @@ label {
   position: relative; /* 가상 요소를 위한 relative 설정 */
   display: inline-block;
   cursor: pointer;
+  margin-bottom: 12px;
 }
 
 .label-hover::before {
   content: '';
   position: absolute;
   top: 40%;
-  left: 40%;
+  left: 2.7%;
   width: 34px;
   height: 34px;
   background-color: rgba(99, 99, 99, 0.1);

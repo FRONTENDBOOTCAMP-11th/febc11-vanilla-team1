@@ -22,6 +22,12 @@ const regTxt = document.querySelector('#regPw');
 const editEmail = document.querySelector('.edit-email');
 const regContainer = document.querySelector('#regContainer');
 
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('input, textarea').forEach(input => {
+    input.value = ''; // 페이지 로드 시 폼 초기화
+  });
+});
+
 // LOGIN 부분
 function switchLogin() {
   loginSession.style.display = 'block';
@@ -75,6 +81,7 @@ async function getEmail(userEmail) {
     });
     if (response.data.ok === 1) {
       window.location.href = 'check.html';
+      authInput.value = '';
     }
   } catch (error) {
     if (error.response && error.response.status === 409) {
@@ -140,7 +147,6 @@ function kakaoLogOut() {
 }
 
 // PASSWORD
-
 document.addEventListener('DOMContentLoaded', function () {
   if (!authEmail) {
     switchLogin();
@@ -220,6 +226,7 @@ async function loginUser(userEmail, userPw) {
         sessionStorage.setItem('refreshToken', refreshToken);
         sessionStorage.setItem('name', userName);
         window.location.href = 'complete.html';
+        authInput.value = '';
         sessionStorage.removeItem('email');
       } else {
         console.error('로그인 실패');
