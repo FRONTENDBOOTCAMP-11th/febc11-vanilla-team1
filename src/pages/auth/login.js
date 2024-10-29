@@ -1,13 +1,27 @@
-// LOGIN 부분
 import axios from 'axios';
 
+// login 관련 요소
 const loginSession = document.querySelector('.login-session')
 const authInput = document.querySelector('#emailInput');
 const authBtn = document.querySelector('#loginEmailBtn');
 const emailRegex = /^[A-Za-z0-9]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const regText = document.querySelector('.reg-Text');
 const socialBtn = document.querySelector('#socialBtn');
+const authEmail = document.querySelector('.auth-email');
 
+// Password 관련 요소
+const passwordSession = document.querySelector('.password-session');
+const passwordInput = document.querySelector('#authInput');
+const toggleOpen = document.querySelector('#toggleOpen');
+const toggleClose = document.querySelector('#toggleClose');
+const prevBtn = document.querySelector('#prevBtn');
+const loginPasswordBtn = document.querySelector('#loginPasswordBtn');
+const alertMessage = document.querySelector('.find-password');
+const regTxt = document.querySelector('#regPw');
+const editEmail = document.querySelector('.edit-email');
+const regContainer = document.querySelector('#regContainer');
+
+// LOGIN 부분
 function switchLogin() {
   loginSession.style.display = 'block';
   passwordSession.style.display = 'none';
@@ -128,18 +142,6 @@ function kakaoLogOut() {
 }
 
 // PASSWORD
-const passwordSession = document.querySelector('.password-session');
-const passwordInput = document.querySelector('#authInput');
-const toggleOpen = document.querySelector('#toggleOpen');
-const toggleClose = document.querySelector('#toggleClose');
-const prevBtn = document.querySelector('#prevBtn');
-const loginPasswordBtn = document.querySelector('#loginPasswordBtn');
-const authEmail = document.querySelector('.auth-email');
-const alertMessage = document.querySelector('.find-password');
-const regTxt = document.querySelector('#regPw');
-const editEmail = document.querySelector('.edit-email');
-const regContainer = document.querySelector('#regContainer');
-
 
 document.addEventListener('DOMContentLoaded', function () {
   if (!authEmail) {
