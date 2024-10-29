@@ -56,33 +56,35 @@ const categoryParam = URLparams.get('category');
 let categoryList = categoryParam ? categoryParam.split('-') : [];
 let category = new Category();
 
-await category.getMainCategory(categoryList[0]);
-await category.getMiddleCategory(categoryList[0]);
+async function setCategory() {
+  await category.getMainCategory(categoryList[0]);
+  await category.getMiddleCategory(categoryList[0]);
 
-if (categoryList.length > 1) {
-  category.middle = category.middle.filter(
-    item => item.code === categoryList[1],
-  );
-  await category.getSubCategory(categoryList[1]);
-}
-if (categoryList.length > 2) {
-  category.sub = category.sub.filter(item => item.code === categoryList[2]);
-}
+  if (categoryList.length > 1) {
+    category.middle = category.middle.filter(
+      item => item.code === categoryList[1],
+    );
+    await category.getSubCategory(categoryList[1]);
+  }
+  if (categoryList.length > 2) {
+    category.sub = category.sub.filter(item => item.code === categoryList[2]);
+  }
 
-const headerTitle = document.querySelector('.header__title .title');
-switch (categoryList.length) {
-  case 0:
-    headerTitle.textContent = '전체';
-    break;
-  case 1:
-    headerTitle.textContent = category.main[0].desc || category.main[0].value;
-    break;
-  case 2:
-    headerTitle.textContent =
-      category.middle[0].desc || category.middle[0].value;
-    break;
-  default:
-    headerTitle.textContent = category.sub[0].desc || category.sub[0].value;
+  const headerTitle = document.querySelector('.header__title .title');
+  switch (categoryList.length) {
+    case 0:
+      headerTitle.textContent = '전체';
+      break;
+    case 1:
+      headerTitle.textContent = category.main[0].desc || category.main[0].value;
+      break;
+    case 2:
+      headerTitle.textContent =
+        category.middle[0].desc || category.middle[0].value;
+      break;
+    default:
+      headerTitle.textContent = category.sub[0].desc || category.sub[0].value;
+  }
 }
 
 // 카테고리 목록 출력
@@ -159,5 +161,9 @@ function renderBreadcrumbs() {
   });
 }
 
-renderList();
-renderBreadcrumbs();
+// 초기 실행
+document.addEventListener('DOMContentLoaded', async () => {
+  await setCategory();
+  renderList();
+  renderBreadcrumbs();
+});
