@@ -143,11 +143,8 @@ function kakaoLogOut() {
 
 // PASSWORD
 document.addEventListener('DOMContentLoaded', function () {
-  const userEmail = sessionStorage.getItem('email') || localStorage.getItem('email');
-
-  // authEmail이 없을 때 로그인 페이지가 아닌 경우에만 switchLogin 호출
-  if (!userEmail && window.location.pathname !== '/login') {
-    switchLogin();
+  if (!authEmail) {
+    switchLogin()
   }
 });
 
