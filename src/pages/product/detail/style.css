@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+@import '../../../../index.css';
+@import '../../../../style.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
 :root {
   font-family: 'Noto Sans KR';
@@ -22,12 +24,9 @@ li {
   list-style: none;
   padding: 0;
   margin: 0;
+  text-decoration-line: none;
 }
-
-a {
-  border-bottom: 1px solid #000;
-  color: var(--color-black);
-  font-weight: bold;
+material_introduce a {
   text-decoration: none;
 }
 
@@ -68,7 +67,20 @@ p {
 .hide {
   display: none;
 }
-/* 
+
+.seemore {
+  border-bottom: 1px solid #000;
+  color: var(--color-black);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+header {
+  width: auto;
+  height: 96px;
+  border: 1px solid #000;
+  margin-bottom: 156px;
+}
 
 /*-----color------*/
 :root {
@@ -77,22 +89,6 @@ p {
   --color-subcolor: #707072;
   --color-white: #ffffff;
 }
-
-/* 헤더,푸터 */
-header {
-  width: auto;
-  height: 96px;
-  border: 1px solid #000;
-  margin-bottom: 156px;
-}
-
-footer {
-  width: auto;
-  height: 604px;
-  border: 1px solid #000;
-  margin-top: 90px;
-}
-
 /* ---------------제품 상세--------------- */
 /* 신발 wrapper */
 .shoes_l_wrapper {
@@ -153,7 +149,7 @@ footer {
 
 .shoes_img_right {
   position: relative;
-  flex-shrink: 1;
+  width: 100%;
 
   /* box-shadow: inset 0 0 20px yellow; */
   margin: 0 32px 0 16px;
@@ -302,6 +298,7 @@ button:focus {
 .size_number {
   width: 69.19px;
   height: 48px;
+  font-size: 14px;
   /* box-shadow: inset 0 0 20px darkcyan; */
   margin: 3px;
   display: flex;
@@ -327,6 +324,18 @@ button:focus {
   cursor: pointer;
   border: none;
   margin: 33px 0 12px 0;
+  appearance: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0;
+  text-shadow: none;
+  display: inline-block;
+  text-align: center;
+  box-sizing: border-box;
+  padding-block: 1px;
+  padding-inline: 6px;
 }
 
 .basket:hover {
@@ -341,7 +350,6 @@ button:focus {
   border-radius: 30px;
   width: 376px;
   height: 64px;
-  padding: 18px 0;
   cursor: pointer;
   background: none;
 }
@@ -355,6 +363,7 @@ button:focus {
   padding: 24px 21.16px 24px 21.34px;
   text-align: center;
   font-weight: 400;
+  font-size: 16px;
   margin: 32px 0 60px 0;
 }
 
@@ -407,6 +416,7 @@ button:focus {
   transition: max-height 0.2s ease-out;
   line-height: 30px;
   padding: 0;
+  font-size: 14px;
 }
 
 .shoes_panel ul li {
@@ -419,7 +429,7 @@ button:focus {
 }
 
 .active_button::after {
-  content: url(../../../public/assets/icons/button/arrow_bottom.svg);
+  content: url(../../../../public/assets/icons/button/arrow_bottom.svg);
   font-size: 13px;
   color: #777;
   float: right;
@@ -427,7 +437,7 @@ button:focus {
 }
 
 .on::after {
-  content: url(../../../public/assets/icons/button/arrow_top.svg);
+  content: url(../../../../public/assets/icons/button/arrow_top.svg);
 }
 
 .rev-button_layout {
@@ -451,15 +461,18 @@ button:focus {
 
 .shoes_type {
   font-weight: 500;
+  font-size: 16px;
 }
 
 .det_payment {
   font-weight: 500;
   margin: 32px 0;
+  font-size: 16px;
 }
 
 .size_header {
   margin-top: 27px;
+  font-size: 16px;
 }
 
 .detail_introduce {
@@ -474,6 +487,7 @@ button:focus {
 .additianal_info {
   padding-inline-start: 20px;
   margin: 28px 0 30px 0;
+  font-size: 14px;
 }
 
 .basket {
@@ -548,9 +562,49 @@ button:focus {
   filter: brightness(0.9);
 }
 
+.re_container {
+  /* box-shadow: inset 0 0 20px yellow; */
+  margin: 50px;
+}
+
 .re_description {
   display: flex;
   gap: 12px;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-wrapper {
+  /* box-shadow: inset 0 0 20px red; */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  filter: brightness(0.9);
+}
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  display: none;
+}
+
+.swiper-pagination {
 }
 
 .product_content img {
