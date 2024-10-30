@@ -90,8 +90,10 @@ function updateCartView() {
     cartItemsContainer.innerHTML = cart.items
       .map(item => {
         // image 속성이 없을 경우 기본 이미지 URL 사용
-        const imageUrl =
-          item.product.image.path || 'https://via.placeholder.com/150';
+        const baseURL = 'https://11.fesp.shop';
+        const imageUrl = item.product.image.path
+          ? `${baseURL}${item.product.image.path}`
+          : 'https://via.placeholder.com/150';
         const itemName = item.product.name || '이름 없는 상품';
         const itemPrice = (item.product.price || 0).toLocaleString();
         const categoryDescription = item.product.extra?.category
@@ -187,15 +189,17 @@ function updateWishlistView() {
   wishlistContainer.innerHTML = wishlist
     .map(item => {
       // 이미지 URL과 제품 이름이 정의되어 있는지 체크
-      const imageUrl =
-        item.product?.image?.url || 'https://via.placeholder.com/150';
+      const baseURL = 'https://11.fesp.shop';
+      const imageUrl = item.product.image.path
+        ? `${baseURL}${item.product.image.path}`
+        : 'https://via.placeholder.com/150';
       const productName = item.product?.name || '이름 없는 상품';
       const productPrice =
         item.product?.price?.toLocaleString() || '가격 정보 없음';
 
       return `
         <div class="wishlist-item">
-            <img src="${imageUrl}" alt="${productName}">
+            <img src="${imageUrl}" alt="${productName}" >
             <div class="wishlist-item-details">
                 <div class="item-name">${productName}</div>
                 <div class="item-price">${productPrice}원</div>
