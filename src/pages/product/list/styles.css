@@ -431,11 +431,14 @@ ul.product-list {
       padding: 36px 0 20px;
     }
   }
-  .close-btn {
+  .dialog .close-btn {
     position: fixed;
     top: 0;
     right: 0;
+    width: 32px;
+    height: 32px;
     padding: 20px;
+    background-color: transparent;
   }
   /* sorting, radio-group */
   .radio-item {

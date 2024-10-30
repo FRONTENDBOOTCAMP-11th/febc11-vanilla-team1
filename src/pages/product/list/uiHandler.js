@@ -62,7 +62,7 @@ function filterMobileToggle(e) {
 }
 const filterMobileToggleButtons =
   document.querySelectorAll(
-    '.subheading__filter-toggle, .close-btn[aria-label="필터 메뉴 닫기"]',
+    '.subheading__filter-toggle, button[aria-label="필터 메뉴 닫기"]',
   ) || [];
 filterMobileToggleButtons.forEach(el => {
   el.addEventListener('click', e => filterMobileToggle(e));

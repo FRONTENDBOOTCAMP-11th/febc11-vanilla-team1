@@ -194,3 +194,22 @@ document
 document.addEventListener('DOMContentLoaded', () => {
   getList();
 });
+// filter reset
+function filterReset(e) {
+  e.preventDefault();
+
+  const filterCheckboxes = document.querySelectorAll(
+    '.filter-checkbox input[type="checkbox"]',
+  );
+  filterCheckboxes.forEach(el => {
+    if (el.checked) {
+      // el에 change 이벤트 발생
+      el.checked = false;
+      const event = new Event('change');
+      el.dispatchEvent(event);
+    }
+  });
+}
+document
+  .querySelector('button[aria-label="필터 초기화"]')
+  .addEventListener('click', e => filterReset(e));
