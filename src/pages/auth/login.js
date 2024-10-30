@@ -1,5 +1,7 @@
-// LOGIN 부분
 import axios from 'axios';
+import api from '../../api';
+
+// LOGIN 부분
 
 // login 관련 요소
 const loginSession = document.querySelector('.login-session');
@@ -23,8 +25,8 @@ const editEmail = document.querySelector('.edit-email');
 const regContainer = document.querySelector('#regContainer');
 
 window.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('input, textarea').forEach(input => {
-    input.value = ''; // 페이지 로드 시 폼 초기화
+  document.querySelectorAll('input[type="email"], textarea').forEach(authInput => {
+    authInput.value = ''; // 페이지 로드 시 폼 초기화
   });
 });
 
@@ -67,25 +69,21 @@ authBtn.addEventListener('click', function () {
   }
 });
 
-async function getEmail(userEmail) {
-  try {
-    const response = await axios.get('https://11.fesp.shop/users/email', {
-      params: {
-        email: userEmail,
-      },
+async function getEmail(email) {
 
-      headers: {
-        'Content-Type': 'application/json',
-        'client-id': 'vanilla01',
-      },
-    });
+  try {
+    const response = await api(
+      'get',
+      'users/email',
+      { email }
+    );
     if (response.data.ok === 1) {
       window.location.href = 'check.html';
       authInput.value = '';
     }
   } catch (error) {
     if (error.response && error.response.status === 409) {
-      sessionStorage.setItem('email', userEmail);
+      sessionStorage.setItem('email', email);
       switchPw();
       return;
     } else {
@@ -122,11 +120,10 @@ function getInfo() {
     url: '/v2/user/me',
   })
     .then(function (res) {
-      console.log('사용자 정보:', res);
-      const account_email = res.kakao_account.email;
-      const account_name = res.kakao_account.name;
-      sessionStorage.setItem('email', account_email);
-      sessionStorage.setItem('name', account_name);
+      const kakaoEmail = res.kakao_account.email;
+      const kakaoName = res.kakao_account.name;
+      sessionStorage.setItem('email', kakaoEmail);
+      sessionStorage.setItem('name', kakaoName);
       window.location.href = 'complete.html';
     })
     .catch(function (error) {
@@ -199,55 +196,56 @@ function checkPassword(userPw) {
   }
 }
 
+// input 초기화
+function resetInputs() {
+  document.querySelectorAll('input').forEach(input => {
+    input.value = '';
+  });
+}
+
 // 로그인 요청 함수
-async function loginUser(userEmail, userPw) {
+async function loginUser(email, password) {
   try {
-    const response = await axios.post(
-      'https://11.fesp.shop/users/login',
-
+    const response = await api(
+      'post',
+      'users/login',
+      null,
       {
-        email: userEmail,
-        password: userPw,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'client-id': 'vanilla01',
-        },
-      },
+        email,
+        password
+      }
     );
-
     if (response.data.item.token) {
       const { accessToken, refreshToken } = response.data.item.token;
       const userName = response.data.item.name;
-
       if (accessToken && refreshToken) {
         sessionStorage.setItem('accessToken', accessToken);
         sessionStorage.setItem('refreshToken', refreshToken);
         sessionStorage.setItem('name', userName);
         window.location.href = 'complete.html';
-        authInput.value = '';
+        resetInputs();
         sessionStorage.removeItem('email');
       } else {
         console.error('로그인 실패');
-        checkPassword(userPw);
+        checkPassword(password);
       }
     } else {
       console.error('정보가 응답에 없습니다.');
     }
   } catch (error) {
-    if (error.response.status === 422) {
-      checkPassword(userPw);
-    } else if (error.response.status === 403) {
-      checkPassword(userPw);
-    } else if (error.response && error.response.status === 401) {
-      const reToken = await issueToken();
-      if (reToken) {
-        sessionStorage.setItem('accessToken', reToken);
-        return loginUser(userEmail, userPw);
-      } else {
-        localStorage.clear();
-        tokenError(error);
+    if (error.status) {
+      const status = error.response.status;
+      if (status === 422 || status === 403) {
+        checkPassword(password);
+      } else if (status === 401) {
+        const reToken = await issueToken();
+        if (reToken) {
+          sessionStorage.setItem('accessToken', reToken);
+          return loginUser(email, password);
+        } else {
+          localStorage.clear();
+          tokenError(error);
+        }
       }
     }
   }
