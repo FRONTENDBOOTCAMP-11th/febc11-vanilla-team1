@@ -1,142 +1,89 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>login</title>
-    <link rel="stylesheet" href="../../../style.css" />
-    <link rel="stylesheet" href="auth.css" />
-  </head>
 
-  <body>
-    <div id="app">
-      <div class="l_wrapper login-session">
-        <div id="login-form" class="auth-form">
-          <header class="auth-header login-header">
-            <div class="auth-logo">
-              <img src="/assets/icons/logo/nike.svg" alt="nike-logo" />
-            </div>
-            <h1 class="auth-title login-title">
-              가입 또는 로그인을 위해 이메일을 입력하세요.
-            </h1>
-          </header>
-          <section class="input-form login">
-            <input
-              class="auth-input"
-              id="emailInput"
-              placeholder="이메일"
-              type="email"
-              tabindex="1"
-              maxlength="32"
-            />
-            <p class="reg-Text"></p>
-            <p class="login-agreement">
-              계속 진행하면 나이키의
-              <a
-                target="_blank"
-                href="https://agreementservice.svs.nike.com/rest/agreement?agreementType=privacyPolicy&country=KR&language=ko&requestType=redirect&uxId=4fd2d5e7db76e0f85a6bb56721bd51df"
-                rel="noopener noreferrer"
-                tabindex="1"
-                >개인정보 처리받침</a
-              >
-              및
-              <a
-                target="_blank"
-                href="https://agreementservice.svs.nike.com/rest/agreement?agreementType=termsOfUse&country=KR&language=ko&requestType=redirect&uxId=4fd2d5e7db76e0f85a6bb56721bd51df"
-                rel="noopener noreferrer"
-                tabindex="1"
-                >이용약관</a
-              >에 동의하게 됩니다.
-            </p>
-          </section>
-          <button
-            type="button"
-            id="loginEmailBtn"
-            class="btn login-btn"
-            tabindex="1"
-          >
-            계속
-          </button>
-          <button
-            type="button"
-            id="socialBtn"
-            class="btn social-btn"
-            tabindex="1"
-          >
-            <img
-              src=" /assets/icons/buttons/kakao.svg"
-              href="javascript:loginWithKakao()"
-            />카카오계정으로 로그인
-          </button>
-        </div>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>login</title>
+  <link rel="stylesheet" href="../../../style.css" />
+  <link rel="stylesheet" href="auth.css" />
+</head>
 
-      <div class="l_wrapper password-session">
-        <div id="login-form" class="auth-form">
-          <header class="auth-header login-header">
-            <div class="auth-logo">
-              <img src="/assets/icons/logo/nike.svg" alt="nike-logo" />
-            </div>
-            <div class="login-container">
-              <h1 class="auth-title pw-title">비밀번호를 입력하세요.</h1>
-              <div class="edit-container">
-                <p class="auth-email"></p>
-                <a class="edit-email" tabindex="1">편집</a>
-              </div>
-              <div id="regContainer">
-                <p id="regPw"></p>
-              </div>
-            </div>
-          </header>
-          <section class="input-form login">
-            <div class="password-container">
-              <input
-                class="auth-input pw-input"
-                id="authInput"
-                placeholder="비밀번호"
-                type="password"
-                maxlength="32"
-                required
-                tabindex="1"
-              />
-              <img
-                class="close"
-                id="toggleClose"
-                src="/assets/icons/eye-icon/closeeye.svg"
-                tabindex="1"
-              />
-              <img
-                class="open"
-                id="toggleOpen"
-                src="/assets/icons/eye-icon/openeye.svg"
-                tabindex="1"
-              />
-            </div>
-            <a class="find-password" tabindex="1">비밀번호 찾기</a>
-          </section>
-          <div class="button-container">
-            <button
-              type="button"
-              id="prevBtn"
-              class="btn prev-btn"
-              tabindex="1"
-            >
-              이전
-            </button>
-            <button
-              type="button"
-              id="loginPasswordBtn"
-              class="btn next-btn"
-              tabindex="1"
-            >
-              로그인
-            </button>
+<body>
+  <div id="app">
+    <div class="l_wrapper login-session">
+      <div id="login-form" class="auth-form">
+        <header class="auth-header login-header">
+          <div class="auth-logo">
+            <img src="/assets/icons/logo/nike.svg" alt="nike-logo" />
           </div>
-        </div>
+          <h1 class="auth-title login-title">
+            가입 또는 로그인을 위해 이메일을 입력하세요.
+          </h1>
+        </header>
+        <section class="input-form login">
+          <input class="auth-input" id="emailInput" placeholder="이메일" type="email" tabindex="1" maxlength="32" />
+          <p class="reg-Text"></p>
+          <p class="login-agreement">
+            계속 진행하면 나이키의
+            <a target="_blank"
+              href="https://agreementservice.svs.nike.com/rest/agreement?agreementType=privacyPolicy&country=KR&language=ko&requestType=redirect&uxId=4fd2d5e7db76e0f85a6bb56721bd51df"
+              rel="noopener noreferrer" tabindex="1">개인정보 처리받침</a>
+            및
+            <a target="_blank"
+              href="https://agreementservice.svs.nike.com/rest/agreement?agreementType=termsOfUse&country=KR&language=ko&requestType=redirect&uxId=4fd2d5e7db76e0f85a6bb56721bd51df"
+              rel="noopener noreferrer" tabindex="1">이용약관</a>에 동의하게 됩니다.
+          </p>
+        </section>
+        <button type="button" id="loginEmailBtn" class="btn login-btn" tabindex="1">
+          계속
+        </button>
+        <button type="button" id="socialBtn" class="btn social-btn" tabindex="1">
+          <img src=" /assets/icons/buttons/kakao.svg" href="javascript:loginWithKakao()" />카카오계정으로 로그인
+        </button>
       </div>
     </div>
 
-    <script type="module" src="./login.js"></script>
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-  </body>
+    <div class="l_wrapper password-session">
+      <div id="login-form" class="auth-form">
+        <header class="auth-header login-header">
+          <div class="auth-logo">
+            <img src="/assets/icons/logo/nike.svg" alt="nike-logo" />
+          </div>
+          <div class="login-container">
+            <h1 class="auth-title pw-title">비밀번호를 입력하세요.</h1>
+            <div class="edit-container">
+              <p class="auth-email"></p>
+              <a class="edit-email" tabindex="1">편집</a>
+            </div>
+            <div id="regContainer">
+              <p id="regPw"></p>
+            </div>
+          </div>
+        </header>
+        <section class="input-form login">
+          <div class="password-container">
+            <input class="auth-input pw-input" id="authInput" placeholder="비밀번호" type="password" maxlength="32" required
+              tabindex="1" />
+            <img class="close" id="toggleClose" src="/assets/icons/eye-icon/closeeye.svg" tabindex="1" />
+            <img class="open" id="toggleOpen" src="/assets/icons/eye-icon/openeye.svg" tabindex="1" />
+          </div>
+          <a class="find-password" tabindex="1">비밀번호 찾기</a>
+        </section>
+        <div class="button-container">
+          <button type="button" id="prevBtn" class="btn prev-btn" tabindex="1">
+            이전
+          </button>
+          <button type="button" id="loginPasswordBtn" class="btn next-btn" tabindex="1">
+            로그인
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./login.js"></script>
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+</body>
+
 </html>
