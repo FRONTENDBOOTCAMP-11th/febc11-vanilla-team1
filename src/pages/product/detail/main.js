@@ -182,18 +182,18 @@ const getProduct = async function (productId) {
 };
 
 const renderImage = function () {
-  const $coverMain = document.querySelector('.nike_shoes');
-  $coverMain.innerHTML = '';
+  const shoes_img = document.querySelector('.nike_shoes');
+  shoes_img.innerHTML = '';
   if (product.item.options.length === 0) {
     product.item.mainImages.map(
       e =>
-        ($coverMain.innerHTML += `<img src='https://11.fesp.shop/files/vanilla01/${e.name}
+        (shoes_img.innerHTML += `<img src='https://11.fesp.shop/files/vanilla01/${e.name}
       ' />`),
     );
   } else {
     product.item.options[currentOption.option].mainImages.map(
       e =>
-        ($coverMain.innerHTML += `<img src='https://11.fesp.shop/files/vanilla01/${e.name}
+        (shoes_img.innerHTML += `<img src='https://11.fesp.shop/files/vanilla01/${e.name}
 ' />`),
     );
   }
@@ -234,7 +234,7 @@ renderSize(product, currentOption);
 basket.addEventListener('click', async function () {
   console.log(productId, currentOption.size);
   if (currentOption.size === null) {
-    window.alert('사이즈를 선택해 주세요.');
+    alert('원하는 신발 사이즈 선택하세요');
   } else {
     try {
       const product_id =
