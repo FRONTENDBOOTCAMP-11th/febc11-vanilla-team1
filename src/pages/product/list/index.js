@@ -1,10 +1,14 @@
 'use strict';
 import api from '@/api.js';
 
+// 상품 리스트를 가져올 때 사용될 params를 관리하는 클래스
 class Params {
   gender = [];
   price = [];
   category = [];
+  currentPage = 1;
+  page = 1;
+  totalPages = 1;
 
   constructor() {
     // 현재 페이지의 URL을 가져옵니다.
@@ -83,6 +87,7 @@ class Params {
     return categoryParams;
   }
 
+  // getList에 사용될 params 객체 반환
   getCustomParams() {
     return {
       ...this.getGender(),
@@ -91,11 +96,13 @@ class Params {
   }
 }
 const params = new Params();
+let isLoad = false;
 
 // `{"$or": ${JSON.stringify(params.getParams())}}`
 // {"extra.isNew":{"$in":[true, false]},"_id":{"$in":[1,2,3]}}
 // GET /api/products
-async function getList() {
+// 상품 리스트 가져오기
+async function getProducts() {
   try {
     const custom = params.getCustomParams() || null;
     // console.log(custom);
@@ -105,8 +112,11 @@ async function getList() {
       custom: JSON.stringify(custom),
       minPrice: params?.getPrice()?.minPrice || null,
       maxPrice: params?.getPrice()?.maxPrice || null,
+      page: params.page,
+      limit: 15,
     });
 
+    params.totalPages = data.pagination.totalPages;
     renderList(data);
   } catch (error) {
     console.error(error);
@@ -136,7 +146,7 @@ async function renderList(data) {
       return `
       <li class="product">
         <figure>
-          <a href="">
+          <a href="/src/pages/product/detail/index.html">
             <div class="product__image">
               <img 
                 src="https://11.fesp.shop${product.mainImages[0].path}" 
@@ -162,7 +172,18 @@ async function renderList(data) {
     `;
     })
     .join('');
-  listNode.innerHTML = list;
+
+  if (list === '') {
+    listNode.innerHTML = '<p>상품이 없습니다.</p>';
+    return;
+  }
+  if (params.currentPage !== params.page) {
+    listNode.innerHTML += list;
+    params.currentPage = params.page;
+  } else {
+    listNode.innerHTML = list;
+  }
+  isLoad = false;
 }
 
 // 필터 메뉴 선택
@@ -180,21 +201,21 @@ function filterMenuSelect(e) {
       break;
   }
 
-  getList();
+  // 페이지와 스크롤 초기화
+  window.scrollTo(0, 0);
+  params.page = 1;
+  params.totalPages = 1;
+  params.currentPage = 1;
+  getProducts();
 }
+// 카테고리에 이벤트 리스너 추가
 document
   .querySelectorAll('.filter-checkbox input[type="checkbox"]')
   .forEach(el => {
     el.addEventListener('change', e => filterMenuSelect(e));
   });
 
-// 카테고리
-
-// 초기 실행
-document.addEventListener('DOMContentLoaded', () => {
-  getList();
-});
-// filter reset
+// 지우기 버튼 클릭시 필터 초기화
 function filterReset(e) {
   e.preventDefault();
 
@@ -213,3 +234,26 @@ function filterReset(e) {
 document
   .querySelector('button[aria-label="필터 초기화"]')
   .addEventListener('click', e => filterReset(e));
+
+// 무한 스크롤
+window.addEventListener('scroll', () => {
+  const footerNode = document.querySelector('footer');
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+  // 스크롤이 페이지 하단에 도달했는지 확인
+  // footerNode 위치에 도달시 한 번만 실행
+  if (scrollTop + clientHeight >= scrollHeight - footerNode.clientHeight) {
+    if (isLoad) return;
+    isLoad = true;
+
+    if (params.page < params.totalPages) {
+      params.page += 1;
+      getProducts();
+    }
+  }
+});
+
+// 초기 실행
+document.addEventListener('DOMContentLoaded', () => {
+  getProducts();
+});
