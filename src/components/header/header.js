@@ -12,7 +12,7 @@ async function renderHeader() {
   //✨메뉴패널 구현*/
   // 요소 선택
   const menuIcon = document.getElementById('menu-icon');
-  const menuSidebar = document.getElementById('menu-sidebar');
+  const menuSidebar = document.getElementById('menu-side');
   const closeBtn = document.querySelector('.close-btn');
 
   // 메뉴 아이콘 클릭 시 메뉴 탭이 나타나는 기능
@@ -70,7 +70,8 @@ function userOut() {
   logOut.addEventListener('click', function () {
     sessionStorage.clear();
     localStorage.clear();
-  });
+    location.reload();
+  })
 }
 
 function mobileOut() {
@@ -78,5 +79,6 @@ function mobileOut() {
   logoutMobile.addEventListener('click', function () {
     sessionStorage.clear();
     localStorage.clear();
-  });
+    location.reload();
+  })
 }
