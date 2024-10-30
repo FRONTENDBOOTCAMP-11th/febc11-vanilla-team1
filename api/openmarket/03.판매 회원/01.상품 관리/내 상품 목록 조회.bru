@@ -5,7 +5,11 @@ meta {
 }
 
 get {
-  url: {{url}}/seller/products
+  url: {{url}}/seller/products?type=info
   body: none
   auth: inherit
+}
+
+params:query {
+  type: info
 }
