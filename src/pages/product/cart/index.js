@@ -16,16 +16,36 @@ let accessToken = null;
 async function fetchCart() {
   try {
     accessToken = sessionStorage.getItem('accessToken') || null;
-    const response = await axios.get('https://11.fesp.shop/carts', {
-      headers: {
-        'Content-Type': 'application/json',
-        'client-id': 'vanilla01',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+
+    let response;
+    if (accessToken) {
+      // 로그인한 경우
+      response = await axios.get('https://11.fesp.shop/carts', {
+        headers: {
+          'Content-Type': 'application/json',
+          'client-id': 'vanilla01',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+    } else {
+      // 비로그인 상태인 경우
+      response = await axios.post(
+        'https://11.fesp.shop/carts/local',
+        {
+          products: [
+          ],
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'client-id': 'vanilla01',
+          },
+        },
+      );
+    }
+
     console.log(response.data);
 
-    // 응답 데이터 구조에 맞게 item 배열로 접근
     if (
       response.data &&
       response.data.item &&
@@ -36,8 +56,8 @@ async function fetchCart() {
       cart.items = [];
     }
 
-    updateCartView(); // 카트 뷰 업데이트
-    updateOrderSummary(); // 주문 요약 업데이트
+    updateCartView();
+    updateOrderSummary();
   } catch (error) {
     console.error(
       '카트 데이터를 가져오는 데 실패했습니다:',
@@ -45,6 +65,7 @@ async function fetchCart() {
     );
   }
 }
+
 
 function initCart() {
   //   updateCartView();
@@ -106,8 +127,7 @@ function updateCartView() {
                   item._id
                 })">
                 <img src="../../../../public/assets/icons/button36px/white-heart.svg" alt="빈 하트" style="width: 24px; height: auto;"></button>
-                <button class="remove-item button-class" onclick="removeItem(${
-                  item._id
+                <button class="remove-item button-class" onclick="removeItem(${item._id
                 })">
                   <img src="../../../../public/assets/icons/button36px/delete.svg" alt="삭제" style="width: 20px; height: auto;">
                 </button>
@@ -202,6 +222,7 @@ function changeQuantity(itemId, change) {
   const item = cart.items.find(i => i._id === itemId);
   if (item) {
     item.quantity = Math.max(1, item.quantity + change);
+    updateCartQuantity(itemId, item.quantity);
     updateCartView();
   }
 }
@@ -211,6 +232,7 @@ function updateQuantity(itemId, newQuantity) {
   const item = cart.items.find(i => i._id === itemId);
   if (item) {
     item.quantity = Math.max(1, parseInt(newQuantity) || 1);
+    updateCartQuantity(itemId, item.quantity);
     updateCartView();
   }
 }
@@ -218,6 +240,7 @@ window.updateQuantity = updateQuantity;
 
 function removeItem(itemId) {
   cart.items = cart.items.filter(item => item._id !== itemId);
+  deleteCartItem(itemId);
   updateCartView();
 }
 window.removeItem = removeItem;
@@ -263,8 +286,51 @@ function addToCartFromWishlist(productId) {
 }
 window.addToCartFromWishlist = addToCartFromWishlist;
 
-document.getElementById('order-button').addEventListener('click', function () {
-  alert('주문이 완료되었습니다!');
-});
+// 장바구니 수량 업데이트 API 요청
+async function updateCartQuantity(itemId, quantity) {
+  try {
+    await axios.patch(
+      `https://11.fesp.shop/carts/${itemId}`,
+      { quantity },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'client-id': 'vanilla01',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    );
+  } catch (error) {
+    console.error(
+      '수량 업데이트에 실패했습니다:',
+      error.response ? error.response.data : error.message,
+    );
+  }
+}
 
-window.onload = initCart;
+// 장바구니에서 항목 삭제 API 요청
+async function deleteCartItem(itemId) {
+  try {
+    await axios.delete(`https://11.fesp.shop/carts/${itemId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'client-id': 'vanilla01',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  } catch (error) {
+    console.error(
+      '항목 삭제에 실패했습니다:',
+      error.response ? error.response.data : error.message,
+    );
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  document
+    .getElementById('order-button')
+    .addEventListener('click', function () {
+      alert('주문이 완료되었습니다!');
+    });
+  initCart();
+});
