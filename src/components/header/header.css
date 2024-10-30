@@ -139,6 +139,10 @@
   }
 }
 
+.menu-text {
+  display: none;
+}
+
 .mobile-login {
   display: none;
 }
@@ -262,6 +266,15 @@
 
   #menu-side ul.menu-icons li a {
     font-size: 1.6rem;
+  }
+
+  .menu-text {
+    display: block;
+  }
+
+  .menu-name {
+    font-size: 2rem;
+    font-weight: 600;
   }
 
   .search-box,

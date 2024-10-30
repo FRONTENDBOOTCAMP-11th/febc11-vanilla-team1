@@ -32,6 +32,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   checkLoginState();
   userOut();
   mobileOut();
+  sideName();
 });
 
 // 로그인, 소셜로그인 시 헤더 변경
@@ -61,6 +62,21 @@ function checkLoginState() {
     userLoginItems.forEach(item => (item.style.display = 'block'));
     userOutItems.forEach(item => (item.style.display = 'none'));
     loginMobile.forEach(item => (item.style.display = ' block'));
+  }
+}
+
+function sideName() {
+  const token = sessionStorage.getItem('accessToken');
+  const socialName = sessionStorage.getItem('name');
+  const userName = sessionStorage.getItem('name');
+  const menuName = document.querySelector('.menu-name');
+  const menuText = document.querySelector('.menu-text')
+  if (token) {
+    menuName.innerHTML = `<h1>${userName} 님</h1>`;
+  } else if (socialName) {
+    menuName.innerHTML = `<h1>${socialName} 님</h1>`;
+  } else {
+    menuText.style.display = 'block';
   }
 }
 
