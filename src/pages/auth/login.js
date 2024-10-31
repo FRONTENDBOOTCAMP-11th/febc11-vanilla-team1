@@ -121,7 +121,7 @@ function getInfo() {
       const kakaoName = res.kakao_account.name;
       sessionStorage.setItem('email', kakaoEmail);
       sessionStorage.setItem('name', kakaoName);
-      window.location.href = 'complete.html';
+      window.location.href = 'index.html';
     })
     .catch(function (error) {
       console.error('사용자 정보 요청 실패:', error);
@@ -214,7 +214,7 @@ async function loginUser(email, password) {
         sessionStorage.setItem('accessToken', accessToken);
         sessionStorage.setItem('refreshToken', refreshToken);
         sessionStorage.setItem('name', userName);
-        window.location.href = 'complete.html';
+        window.location.href = 'index.html';
         resetInputs();
         sessionStorage.removeItem('email');
       } else {
