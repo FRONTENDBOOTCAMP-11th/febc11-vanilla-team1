@@ -27,7 +27,7 @@ let wishlist = [
         isBest: true,
         category: ['PC03', 'PC0303'],
         sort: 1,
-        size : ['XS', 'S', 'M', 'L', 'XL'],
+        size: ['XS', 'S', 'M', 'L', 'XL'],
       },
     },
   },
