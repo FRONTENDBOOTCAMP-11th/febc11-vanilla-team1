@@ -146,7 +146,7 @@ async function renderList(data) {
       return `
       <li class="product">
         <figure>
-          <a href="/src/pages/product/detail/index.html?id=${product._id}">
+          <a href="/src/pages/product/detail/index.html?productId=${product._id}">
             <div class="product__image">
               <img 
                 src="https://11.fesp.shop${product.mainImages[0].path}" 
