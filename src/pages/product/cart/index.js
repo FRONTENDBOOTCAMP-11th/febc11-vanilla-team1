@@ -5,7 +5,33 @@ let cart = {
   total: 0,
 };
 
-let wishlist = [];
+let wishlist = [
+  {
+    _id: 9,
+    user_id: 4,
+    memo: '다음에 재구매',
+    createdAt: '2024.04.08 16:47:46',
+    product: {
+      _id: 4,
+      name: '레고 테크닉',
+      price: 45000,
+      quantity: 100,
+      buyQuantity: 89,
+      image: {
+        url: 'https://via.placeholder.com/150',
+        fileName: 'sample-bugatti.png',
+        orgName: '부가티.png',
+      },
+      extra: {
+        isNew: false,
+        isBest: true,
+        category: ['PC03', 'PC0303'],
+        sort: 1,
+        size: ['XS', 'S', 'M', 'L', 'XL'],
+      },
+    },
+  },
+];
 
 // 이 ID로 로그인하고 있다고 가정하고 TEST 시도중
 // let accessToken =
@@ -106,7 +132,7 @@ function updateCartView() {
                   <div class="item-name">${itemName}</div>
                   <div class="item-price">${itemPrice.toLocaleString()}원</div>
                 </div>
-                <div class="item-option">${item.product.color}</div>
+                <div class="item-option">${item.product.extra.color}</div>
                 <div class="item-description">${categoryDescription}</div>
                 <div>
                   <span class="item-size">사이즈 ${item.size}</span>
@@ -199,9 +225,13 @@ function updateWishlistView() {
       return `
         <div class="wishlist-item">
             <img src="${imageUrl}" alt="${productName}" >
-            <div class="wishlist-item-details">
-                <div class="item-name">${productName}</div>
-                <div class="item-price">${productPrice}원</div>
+            <div class="item-details">
+                <div class="item-header">
+                  <div class="item-name">${productName}</div>
+                  <div class="item-price">${productPrice}원</div>
+                </div>
+                <div class="item-category">${item.product.extra.category}</div>
+                <div class="item-size">사이즈 <a href="#">${item.product.extra.size[0]}</a></div>
                 <button class="add-to-cart-button" onclick="addToCartFromWishlist(${item.product._id})">장바구니에 추가</button>
             </div>
         </div>
