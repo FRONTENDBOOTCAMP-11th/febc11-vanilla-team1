@@ -1,10 +1,33 @@
 'use strict';
 import api from '@/api.js';
 
+// 상품 리스트를 가져올 때 사용될 params를 관리하는 클래스
 class Params {
   gender = [];
   price = [];
   category = [];
+  currentPage = 1;
+  page = 1;
+  totalPages = 1;
+
+  constructor() {
+    // 현재 페이지의 URL을 가져옵니다.
+    const url = new URL(window.location.href);
+
+    // 쿼리 파라미터를 파싱합니다.
+    const URLparams = new URLSearchParams(url.search);
+
+    // 특정 쿼리 파라미터의 값을 가져옵니다.
+    // category=depth1-depth2-depth3 형태로 되어 있습니다.
+    // Men-신발-조던
+    const paramValue = URLparams.get('category');
+
+    let categoryList = null;
+    if (paramValue) {
+      categoryList = paramValue.split('-');
+      this.category = categoryList;
+    }
+  }
 
   // g가 gender에 포함되어 있으면 제거, 아니면 추가
   setGender(g) {
@@ -64,6 +87,7 @@ class Params {
     return categoryParams;
   }
 
+  // getList에 사용될 params 객체 반환
   getCustomParams() {
     return {
       ...this.getGender(),
@@ -72,116 +96,13 @@ class Params {
   }
 }
 const params = new Params();
-
-// GET /api/codes
-// get main category
-async function getMainCategory() {
-  // 현재 페이지의 URL을 가져옵니다.
-  const url = new URL(window.location.href);
-
-  // 쿼리 파라미터를 파싱합니다.
-  const URLparams = new URLSearchParams(url.search);
-
-  // 특정 쿼리 파라미터의 값을 가져옵니다.
-  // category=depth1-depth2-depth3 형태로 되어 있습니다.
-  // Men-신발-조던
-  const paramValue = URLparams.get('category');
-
-  let categoryList = null;
-  if (paramValue) {
-    categoryList = paramValue.split('-');
-    params.category = categoryList;
-  }
-
-  try {
-    const {
-      data: {
-        item: { codes },
-      },
-    } = await api('get', 'codes/productCategory', {
-      code: categoryList && categoryList[categoryList.length - 1],
-      depth: categoryList ? categoryList.length : 1,
-    });
-
-    // data.item.codes[0] or data.item.productCategory.codes[0]
-    // codes[0]만 사용
-    const headerTitle = document.querySelector('.header__title .title');
-    headerTitle.textContent = codes[0].desc || codes[0].value;
-
-    getSubCategory(codes[0].code);
-    // renderCategoryList(data.item?.codes[0]);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// get sub category
-async function getSubCategory(code) {
-  try {
-    const {
-      data: {
-        item: { codes },
-      },
-    } = await api('get', 'codes/productCategory', {
-      parent: code,
-    });
-
-    renderCategoryList(codes);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// 카테고리 목록 출력
-function renderCategoryList(codes) {
-  const url = new URL(window.location.href);
-  const baseURI = url.origin + url.pathname;
-
-  const categoryList = document.querySelector('ul.categories');
-  const sidebar__categoryList = document.querySelector(
-    'ul.sidebar__categories',
-  );
-  const parentCategory = params.category.join('-');
-
-  if (codes.length === 0) {
-    return;
-  }
-
-  codes.forEach(code => {
-    categoryList.innerHTML += `
-      <li class="categories__item">
-        <a href="${baseURI}?category=${parentCategory}-${code.code}">
-          ${code.desc || code.value}
-        </a>
-      </li>
-    `;
-    sidebar__categoryList.innerHTML += `
-      <li class="sidebar__category">
-        <a href="${baseURI}?category=${parentCategory}-${code.code}">
-          ${code.desc || code.value}
-        </a>
-      </li>
-    `;
-  });
-  // categoryList.forEach(el => {
-  //   const sub = data.sub || [];
-  //   const list = sub.map(item => {
-  //     return `
-  //       <li class="${el.classList.contains('is_mobile') ? 'categories' : 'sidebar__category'}">
-  //         <a href="${baseURI}?category=${data.code}-${item.code}">
-  //           ${item.desc || item.value}
-  //         </a>
-  //       </li>
-  //     `;
-  //   });
-  //   el.innerHTML = list.join('');
-  // });
-}
+let isLoad = false;
 
 // `{"$or": ${JSON.stringify(params.getParams())}}`
 // {"extra.isNew":{"$in":[true, false]},"_id":{"$in":[1,2,3]}}
 // GET /api/products
-async function getList() {
+// 상품 리스트 가져오기
+async function getProducts() {
   try {
     const custom = params.getCustomParams() || null;
     // console.log(custom);
@@ -191,8 +112,11 @@ async function getList() {
       custom: JSON.stringify(custom),
       minPrice: params?.getPrice()?.minPrice || null,
       maxPrice: params?.getPrice()?.maxPrice || null,
+      page: params.page,
+      limit: 15,
     });
 
+    params.totalPages = data.pagination.totalPages;
     renderList(data);
   } catch (error) {
     console.error(error);
@@ -213,7 +137,7 @@ async function renderList(data) {
 
   // 상품 개수 출력
   countNode.forEach(el => {
-    el.textContent = pagination.total;
+    el.textContent = `(${pagination.total})`;
   });
 
   // 상품 목록 출력
@@ -222,7 +146,7 @@ async function renderList(data) {
       return `
       <li class="product">
         <figure>
-          <a href="">
+          <a href="/src/pages/product/detail/index.html?id=${product._id}">
             <div class="product__image">
               <img 
                 src="https://11.fesp.shop${product.mainImages[0].path}" 
@@ -248,7 +172,18 @@ async function renderList(data) {
     `;
     })
     .join('');
-  listNode.innerHTML = list;
+
+  if (list === '') {
+    listNode.innerHTML = '<p>상품이 없습니다.</p>';
+    return;
+  }
+  if (params.currentPage !== params.page) {
+    listNode.innerHTML += list;
+    params.currentPage = params.page;
+  } else {
+    listNode.innerHTML = list;
+  }
+  isLoad = false;
 }
 
 // 필터 메뉴 선택
@@ -266,18 +201,59 @@ function filterMenuSelect(e) {
       break;
   }
 
-  getList();
+  // 페이지와 스크롤 초기화
+  window.scrollTo(0, 0);
+  params.page = 1;
+  params.totalPages = 1;
+  params.currentPage = 1;
+  getProducts();
 }
+// 카테고리에 이벤트 리스너 추가
 document
   .querySelectorAll('.filter-checkbox input[type="checkbox"]')
   .forEach(el => {
     el.addEventListener('change', e => filterMenuSelect(e));
   });
 
-// 카테고리
+// 지우기 버튼 클릭시 필터 초기화
+function filterReset(e) {
+  e.preventDefault();
+
+  const filterCheckboxes = document.querySelectorAll(
+    '.filter-checkbox input[type="checkbox"]',
+  );
+  filterCheckboxes.forEach(el => {
+    if (el.checked) {
+      // el에 change 이벤트 발생
+      el.checked = false;
+      const event = new Event('change');
+      el.dispatchEvent(event);
+    }
+  });
+}
+document
+  .querySelector('button[aria-label="필터 초기화"]')
+  .addEventListener('click', e => filterReset(e));
+
+// 무한 스크롤
+window.addEventListener('scroll', () => {
+  const footerNode = document.querySelector('footer');
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+  // 스크롤이 페이지 하단에 도달했는지 확인
+  // footerNode 위치에 도달시 한 번만 실행
+  if (scrollTop + clientHeight >= scrollHeight - footerNode.clientHeight) {
+    if (isLoad) return;
+    isLoad = true;
+
+    if (params.page < params.totalPages) {
+      params.page += 1;
+      getProducts();
+    }
+  }
+});
 
 // 초기 실행
 document.addEventListener('DOMContentLoaded', () => {
-  getMainCategory();
-  getList();
+  getProducts();
 });

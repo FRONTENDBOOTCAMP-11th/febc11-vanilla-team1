@@ -72,7 +72,11 @@ p {
 header {
   width: auto;
   height: 96px;
+<<<<<<< HEAD
   /* border: 1px solid #000; */
+=======
+  border: 1px solid #000;
+>>>>>>> dev
   margin-bottom: 156px;
 }
 

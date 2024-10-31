@@ -21,7 +21,7 @@ checkboxes.forEach(checkbox => {
 
 function updateAgreeButtonState() {
   const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
-  agreeBtn.disabled = !(allChecked);
+  agreeBtn.disabled = !allChecked;
 }
 
 agreeBtn.addEventListener('click', function () {
