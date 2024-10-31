@@ -20,6 +20,21 @@ const regPw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 const regEight = /^.{8,}$/;
 const regMin = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
 
+// 입력 단계에서 공백을 막는 코드
+inputFirstName.addEventListener('input', function () {
+  this.value = this.value.replace(/\s/g, '');
+});
+
+inputLastName.addEventListener('input', function () {
+  this.value = this.value.replace(/\s/g, '');
+});
+
+inputPassword.addEventListener('keydown', function (event) {
+  if (event.code === 'Space') {
+    event.preventDefault();
+  }
+});
+
 toggleClose.addEventListener('click', function () {
   inputPassword.type = 'text';
   toggleClose.style.display = 'none';
