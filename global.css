@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,18 +36,26 @@ img {
 }
 
 button {
-  all: unset;
+  margin: 0;
+  padding: 0;
   border: none;
+  box-sizing: content-box;
   background-color: transparent;
   cursor: pointer;
   font-family: inherit;
 }
 
+input[type='radio'],
+input[type='checkbox'] {
+  appearance: none;
+}
+
 /* CSS Variables */
 :root {
   /* Typography */
-  font-family: NotosansKR, sans-serif;
+  font-family: 'Noto Sans KR', 'Arial Bold', 'Helvetica Now Text';
   font-size: 62.5%;
+  color: var(--color-black);
 
   /* Colors */
   --color-black: #111;
@@ -65,6 +74,7 @@ body {
   margin: 0;
   min-width: 360px;
   min-height: 100vh;
+  font-size: 1.6rem;
 }
 
 #app {

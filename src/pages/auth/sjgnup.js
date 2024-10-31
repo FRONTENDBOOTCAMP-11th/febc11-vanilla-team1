@@ -6,7 +6,7 @@ const inputPassword = document.querySelector('#inputPassword');
 const inputCalendar = document.querySelector('#inputCalendar');
 const authInput = document.querySelector('#emailInput');
 
-const signUpForm = document.querySelector('#signUpForm')
+const signUpForm = document.querySelector('#signUpForm');
 const cancelBtn = document.querySelector('#cancelBtn');
 const loginTxtFirst = document.querySelector('.first');
 const loginTxtSecond = document.querySelector('.second');
@@ -75,20 +75,15 @@ inputPassword.addEventListener('input', function () {
 
 async function userSign(password, name, userBirth, email) {
   try {
-    const response = await api(
-      'post',
-      'users/',
-      null,
-      {
-        email,
-        password,
-        name,
-        type: 'user',
-        extra: {
-          userBirth,
-        },
-      }
-    );
+    const response = await api('post', 'users/', null, {
+      email,
+      password,
+      name,
+      type: 'user',
+      extra: {
+        userBirth,
+      },
+    });
 
     if (response.data) {
       loginUser(email, password);
@@ -105,15 +100,10 @@ async function userSign(password, name, userBirth, email) {
 
 async function loginUser(email, password) {
   try {
-    const response = await api(
-      'post',
-      'users/login',
-      null,
-      {
-        email,
-        password
-      }
-    );
+    const response = await api('post', 'users/login', null, {
+      email,
+      password,
+    });
     if (response.data.item.token) {
       const { accessToken, refreshToken } = response.data.item.token;
       const userName = response.data.item.name;
@@ -158,7 +148,6 @@ signUpForm.addEventListener('submit', function (e) {
     regPassword(userPw);
   }
 });
-
 
 cancelBtn.addEventListener('click', function () {
   window.location.href = 'login.html';
