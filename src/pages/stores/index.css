@@ -226,12 +226,12 @@ body {
   justify-content: center;
 }
 
-
 /*📌셀렉터 탭*/
 .select-tap {
-  display:none;
+  display: none;
 }
-.map, .card-container {
+.map,
+.card-container {
   display: block;
 }
 
@@ -321,12 +321,10 @@ body {
   background-repeat: no-repeat;
 }
 
-.map, .card-container {
+.map,
+.card-container {
   display: block;
 }
-
-
-
 
 /* 푸터 */
 #footer {
@@ -442,7 +440,7 @@ body {
   .card-container {
     display: block;
   }
-  .map{
+  .map {
     display: none;
   }
 
@@ -451,7 +449,7 @@ body {
     margin-top: 20px;
   }
 
-  .select-tap a{
+  .select-tap a {
     font-size: 16px;
     line-height: 28px;
     margin-right: 10px;
@@ -493,7 +491,7 @@ body {
     line-height: 15px;
     color: #707072;
   }
- 
+
   /*map*/
   .map {
     margin-top: 100px;

@@ -1,298 +1,482 @@
 <!doctype html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>나이키</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/src/components/header/header.css" />
+    <link rel="stylesheet" href="/src/components/footer/footer.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="header-wrap"></div>
+      <div class="wrapper">
+        <div class="breadcrumbs__list"></div>
+        <header class="header">
+          <h1 class="header__title">
+            <span class="title"></span>
+            <span class="result-count">
+              <span class="count"></span>
+            </span>
+          </h1>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>나이키</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="/src/components/header/header.css" />
-  <link rel="stylesheet" href="/src/components/footer/footer.css" />
-</head>
-
-<body>
-  <div id="app">
-    <div id="header-wrap"></div>
-    <div class="wrapper">
-      <header class="header">
-        <h1 class="header__title">
-          <span class="title">신제품</span>
-          <span class="result-count"> (<span class="count"></span>) </span>
-        </h1>
-
-        <!-- header button actions(filter, sorting) -->
-        <div class="header__actions">
-          <!-- filter toggle button -->
-          <button class="header__action-button header__filter-toggle" aria-expanded="true" aria-controls="sidebar">
-            <span>필터 숨기기</span>
-            <img src="/assets/icons/button24px/filter.svg" alt="필터토글" srcset="" />
-          </button>
-
-          <div class="dropdown-wrapper">
-            <!-- sorting toggle button -->
-            <button class="header__action-button header__sorting-dropdown" aria-expanded="false"
-              aria-controls="sorting-options">
-              <span>정렬 기준:</span>
-              <img src="/assets/icons/button24px/down.svg" alt="정렬 기준 보기" srcset="" />
+          <!-- header button actions(filter, sorting) -->
+          <div class="header__actions">
+            <!-- filter toggle button -->
+            <button
+              class="header__action-button header__filter-toggle"
+              aria-expanded="true"
+              aria-controls="sidebar"
+            >
+              <span>필터 숨기기</span>
+              <img
+                src="/assets/icons/button24px/filter.svg"
+                alt="필터토글"
+                srcset=""
+              />
             </button>
 
-            <!-- 정렬 옵션 리스트 -->
-            <div id="sorting-options" class="sorting__options-list dropdown__options-wrapper"
-              aria-labelledby="dropdown-btn" role="menu">
-              <button aria-hidden="false" aria-label="추천순" class="sorting__options" data-ndx="0" role="menuitem"
-                tabindex="-1" type="button" value="beast">
-                추천순
+            <div class="dropdown-wrapper">
+              <!-- sorting toggle button -->
+              <button
+                class="header__action-button header__sorting-dropdown"
+                aria-expanded="false"
+                aria-controls="sorting-options"
+              >
+                <span>정렬 기준:</span>
+                <img
+                  src="/assets/icons/button24px/down.svg"
+                  alt="정렬 기준 보기"
+                  srcset=""
+                />
               </button>
-              <button aria-hidden="false" aria-label="최신순" class="sorting__options" data-ndx="1" role="menuitem"
-                tabindex="-1" type="button" value="newest">
-                최신순
-              </button>
-              <button aria-hidden="false" aria-label="높은 가격순" class="sorting__options" data-ndx="2" role="menuitem"
-                tabindex="-1" type="button" value="priceDesc">
-                높은 가격순
-              </button>
-              <button aria-hidden="false" aria-label="낮은 가격순" class="sorting__options" data-ndx="3" role="menuitem"
-                tabindex="-1" type="button" value="priceAsc">
-                낮은 가격순
-              </button>
+
+              <!-- 정렬 옵션 리스트 -->
+              <div
+                id="sorting-options"
+                class="sorting__options-list dropdown__options-wrapper"
+                aria-labelledby="dropdown-btn"
+                role="menu"
+              >
+                <button
+                  aria-hidden="false"
+                  aria-label="추천순"
+                  class="sorting__options"
+                  data-ndx="0"
+                  role="menuitem"
+                  tabindex="-1"
+                  type="button"
+                  value="beast"
+                >
+                  추천순
+                </button>
+                <button
+                  aria-hidden="false"
+                  aria-label="최신순"
+                  class="sorting__options"
+                  data-ndx="1"
+                  role="menuitem"
+                  tabindex="-1"
+                  type="button"
+                  value="newest"
+                >
+                  최신순
+                </button>
+                <button
+                  aria-hidden="false"
+                  aria-label="높은 가격순"
+                  class="sorting__options"
+                  data-ndx="2"
+                  role="menuitem"
+                  tabindex="-1"
+                  type="button"
+                  value="priceDesc"
+                >
+                  높은 가격순
+                </button>
+                <button
+                  aria-hidden="false"
+                  aria-label="낮은 가격순"
+                  class="sorting__options"
+                  data-ndx="3"
+                  role="menuitem"
+                  tabindex="-1"
+                  type="button"
+                  value="priceAsc"
+                >
+                  낮은 가격순
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <ul class="categories is_mobile"></ul>
+        <ul class="categories is_mobile"></ul>
 
-      <div class="subheading is_mobile">
-        <div class="subheading__result-count">
-          <span class="count"></span>
-          개의 결과
-        </div>
-        <button class="subheading__filter-toggle subheading__action-button">
-          <span>필터</span>
-          <img src="/assets/icons/button24px/filter.svg" alt="필터토글" srcset="" />
-        </button>
-      </div>
-
-      <div class="dialog is_mobile">
-        <div class="dialog-wrapper">
-          <div class="dialog__header">필터</div>
-          <fieldset aria-label="정렬 기준">
-            <legend>
-              <h3>정렬 기준:</h3>
-            </legend>
-            <div class="selection-list">
-              <div class="radio-item">
-                <div class="sort-input">
-                  <input type="radio" name="sortBy" id="sort-by-best" checked aria-label="추천순" />
-                </div>
-                <label for="sort-by-best">추천순</label>
-              </div>
-              <div class="radio-item">
-                <div class="sort-input">
-                  <input type="radio" name="sortBy" id="sort-by-newest" aria-label="최신순" />
-                </div>
-                <label for="sort-by-newest">최신순</label>
-              </div>
-              <div class="radio-item">
-                <div class="sort-input">
-                  <input type="radio" name="sortBy" id="sort-by-priceDesc" aria-label="높은 가격순" />
-                </div>
-                <label for="sort-by-priceDesc">높은 가격순</label>
-              </div>
-              <div class="radio-item">
-                <div class="sort-input">
-                  <input type="radio" name="sortBy" id="sort-by-priceAsc" aria-label="낮은 가격순" />
-                </div>
-                <label for="sort-by-priceAsc">낮은 가격순</label>
-              </div>
-            </div>
-          </fieldset>
-
-          <ul class="filter-select">
-            <li class="filter collapse-container">
-              <button class="filter-title collapse-button">
-                <span>성별</span>
-              </button>
-              <div class="filter-group collapse-content">
-                <div class="filter-item">
-                  <div class="filter-checkbox">
-                    <input type="checkbox" name="gender__filter" id="dialog__filter__male" aria-label="남성으로 필터링"
-                      value="men" />
-                  </div>
-                  <label for="dialog__filter__male">남성</label>
-                </div>
-                <div class="filter-item">
-                  <div class="filter-checkbox">
-                    <input type="checkbox" name="gender__filter" id="dialog__filter__female" aria-label="여성으로 필터링"
-                      value="women" />
-                  </div>
-                  <label for="dialog__filter__female">여성</label>
-                </div>
-                <div class="filter-item">
-                  <div class="filter-checkbox">
-                    <input type="checkbox" name="gender__filter" id="dialog__filter__unisex" aria-label="유니섹스로 필터링"
-                      value="unisex" />
-                  </div>
-                  <label for="dialog__filter__unisex">유니섹스</label>
-                </div>
-              </div>
-            </li>
-            <li class="filter collapse-container">
-              <div class="filter-title collapse-button">
-                <span>가격대</span>
-              </div>
-              <div class="filter-group collapse-content">
-                <div class="filter-item">
-                  <div class="filter-checkbox">
-                    <input type="checkbox" name="price__filter" id="dialog__filter__price-0-50"
-                      aria-label="0 - 50,000 원(으)로 필터링" value="50000-100000" />
-                  </div>
-                  <label for="dialog__filter__price-0-50">
-                    0 - 50,000 원
-                  </label>
-                </div>
-                <div class="filter-item">
-                  <div class="filter-checkbox">
-                    <input type="checkbox" name="price__filter" id="dialog__filter__price-50-100"
-                      aria-label="50,000 - 100,000 원(으)로 필터링" value="50000-100000" />
-                  </div>
-                  <label for="dialog__filter__price-50-100">
-                    50,000 - 100,000 원
-                  </label>
-                </div>
-                <div class="filter-item">
-                  <div class="filter-checkbox">
-                    <input type="checkbox" name="price__filter" id="dialog__filter__price-100-150"
-                      aria-label="100,000 - 150,000 원(으)로 필터링" value="100000-150000" />
-                  </div>
-                  <label for="dialog__filter__price-100-150">
-                    100,000 - 150,000 원
-                  </label>
-                </div>
-                <div class="filter-item">
-                  <div class="filter-checkbox">
-                    <input type="checkbox" name="price__filter" id="dialog__filter__price-150-200"
-                      aria-label="150,000 - 200,000 원(으)로 필터링" value="150000-200000" />
-                  </div>
-                  <label for="dialog__filter__price-150-200">
-                    150,000 - 200,000 원
-                  </label>
-                </div>
-                <div class="filter-item">
-                  <div class="filter-checkbox">
-                    <input type="checkbox" name="price__filter" id="dialog__filter__price-200-0"
-                      aria-label="200,000 원 이상(으)로 필터링" value="200000-99999999999" />
-                  </div>
-                  <label for="dialog__filter__price-200-0">
-                    200,000 원 +
-                  </label>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div
-          class="button-group border-solid bg-white border-gray-200 border-t-[1px] flex justify-center gap-4 sticky bottom-0 inset-x-0 px-[26px] py-[16px]">
-          <button class="bg-white w-[152px] h-[46px] leading-10 rounded-full border-solid border-gray-200 border-[1px]">
-            지우기
-          </button>
-          <button
-            class="bg-black w-[152px] h-[46px] leading-10 rounded-full text-white border-solid border-gray-200 border-[1px]">
-            적용
+        <div class="subheading is_mobile">
+          <div class="subheading__result-count">
+            <span class="count"></span>
+            개의 결과
+          </div>
+          <button class="subheading__filter-toggle subheading__action-button">
+            <span>필터</span>
+            <img
+              src="/assets/icons/button24px/filter.svg"
+              alt="필터토글"
+              srcset=""
+            />
           </button>
         </div>
-        <button class="close-btn" aria-label="필터 메뉴 닫기">
-          <img src="/assets/icons/buttons/l-fill-x.svg" alt="닫기" srcset="" />
-        </button>
+
+        <div class="dialog is_mobile">
+          <div class="dialog-wrapper">
+            <div class="dialog__header">필터</div>
+            <fieldset aria-label="정렬 기준">
+              <legend>
+                <h3>정렬 기준:</h3>
+              </legend>
+              <div class="selection-list">
+                <div class="radio-item">
+                  <div class="sort-input">
+                    <input
+                      type="radio"
+                      name="sortBy"
+                      id="sort-by-best"
+                      checked
+                      aria-label="추천순"
+                    />
+                  </div>
+                  <label for="sort-by-best">추천순</label>
+                </div>
+                <div class="radio-item">
+                  <div class="sort-input">
+                    <input
+                      type="radio"
+                      name="sortBy"
+                      id="sort-by-newest"
+                      aria-label="최신순"
+                    />
+                  </div>
+                  <label for="sort-by-newest">최신순</label>
+                </div>
+                <div class="radio-item">
+                  <div class="sort-input">
+                    <input
+                      type="radio"
+                      name="sortBy"
+                      id="sort-by-priceDesc"
+                      aria-label="높은 가격순"
+                    />
+                  </div>
+                  <label for="sort-by-priceDesc">높은 가격순</label>
+                </div>
+                <div class="radio-item">
+                  <div class="sort-input">
+                    <input
+                      type="radio"
+                      name="sortBy"
+                      id="sort-by-priceAsc"
+                      aria-label="낮은 가격순"
+                    />
+                  </div>
+                  <label for="sort-by-priceAsc">낮은 가격순</label>
+                </div>
+              </div>
+            </fieldset>
+
+            <ul class="filter-select">
+              <li class="filter collapse-container">
+                <button class="filter-title collapse-button">
+                  <span>성별</span>
+                </button>
+                <div class="filter-group collapse-content">
+                  <div class="filter-item">
+                    <div class="filter-checkbox">
+                      <input
+                        type="checkbox"
+                        name="gender__filter"
+                        id="dialog__filter__male"
+                        aria-label="남성으로 필터링"
+                        value="men"
+                      />
+                    </div>
+                    <label for="dialog__filter__male">남성</label>
+                  </div>
+                  <div class="filter-item">
+                    <div class="filter-checkbox">
+                      <input
+                        type="checkbox"
+                        name="gender__filter"
+                        id="dialog__filter__female"
+                        aria-label="여성으로 필터링"
+                        value="women"
+                      />
+                    </div>
+                    <label for="dialog__filter__female">여성</label>
+                  </div>
+                  <div class="filter-item">
+                    <div class="filter-checkbox">
+                      <input
+                        type="checkbox"
+                        name="gender__filter"
+                        id="dialog__filter__unisex"
+                        aria-label="유니섹스로 필터링"
+                        value="unisex"
+                      />
+                    </div>
+                    <label for="dialog__filter__unisex">유니섹스</label>
+                  </div>
+                </div>
+              </li>
+              <li class="filter collapse-container">
+                <div class="filter-title collapse-button">
+                  <span>가격대</span>
+                </div>
+                <div class="filter-group collapse-content">
+                  <div class="filter-item">
+                    <div class="filter-checkbox">
+                      <input
+                        type="checkbox"
+                        name="price__filter"
+                        id="dialog__filter__price-0-50"
+                        aria-label="0 - 50,000 원(으)로 필터링"
+                        value="50000-100000"
+                      />
+                    </div>
+                    <label for="dialog__filter__price-0-50">
+                      0 - 50,000 원
+                    </label>
+                  </div>
+                  <div class="filter-item">
+                    <div class="filter-checkbox">
+                      <input
+                        type="checkbox"
+                        name="price__filter"
+                        id="dialog__filter__price-50-100"
+                        aria-label="50,000 - 100,000 원(으)로 필터링"
+                        value="50000-100000"
+                      />
+                    </div>
+                    <label for="dialog__filter__price-50-100">
+                      50,000 - 100,000 원
+                    </label>
+                  </div>
+                  <div class="filter-item">
+                    <div class="filter-checkbox">
+                      <input
+                        type="checkbox"
+                        name="price__filter"
+                        id="dialog__filter__price-100-150"
+                        aria-label="100,000 - 150,000 원(으)로 필터링"
+                        value="100000-150000"
+                      />
+                    </div>
+                    <label for="dialog__filter__price-100-150">
+                      100,000 - 150,000 원
+                    </label>
+                  </div>
+                  <div class="filter-item">
+                    <div class="filter-checkbox">
+                      <input
+                        type="checkbox"
+                        name="price__filter"
+                        id="dialog__filter__price-150-200"
+                        aria-label="150,000 - 200,000 원(으)로 필터링"
+                        value="150000-200000"
+                      />
+                    </div>
+                    <label for="dialog__filter__price-150-200">
+                      150,000 - 200,000 원
+                    </label>
+                  </div>
+                  <div class="filter-item">
+                    <div class="filter-checkbox">
+                      <input
+                        type="checkbox"
+                        name="price__filter"
+                        id="dialog__filter__price-200-0"
+                        aria-label="200,000 원 이상(으)로 필터링"
+                        value="200000-99999999999"
+                      />
+                    </div>
+                    <label for="dialog__filter__price-200-0">
+                      200,000 원 +
+                    </label>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="button-group border-solid bg-white border-gray-200 border-t-[1px] flex justify-center gap-4 sticky bottom-0 inset-x-0 px-[26px] py-[16px]"
+          >
+            <button
+              class="bg-white w-[152px] h-[46px] leading-10 rounded-full border-solid border-gray-200 border-[1px]"
+              aria-label="필터 초기화"
+            >
+              지우기
+            </button>
+            <button
+              class="bg-black w-[152px] h-[46px] leading-10 rounded-full text-white border-solid border-gray-200 border-[1px]"
+              aria-label="필터 메뉴 닫기"
+            >
+              적용
+            </button>
+          </div>
+          <button class="close-btn" aria-label="필터 메뉴 닫기">
+            <img
+              src="/assets/icons/buttons/l-fill-x.svg"
+              alt="닫기"
+              srcset=""
+            />
+          </button>
+        </div>
+
+        <main class="result-container">
+          <!-- sidebar -->
+          <aside id="sidebar" class="sidebar active" aria-expanded="true">
+            <ul class="sidebar__categories"></ul>
+
+            <ul class="filter-select">
+              <li class="filter collapse-container">
+                <button
+                  class="filter-title collapse-button"
+                  aria-label="필터 드롭다운"
+                >
+                  <span>성별</span>
+                  <img
+                    src="/assets/icons/button24px/down.svg"
+                    alt="필터 드롭다운"
+                    srcset=""
+                  />
+                </button>
+                <div class="filter-group collapse-content">
+                  <div class="filter-item">
+                    <div class="filter-checkbox">
+                      <input
+                        type="checkbox"
+                        name="gender__filter"
+                        id="male"
+                        aria-label="남성으로 필터링"
+                        value="men"
+                      />
+                    </div>
+                    <label for="male">남성</label>
+                  </div>
+                  <div class="filter-item">
+                    <div class="filter-checkbox">
+                      <input
+                        type="checkbox"
+                        name="gender__filter"
+                        id="female"
+                        aria-label="여성으로 필터링"
+                        value="women"
+                      />
+                    </div>
+                    <label for="female">여성</label>
+                  </div>
+                  <div class="filter-item">
+                    <div class="filter-checkbox">
+                      <input
+                        type="checkbox"
+                        name="gender__filter"
+                        id="unisex"
+                        aria-label="유니섹스로 필터링"
+                        value="unisex"
+                      />
+                    </div>
+                    <label for="unisex">유니섹스</label>
+                  </div>
+                </div>
+              </li>
+
+              <li class="filter collapse-container">
+                <button
+                  class="filter-title collapse-button"
+                  aria-label="가격 필터 드롭다운"
+                >
+                  <span>가격대</span>
+                  <img
+                    src="/assets/icons/button24px/down.svg"
+                    alt="필터 드롭다운"
+                    srcset=""
+                  />
+                </button>
+                <div class="filter-group collapse-content">
+                  <div class="filter-item">
+                    <div class="filter-checkbox">
+                      <input
+                        type="checkbox"
+                        name="price__filter"
+                        id="price-0-50"
+                        aria-label="0 - 50,000 원(으)로 필터링"
+                        value="0-50000"
+                      />
+                    </div>
+                    <label for="price-0-50">0 - 50,000 원</label>
+                  </div>
+                  <div class="filter-item">
+                    <div class="filter-checkbox">
+                      <input
+                        type="checkbox"
+                        name="price__filter"
+                        id="price-50-100"
+                        aria-label="50,000 - 100,000 원(으)로 필터링"
+                        value="50000-100000"
+                      />
+                    </div>
+                    <label for="price-50-100">50,000 - 100,000 원</label>
+                  </div>
+                  <div class="filter-item">
+                    <div class="filter-checkbox">
+                      <input
+                        type="checkbox"
+                        name="price__filter"
+                        id="price-100-150"
+                        aria-label="100,000 - 150,000 원(으)로 필터링"
+                        value="100000-150000"
+                      />
+                    </div>
+                    <label for="price-100-150">100,000 - 150,000 원</label>
+                  </div>
+                  <div class="filter-item">
+                    <div class="filter-checkbox">
+                      <input
+                        type="checkbox"
+                        name="price__filter"
+                        id="price-150-200"
+                        aria-label="150,000 - 200,000 원(으)로 필터링"
+                        value="150000-200000"
+                      />
+                    </div>
+                    <label for="price-150-200">150,000 - 200,000 원</label>
+                  </div>
+                  <div class="filter-item">
+                    <div class="filter-checkbox">
+                      <input
+                        type="checkbox"
+                        name="price__filter"
+                        id="price-200-0"
+                        aria-label="200,000 원 이상(으)로 필터링"
+                        value="200000-99999999999"
+                      />
+                    </div>
+                    <label for="price-200-0">200,000 원 +</label>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </aside>
+          <ul class="product-list"></ul>
+        </main>
       </div>
-
-      <main class="result-container">
-        <!-- sidebar -->
-        <aside id="sidebar" class="sidebar active" aria-expanded="true">
-          <ul class="sidebar__categories"></ul>
-
-          <ul class="filter-select">
-            <li class="filter collapse-container">
-              <button class="filter-title collapse-button" aria-label="필터 드롭다운">
-                <span>성별</span>
-                <img src="/assets/icons/button24px/down.svg" alt="필터 드롭다운" srcset="" />
-              </button>
-              <div class="filter-group collapse-content">
-                <div class="filter-item">
-                  <div class="filter-checkbox">
-                    <input type="checkbox" name="gender__filter" id="male" aria-label="남성으로 필터링" value="men" />
-                  </div>
-                  <label for="male">남성</label>
-                </div>
-                <div class="filter-item">
-                  <div class="filter-checkbox">
-                    <input type="checkbox" name="gender__filter" id="female" aria-label="여성으로 필터링" value="women" />
-                  </div>
-                  <label for="female">여성</label>
-                </div>
-                <div class="filter-item">
-                  <div class="filter-checkbox">
-                    <input type="checkbox" name="gender__filter" id="unisex" aria-label="유니섹스로 필터링" value="unisex" />
-                  </div>
-                  <label for="unisex">유니섹스</label>
-                </div>
-              </div>
-            </li>
-
-            <li class="filter collapse-container">
-              <button class="filter-title collapse-button" aria-label="가격 필터 드롭다운">
-                <span>가격대</span>
-                <img src="/assets/icons/button24px/down.svg" alt="필터 드롭다운" srcset="" />
-              </button>
-              <div class="filter-group collapse-content">
-                <div class="filter-item">
-                  <div class="filter-checkbox">
-                    <input type="checkbox" name="price__filter" id="price-0-50" aria-label="0 - 50,000 원(으)로 필터링"
-                      value="0-50000" />
-                  </div>
-                  <label for="price-0-50">0 - 50,000 원</label>
-                </div>
-                <div class="filter-item">
-                  <div class="filter-checkbox">
-                    <input type="checkbox" name="price__filter" id="price-50-100"
-                      aria-label="50,000 - 100,000 원(으)로 필터링" value="50000-100000" />
-                  </div>
-                  <label for="price-50-100">50,000 - 100,000 원</label>
-                </div>
-                <div class="filter-item">
-                  <div class="filter-checkbox">
-                    <input type="checkbox" name="price__filter" id="price-100-150"
-                      aria-label="100,000 - 150,000 원(으)로 필터링" value="100000-150000" />
-                  </div>
-                  <label for="price-100-150">100,000 - 150,000 원</label>
-                </div>
-                <div class="filter-item">
-                  <div class="filter-checkbox">
-                    <input type="checkbox" name="price__filter" id="price-150-200"
-                      aria-label="150,000 - 200,000 원(으)로 필터링" value="150000-200000" />
-                  </div>
-                  <label for="price-150-200">150,000 - 200,000 원</label>
-                </div>
-                <div class="filter-item">
-                  <div class="filter-checkbox">
-                    <input type="checkbox" name="price__filter" id="price-200-0" aria-label="200,000 원 이상(으)로 필터링"
-                      value="200000-99999999999" />
-                  </div>
-                  <label for="price-200-0">200,000 원 +</label>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </aside>
-        <ul class="product-list"></ul>
-      </main>
+      <div id="footer-wrap"></div>
     </div>
-    <div id="footer-wrap"></div>
-  </div>
-  <script type="module" src="./index.js"></script>
-  <script type="module" src="./uiHandler.js"></script>
-  <script type="module" src="/src/components/header/header.js"></script>
-  <script type="module" src="/src/components/footer/footer.js"></script>
-</body>
-
+    <script type="module" src="./index.js"></script>
+    <script type="module" src="./uiHandler.js"></script>
+    <script type="module" src="./category.js"></script>
+    <script type="module" src="/src/components/header/header.js"></script>
+    <script type="module" src="/src/components/footer/footer.js"></script>
+  </body>
 </html>
