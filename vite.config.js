@@ -11,6 +11,8 @@ export default defineConfig({
         login: 'src/pages/auth/login.html',
         check: 'src/pages/auth/check.html',
         list: 'src/pages/product/list/index.html',
+        detail: 'src/pages/product/detail/index.html',
+        cart: 'src/pages/product/cart/index.html',
       },
     },
   },

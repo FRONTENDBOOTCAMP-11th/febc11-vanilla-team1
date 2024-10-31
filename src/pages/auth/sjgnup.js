@@ -1,11 +1,12 @@
-import axios from 'axios';
-import { check } from 'prettier/standalone.js';
+import api from '../../api';
 
 const inputFirstName = document.querySelector('#inputFirstName');
 const inputLastName = document.querySelector('#inputLastName');
 const inputPassword = document.querySelector('#inputPassword');
 const inputCalendar = document.querySelector('#inputCalendar');
-const signUpBtn = document.querySelector('.signUp-btn');
+const authInput = document.querySelector('#emailInput');
+
+const signUpForm = document.querySelector('#signUpForm')
 const cancelBtn = document.querySelector('#cancelBtn');
 const loginTxtFirst = document.querySelector('.first');
 const loginTxtSecond = document.querySelector('.second');
@@ -19,11 +20,6 @@ const regPw = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 const regEight = /^.{8,}$/;
 const regMin = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
 
-checkbox.addEventListener('change', function () {
-  check.checked = checkbox.checked;
-  console.log(checkbox.checked);
-});
-
 toggleClose.addEventListener('click', function () {
   inputPassword.type = 'text';
   toggleClose.style.display = 'none';
@@ -36,8 +32,20 @@ toggleOpen.addEventListener('click', function () {
   toggleOpen.style.display = 'none';
 });
 
-const today = new Date().toISOString().split('T')[0];
-document.querySelector('#inputCalendar').setAttribute('max', today);
+// input 초기화
+function resetInputs() {
+  document.querySelectorAll('input').forEach(input => {
+    input.value = '';
+  });
+}
+
+// 날짜
+function setDate() {
+  const today = new Date().toISOString().split('T')[0];
+  document.querySelector('#inputCalendar').setAttribute('max', today);
+}
+
+setDate();
 
 function regPassword(userPw) {
   if (userPw === '') {
@@ -62,33 +70,28 @@ function regPassword(userPw) {
 }
 
 inputPassword.addEventListener('input', function () {
-  const userPw = inputPassword.value;
-  regPassword(userPw);
+  regPassword(inputPassword.value);
 });
 
-async function userSign(userPw, userName, userBirth, userEmail) {
+async function userSign(password, name, userBirth, email) {
   try {
-    const response = await axios.post(
-      'https://11.fesp.shop/users/',
+    const response = await api(
+      'post',
+      'users/',
+      null,
       {
-        email: userEmail,
-        password: userPw,
-        name: userName,
+        email,
+        password,
+        name,
         type: 'user',
         extra: {
           userBirth,
         },
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'client-id': 'vanilla01',
-        },
-      },
+      }
     );
 
     if (response.data) {
-      loginUser(userEmail, userPw);
+      loginUser(email, password);
     }
   } catch (error) {
     if (error.response) {
@@ -100,22 +103,17 @@ async function userSign(userPw, userName, userBirth, userEmail) {
   }
 }
 
-async function loginUser(userEmail, userPw) {
+async function loginUser(email, password) {
   try {
-    const response = await axios.post(
-      'https://11.fesp.shop/users/login',
+    const response = await api(
+      'post',
+      'users/login',
+      null,
       {
-        email: userEmail,
-        password: userPw,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'client-id': 'vanilla01',
-        },
-      },
+        email,
+        password
+      }
     );
-
     if (response.data.item.token) {
       const { accessToken, refreshToken } = response.data.item.token;
       const userName = response.data.item.name;
@@ -125,6 +123,7 @@ async function loginUser(userEmail, userPw) {
         sessionStorage.setItem('refreshToken', refreshToken);
         sessionStorage.setItem('name', userName);
         window.location.href = 'complete.html';
+        resetInputs();
         sessionStorage.removeItem('email');
       } else {
         console.error('토큰을 받지 못했습니다. 로그인 실패');
@@ -135,19 +134,24 @@ async function loginUser(userEmail, userPw) {
   }
 }
 
-signUpBtn.addEventListener('click', function (e) {
+function signCheck() {
+  const checkFirstName = regFirstName.test(inputFirstName.value);
+  const checkLastName = regLastName.test(inputLastName.value);
+  const checkPassword = regPw.test(inputPassword.value);
+  const isCheckboxChecked = checkbox.checked === true;
+
+  return checkFirstName && checkLastName && checkPassword && isCheckboxChecked;
+}
+
+signUpForm.addEventListener('submit', function (e) {
   e.preventDefault();
+
   const userPw = inputPassword.value;
   const userName = `${inputFirstName.value + inputLastName.value}`;
   const userBirth = inputCalendar.value;
   const userEmail = sessionStorage.getItem('email');
 
-  if (
-    regFirstName.test(inputFirstName.value) &&
-    regLastName.test(inputLastName.value) &&
-    regPw.test(userPw) &&
-    checkbox.checked === true
-  ) {
+  if (signCheck()) {
     regPassword(userPw);
     userSign(userPw, userName, userBirth, userEmail);
   } else {
@@ -155,8 +159,9 @@ signUpBtn.addEventListener('click', function (e) {
   }
 });
 
+
 cancelBtn.addEventListener('click', function () {
   window.location.href = 'login.html';
+  authInput.value = '';
   sessionStorage.removeItem('email');
-  sessionStorage.clear()
 });

@@ -12,7 +12,7 @@ async function renderHeader() {
   //✨메뉴패널 구현*/
   // 요소 선택
   const menuIcon = document.getElementById('menu-icon');
-  const menuSidebar = document.getElementById('menu-sidebar');
+  const menuSidebar = document.getElementById('menu-side');
   const closeBtn = document.querySelector('.close-btn');
 
   // 메뉴 아이콘 클릭 시 메뉴 탭이 나타나는 기능
@@ -32,6 +32,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   checkLoginState();
   userOut();
   mobileOut();
+  sideName();
 });
 
 // 로그인, 소셜로그인 시 헤더 변경
@@ -44,24 +45,38 @@ function checkLoginState() {
   const userOutItems = document.querySelectorAll('.user-out');
   const userNameItems = document.querySelector('.user-name');
   const userSocialName = document.querySelector('.social-name');
-  const loginMobile = document.querySelectorAll('.mobile-login')
-  const logoutMobile = document.querySelector('.mobile-logout')
+  const loginMobile = document.querySelectorAll('.mobile-login');
+  const logoutMobile = document.querySelector('.mobile-logout');
 
   if (token) {
-    userLoginItems.forEach(item => item.style.display = 'none');
-    userOutItems.forEach(item => item.style.display = 'block');
-    userNameItems.innerHTML = `${userName} 님, 안녕하세요`
+    userLoginItems.forEach(item => (item.style.display = 'none'));
+    userOutItems.forEach(item => (item.style.display = 'block'));
+    userNameItems.innerHTML = `${userName} 님, 안녕하세요`;
     logoutMobile.style.display = 'block';
-
   } else if (socialName) {
-    userLoginItems.forEach(item => item.style.display = 'none');
-    userOutItems.forEach(item => item.style.display = 'block');
-    userSocialName.innerHTML = `${socialName} 님, 안녕하세요`
+    userLoginItems.forEach(item => (item.style.display = 'none'));
+    userOutItems.forEach(item => (item.style.display = 'block'));
+    userSocialName.innerHTML = `${socialName} 님, 안녕하세요`;
     logoutMobile.style.display = 'block';
   } else {
-    userLoginItems.forEach(item => item.style.display = 'block');
-    userOutItems.forEach(item => item.style.display = 'none');
-    loginMobile.forEach(item => item.style.display = ' block');
+    userLoginItems.forEach(item => (item.style.display = 'block'));
+    userOutItems.forEach(item => (item.style.display = 'none'));
+    loginMobile.forEach(item => (item.style.display = ' block'));
+  }
+}
+
+function sideName() {
+  const token = sessionStorage.getItem('accessToken');
+  const socialName = sessionStorage.getItem('name');
+  const userName = sessionStorage.getItem('name');
+  const menuName = document.querySelector('.menu-name');
+  const menuText = document.querySelector('.menu-text')
+  if (token) {
+    menuName.innerHTML = `<h1>${userName} 님</h1>`;
+  } else if (socialName) {
+    menuName.innerHTML = `<h1>${socialName} 님</h1>`;
+  } else {
+    menuText.style.display = 'block';
   }
 }
 
@@ -71,13 +86,15 @@ function userOut() {
   logOut.addEventListener('click', function () {
     sessionStorage.clear();
     localStorage.clear();
+    location.reload();
   })
 }
 
 function mobileOut() {
-  const logoutMobile = document.querySelector('.mobile-logout')
+  const logoutMobile = document.querySelector('.mobile-logout');
   logoutMobile.addEventListener('click', function () {
     sessionStorage.clear();
     localStorage.clear();
+    location.reload();
   })
 }
