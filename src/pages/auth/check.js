@@ -14,7 +14,7 @@ checkAll.addEventListener('change', function () {
   checkboxes.forEach(checkbox => {
     checkbox.checked = checkAll.checked;
   });
-  updateAgreeButtonState();
+  checkEvent();
 });
 
 checkboxes.forEach(checkbox => {
@@ -22,17 +22,17 @@ checkboxes.forEach(checkbox => {
     checkAll.checked = Array.from(checkboxes).every(
       checkbox => checkbox.checked,
     );
-    updateAgreeButtonState();
+    checkEvent();
   });
 });
 
-function updateAgreeButtonState() {
+function checkEvent() {
   const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
   if (allChecked) {
     checkboxes.forEach(checkbox => {
-      checkbox.nextElementSibling.style.color = 'black'; // 텍스트 색상 검은색으로 변경
+      checkbox.nextElementSibling.style.color = 'black';
     });
-    checkError.style.display = 'none'; // 오류 메시지 숨기기
+    checkError.style.display = 'none';
   }
 }
 
