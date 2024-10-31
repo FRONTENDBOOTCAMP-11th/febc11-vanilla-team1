@@ -143,8 +143,6 @@ async function renderList(data) {
   // 상품 목록 출력
   const list = item
     .map(product => {
-      console.log(product);
-
       return `
       <li class="product">
         <figure>
