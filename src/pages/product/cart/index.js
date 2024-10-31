@@ -152,11 +152,11 @@ function updateCartView() {
                 <button class="add-to-wishlist button-class" onclick="addToWishlist(${
                   item._id
                 })">
-                <img src="../../../../public/assets/icons/button36px/white-heart.svg" alt="빈 하트" style="width: 24px; height: auto;"></button>
+                <img src="/assets/icons/button36px/white-heart.svg" alt="빈 하트" style="width: 24px; height: auto;"></button>
                 <button class="remove-item button-class" onclick="removeItem(${
                   item._id
                 })">
-                  <img src="../../../../public/assets/icons/button36px/delete.svg" alt="삭제" style="width: 20px; height: auto;">
+                  <img src="/assets/icons/button36px/delete.svg" alt="삭제" style="width: 20px; height: auto;">
                 </button>
               </div>
             </div>
