@@ -89,7 +89,36 @@ document.querySelector('.black_button').addEventListener('click', function () {
   imgchange_black.setAttribute('src', 'https://via.placeholder.com/544');
 });
 
-//----------------
+//-----------------------------------------------------------------------------
+// let product_item = {
+//   name: '나이키 잼',
+//   _id: 1,
+//   price: 125100,
+// };
+
+// const res = await fetch('https://11.fesp.shop/products/1');
+// console.log(res);
+
+// fetch('https://11.fesp.shop/products/1')
+//   .then(response => response.json())
+//   .then(data => ['name']);
+
+// fetch('https://11.fesp.shop/products/1')
+//   .then(response => response.json())
+//   .then(data => console.log(data['name']));
+
+// res 변수에 json이라는 메서드를 사용해 이를 객체형태로 변환하고
+// fetch함수는 비동기적으로 처리되기 때문에
+// 이 api호출이 완전히 끝난 이후
+// res변수를 객체로 변환해주기 위해 await를 사용한다.
+// 결과에 데이터들이 객체 형태로 떠야 innerHTML로 뭘 하든 할텐데...
+const getData = async () => {
+  const res = await fetch('https://11.fesp.shop/products/1');
+  const data = await res.json();
+  console.log(data);
+};
+
+getData();
 
 const urlSearch = new URLSearchParams(location.search);
 const productId = urlSearch.get('productId');
@@ -124,38 +153,9 @@ const renderImage = function () {
     );
   }
 };
-
-const renderSize = function () {
-  const sizelist = document.querySelector('.det_size_list');
-  sizelist.innerHTML = '';
-
-  if (product.item.options.length === 0) {
-    product.item.extra.size.map(e => {
-      sizelist.innerHTML += `<span>${e}</span>`;
-    });
-  } else {
-    product.item.options[currentOption.option].extra.size.map(e => {
-      sizelist.innerHTML += `<span>${e}</span>`;
-    });
-  }
-
-  const sizes = [...sizelist.querySelectorAll('span')];
-  sizes.forEach(e => {
-    e.addEventListener('click', function (e) {
-      currentOption.size = e.target.textContent;
-
-      [...sizelist.querySelectorAll('span')].map(e => {
-        e.classList.remove('unactive');
-      });
-      e.target.classList.add('active');
-    });
-  });
-};
+renderImage(product, currentOption);
 
 const currentOption = { option: 0, size: null };
-
-renderImage(product, currentOption);
-renderSize(product, currentOption);
 
 basket.addEventListener('click', async function () {
   console.log(productId, currentOption.size);
