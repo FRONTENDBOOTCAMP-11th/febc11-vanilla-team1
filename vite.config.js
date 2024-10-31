@@ -8,7 +8,6 @@ export default defineConfig({
         footer: 'src/components/footer/footer.html',
         index: 'index.html', // 기본 index.html
         sign: 'src/pages/auth/signup.html',
-        sign_complete: 'src/pages/auth/complete.html',
         login: 'src/pages/auth/login.html',
         check: 'src/pages/auth/check.html',
         list: 'src/pages/product/list/index.html',
