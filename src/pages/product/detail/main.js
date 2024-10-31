@@ -115,8 +115,8 @@ document.querySelector('.black_button').addEventListener('click', function () {
 const getData = async () => {
   const res = await api('get', `products/1`);
   console.log(res.data.item);
+  document.getElementById('shoes_name').innerHTML = res.data.item['name'];
 };
-
 getData();
 
 const urlSearch = new URLSearchParams(location.search);
@@ -135,24 +135,13 @@ const getProduct = async function (productId) {
 };
 const product = await getProduct(productId);
 
-const renderImage = function () {
+const renderImage = function (product) {
   const shoes_img = document.querySelector('.nike_shoes');
-  shoes_img.innerHTML = '';
-  if (product.item.options.length === 0) {
-    product.item.mainImages.map(
-      e =>
-        (shoes_img.innerHTML += `<img src='https://11.fesp.shop/files/vanilla01/${e.name}
-      ' />`),
-    );
-  } else {
-    product.item.options[currentOption.option].mainImages.map(
-      e =>
-        (shoes_img.innerHTML += `<img src='https://11.fesp.shop/files/vanilla01/${e.name}
-' />`),
-    );
-  }
+  const img = product.item.mainImages[0];
+  shoes_img.src = `https://11.fesp.shop${img.path}`;
+  console.log(shoes_img.src);
 };
-renderImage(product, currentOption);
+renderImage(product);
 
 const currentOption = { option: 0, size: null };
 
