@@ -143,10 +143,12 @@ async function renderList(data) {
   // 상품 목록 출력
   const list = item
     .map(product => {
+      console.log(product);
+
       return `
       <li class="product">
         <figure>
-          <a href="/src/pages/product/detail/index.html">
+          <a href="/src/pages/product/detail/index.html?id=${product._id}">
             <div class="product__image">
               <img 
                 src="https://11.fesp.shop${product.mainImages[0].path}" 
