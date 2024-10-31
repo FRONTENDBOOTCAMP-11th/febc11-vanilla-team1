@@ -6,6 +6,7 @@ class Params {
   gender = [];
   price = [];
   category = [];
+  sort = '';
   currentPage = 1;
   page = 1;
   totalPages = 1;
@@ -87,9 +88,26 @@ class Params {
     return categoryParams;
   }
 
+  getSort() {
+    // beast/newest/priceDesc/priceAsc
+    /* 
+    인기순, 최신순일 경우에만 추가 파라미터를 반환, 가격 정렬은 다른 옵션을 사용해야 하기 때문
+    추가 정렬 옵션을 요청 가능하나 시간 부족으로 인해 생략합니다.
+    */
+    switch (this.sort) {
+      case 'beast':
+        return { 'extra.isBest': true };
+      case 'newest':
+        return { 'extra.isNew': true };
+      default:
+        return null;
+    }
+  }
+
   // getList에 사용될 params 객체 반환
   getCustomParams() {
     return {
+      ...this.getSort(),
       ...this.getGender(),
       ...this.getCategory(),
     };
@@ -107,11 +125,22 @@ async function getProducts() {
     const custom = params.getCustomParams() || null;
     // console.log(custom);
     // console.log(JSON.stringify(custom));
+    // 정렬 기준이 가격인지 확인, 가격이 아닐 경우 null 반환
+    const isSortingPrice = () => {
+      if (params.sort === 'priceDesc') {
+        return JSON.stringify({ price: -1 });
+      }
+      if (params.sort === 'priceAsc') {
+        return JSON.stringify({ price: 1 });
+      }
+      return null;
+    };
 
     const { data } = await api('get', 'products', {
       custom: JSON.stringify(custom),
       minPrice: params?.getPrice()?.minPrice || null,
       maxPrice: params?.getPrice()?.maxPrice || null,
+      sort: isSortingPrice(),
       page: params.page,
       limit: 15,
     });
@@ -251,6 +280,15 @@ window.addEventListener('scroll', () => {
       getProducts();
     }
   }
+});
+
+// 상품 정렬 버튼 클릭
+document.querySelectorAll('input[name="sortBy"]').forEach(el => {
+  el.addEventListener('change', e => {
+    // beast/newest/priceDesc/priceAsc
+    params.sort = e.currentTarget.value;
+    getProducts();
+  });
 });
 
 // 초기 실행
