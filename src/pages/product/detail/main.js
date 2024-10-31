@@ -80,13 +80,16 @@ let imgchange_braun = document.querySelector('.nike_shoes');
 document.querySelector('.braun_button').addEventListener('click', function () {
   imgchange_braun.setAttribute(
     'src',
-    '../../../../public/assets/icons/shoes/NIKE+JAM.png.svg',
+    'https://11.fesp.shop/files/vanilla01/NIKE_JAM_01.jpg',
   );
 });
 
 let imgchange_black = document.querySelector('.nike_shoes');
 document.querySelector('.black_button').addEventListener('click', function () {
-  imgchange_black.setAttribute('src', 'https://via.placeholder.com/544');
+  imgchange_black.setAttribute(
+    'src',
+    'https://11.fesp.shop/files/vanilla01/NIKE_JAM_b_01.png',
+  );
 });
 
 //-----------------------------------------------------------------------------
@@ -117,7 +120,10 @@ const getData = async () => {
   console.log(res.data.item);
   console.log(res.data.item['name']);
   // console.log(res.data.item['options'][0].extra.size);
-  document.getElementById('shoes_name').innerHTML = res.data.item['name'];
+  document.getElementById('shoes_name_desktop').innerHTML =
+    res.data.item['name'];
+  document.getElementById('shoes_name_mobaile').innerHTML =
+    res.data.item['name'];
 };
 getData();
 
@@ -139,7 +145,7 @@ const renderImage = function (product) {
   const shoes_img = document.querySelector('.nike_shoes');
   const img = product.item.mainImages[0];
   shoes_img.src = `https://11.fesp.shop${img.path}`;
-  // console.log(shoes_img.src);
+  console.log(shoes_img.src);
 };
 renderImage(product);
 
