@@ -83,6 +83,11 @@ button.subheading__action-button {
   display: flex;
   align-items: center;
 }
+span.sort__selected__text {
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--color-gray-500);
+}
 .sort-input,
 label {
   cursor: pointer;

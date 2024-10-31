@@ -282,11 +282,19 @@ window.addEventListener('scroll', () => {
   }
 });
 
+const sortTextNodes = document.querySelectorAll('.sort__selected__text');
+
 // 상품 정렬 버튼 클릭
 document.querySelectorAll('input[name="sortBy"]').forEach(el => {
   el.addEventListener('change', e => {
     // beast/newest/priceDesc/priceAsc
     params.sort = e.currentTarget.value;
+
+    sortTextNodes.forEach(el => {
+      el.textContent = document.querySelector(
+        '.radio-item:has(input[name="sortBy"]:checked) label',
+      ).textContent;
+    });
     getProducts();
   });
 });
