@@ -113,9 +113,8 @@ document.querySelector('.black_button').addEventListener('click', function () {
 // res변수를 객체로 변환해주기 위해 await를 사용한다.
 // 결과에 데이터들이 객체 형태로 떠야 innerHTML로 뭘 하든 할텐데...
 const getData = async () => {
-  const res = await fetch('https://11.fesp.shop/products/1');
-  const data = await res.json();
-  console.log(data);
+  const res = await api('get', `products/1`);
+  console.log(res.data.item);
 };
 
 getData();
