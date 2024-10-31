@@ -430,6 +430,13 @@ input[type='date']:valid::before {
   margin-bottom: 36px;
 }
 
+.check-error {
+  margin-bottom: 10px;
+  font-weight: 400;
+  color: red;
+  display: none;
+}
+
 .check-container p {
   font-size: 1.6rem;
   line-height: 2.4rem;

@@ -151,6 +151,6 @@ signUpForm.addEventListener('submit', function (e) {
 
 cancelBtn.addEventListener('click', function () {
   window.location.href = 'login.html';
+  sessionStorage.clear();
   authInput.value = '';
-  sessionStorage.removeItem('email');
 });
