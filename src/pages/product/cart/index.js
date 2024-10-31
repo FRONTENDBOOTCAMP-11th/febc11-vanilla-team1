@@ -32,8 +32,7 @@ async function fetchCart() {
       response = await axios.post(
         'https://11.fesp.shop/carts/local',
         {
-          products: [
-          ],
+          products: [],
         },
         {
           headers: {
@@ -65,7 +64,6 @@ async function fetchCart() {
     );
   }
 }
-
 
 function initCart() {
   //   updateCartView();
@@ -129,7 +127,8 @@ function updateCartView() {
                   item._id
                 })">
                 <img src="../../../../public/assets/icons/button36px/white-heart.svg" alt="빈 하트" style="width: 24px; height: auto;"></button>
-                <button class="remove-item button-class" onclick="removeItem(${item._id
+                <button class="remove-item button-class" onclick="removeItem(${
+                  item._id
                 })">
                   <img src="../../../../public/assets/icons/button36px/delete.svg" alt="삭제" style="width: 20px; height: auto;">
                 </button>

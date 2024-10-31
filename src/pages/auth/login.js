@@ -25,9 +25,11 @@ const editEmail = document.querySelector('.edit-email');
 const regContainer = document.querySelector('#regContainer');
 
 window.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('input[type="email"], textarea').forEach(authInput => {
-    authInput.value = ''; // 페이지 로드 시 폼 초기화
-  });
+  document
+    .querySelectorAll('input[type="email"], textarea')
+    .forEach(authInput => {
+      authInput.value = ''; // 페이지 로드 시 폼 초기화
+    });
 });
 
 // LOGIN 부분
@@ -70,13 +72,8 @@ authBtn.addEventListener('click', function () {
 });
 
 async function getEmail(email) {
-
   try {
-    const response = await api(
-      'get',
-      'users/email',
-      { email }
-    );
+    const response = await api('get', 'users/email', { email });
     if (response.data.ok === 1) {
       window.location.href = 'check.html';
       authInput.value = '';
@@ -206,15 +203,10 @@ function resetInputs() {
 // 로그인 요청 함수
 async function loginUser(email, password) {
   try {
-    const response = await api(
-      'post',
-      'users/login',
-      null,
-      {
-        email,
-        password
-      }
-    );
+    const response = await api('post', 'users/login', null, {
+      email,
+      password,
+    });
     if (response.data.item.token) {
       const { accessToken, refreshToken } = response.data.item.token;
       const userName = response.data.item.name;

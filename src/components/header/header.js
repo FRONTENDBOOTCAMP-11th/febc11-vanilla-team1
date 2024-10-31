@@ -70,7 +70,7 @@ function sideName() {
   const socialName = sessionStorage.getItem('name');
   const userName = sessionStorage.getItem('name');
   const menuName = document.querySelector('.menu-name');
-  const menuText = document.querySelector('.menu-text')
+  const menuText = document.querySelector('.menu-text');
   if (token) {
     menuName.innerHTML = `<h1>${userName} 님</h1>`;
   } else if (socialName) {
@@ -87,7 +87,7 @@ function userOut() {
     sessionStorage.clear();
     localStorage.clear();
     location.reload();
-  })
+  });
 }
 
 function mobileOut() {
@@ -96,5 +96,5 @@ function mobileOut() {
     sessionStorage.clear();
     localStorage.clear();
     location.reload();
-  })
+  });
 }
