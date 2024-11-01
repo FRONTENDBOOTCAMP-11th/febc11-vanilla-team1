@@ -127,7 +127,7 @@ async function loginUser(email, password) {
         sessionStorage.setItem('accessToken', accessToken);
         sessionStorage.setItem('refreshToken', refreshToken);
         sessionStorage.setItem('name', userName);
-        window.location.href = 'index.html';
+        window.location.href = import.meta.env.VITE_REDIRECT_URL;
         resetInputs();
         sessionStorage.removeItem('email');
       } else {
