@@ -65,6 +65,22 @@ export const initData = async (clientId, nextSeq) => {
           birthday: '1988.05.13',
         },
       },
+      {
+        _id: 5,
+        email: 'database@naver.com',
+        password:
+          '$2b$10$YYI2oEL.W8Kq/v/danfOQeD5Bd9Dt7kEjBKKwnrLDC/RkVatGe.Ru',
+        name: 'renokim',
+        type: 'user',
+        extra: {
+          userBirth: '2024-11-01',
+        },
+        loginType: 'email',
+        createdAt: '2024.11.01 11:15:24',
+        updatedAt: '2024.11.01 11:15:24',
+        refreshToken:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MzA0MjczMjQsImV4cCI6MTczMzAxOTMyNCwiaXNzIjoiRkVTUCJ9.rZJeNYQSZgasoHQVQm4jPVFLSlvxE_c5-pewiIgw5ow',
+      },
     ],
     // 상품
     product: [
