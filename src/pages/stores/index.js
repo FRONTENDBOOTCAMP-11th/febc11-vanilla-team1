@@ -82,15 +82,15 @@ function toggleView(showMap) {
   if (window.innerWidth <= 768) {
     // 앱 화면일 때만 toggle 기능 작동
     if (showMap) {
-      document.querySelector('.map').style.display = 'block';
+      document.querySelector('map').style.display = 'block';
       document.querySelector('.card-container').style.display = 'none';
     } else {
-      document.querySelector('.map').style.display = 'none';
+      document.querySelector('map').style.display = 'none';
       document.querySelector('.card-container').style.display = 'block';
     }
   } else {
     // 웹 화면일 때는 모두 보임
-    document.querySelector('.map').style.display = 'block';
+    document.querySelector('map').style.display = 'block';
     document.querySelector('.card-container').style.display = 'block';
   }
 }
