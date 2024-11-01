@@ -6,31 +6,31 @@ let cart = {
 };
 
 let wishlist = [
-  {
-    _id: 9,
-    user_id: 4,
-    memo: '다음에 재구매',
-    createdAt: '2024.04.08 16:47:46',
-    product: {
-      _id: 4,
-      name: '레고 테크닉',
-      price: 45000,
-      quantity: 100,
-      buyQuantity: 89,
-      image: {
-        url: 'https://via.placeholder.com/150',
-        fileName: 'sample-bugatti.png',
-        orgName: '부가티.png',
-      },
-      extra: {
-        isNew: false,
-        isBest: true,
-        category: ['PC03', 'PC0303'],
-        sort: 1,
-        size: ['XS', 'S', 'M', 'L', 'XL'],
-      },
-    },
-  },
+  // {
+  //   _id: 9,
+  //   user_id: 4,
+  //   memo: '다음에 재구매',
+  //   createdAt: '2024.04.08 16:47:46',
+  //   product: {
+  //     _id: 4,
+  //     name: '레고 테크닉',
+  //     price: 45000,
+  //     quantity: 100,
+  //     buyQuantity: 89,
+  //     image: {
+  //       url: 'https://via.placeholder.com/150',
+  //       fileName: 'sample-bugatti.png',
+  //       orgName: '부가티.png',
+  //     },
+  //     extra: {
+  //       isNew: false,
+  //       isBest: true,
+  //       category: ['PC03', 'PC0303'],
+  //       sort: 1,
+  //       size: ['XS', 'S', 'M', 'L', 'XL'],
+  //     },
+  //   },
+  // },
 ];
 
 // 이 ID로 로그인하고 있다고 가정하고 TEST 시도중
