@@ -13,6 +13,7 @@ export default defineConfig({
         list: 'src/pages/product/list/index.html',
         detail: 'src/pages/product/detail/index.html',
         cart: 'src/pages/product/cart/index.html',
+        stores: 'src/pages/stores/index.html',
       },
     },
   },
