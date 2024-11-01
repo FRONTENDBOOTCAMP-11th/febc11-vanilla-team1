@@ -14,15 +14,23 @@ async function renderHeader() {
   const menuIcon = document.getElementById('menu-icon');
   const menuSidebar = document.getElementById('menu-side');
   const closeBtn = document.querySelector('.close-btn');
+  const overlay = document.getElementById('overlay');
 
   // 메뉴 아이콘 클릭 시 메뉴 탭이 나타나는 기능
   menuIcon.addEventListener('click', () => {
     menuSidebar.classList.add('active');
+    overlay.classList.add('active'); // 오버레이 활성화
   });
 
   // X 닫기 버튼 클릭 시 메뉴 탭이 사라지는 기능
   closeBtn.addEventListener('click', () => {
     menuSidebar.classList.remove('active');
+    overlay.classList.remove('active'); // 오버레이 숨기기
+  });
+
+  overlay.addEventListener('click', function () {
+    menuSidebar.classList.remove('active');
+    overlay.classList.remove('active'); // 오버레이 숨기기
   });
 }
 

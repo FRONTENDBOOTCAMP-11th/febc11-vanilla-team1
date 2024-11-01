@@ -57,7 +57,13 @@ function checkEmail() {
   }
 }
 
+// 이메일, 패스워드 띄어쓰기 막기
+passwordInput.addEventListener('input', function () {
+  this.value = this.value.replace(/\s/g, '');
+});
+
 authInput.addEventListener('input', function () {
+  this.value = this.value.replace(/\s/g, '');
   checkEmail();
 });
 

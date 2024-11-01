@@ -14,17 +14,16 @@
   font-weight: 500;
 }
 
-.headerMenu li::after {
-  content: '';
-  margin: 0 10px;
+.headerMenu ul li:hover {
+  color: var(--color-gray-500);
 }
 
-.headerMenu li:not(.user-line)::after {
+.headerMenu li::after {
   content: '|';
   margin: 0 10px;
 }
 
-.headerMenu li:last-child::after {
+.headerMenu .user-line::after {
   content: '';
 }
 
@@ -137,6 +136,30 @@
   & .close-btn {
     padding: 0;
   }
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2); /* 반투명한 어두운 배경 */
+  backdrop-filter: blur(3px); /* 블러 효과 */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+
+/* 사이드바가 열릴 때 스타일 */
+#menu-side.open {
+  transform: translateX(0); /* 화면 안으로 이동 */
+}
+
+#overlay.active {
+  opacity: 1;
+  visibility: visible; /* 오버레이 활성화 */
 }
 
 .menu-text {
