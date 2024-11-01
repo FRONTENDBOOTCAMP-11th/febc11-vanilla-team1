@@ -8,13 +8,12 @@ let wishlist = [
   },
   {
     id: 2,
-    name: '제품 2',
+    name: '나이키 줌 보메로 5',
     option: '여성 신발',
     price: 20000,
     image: 'https://via.placeholder.com/150',
   },
 ];
-
 
 //위시리스트에서 장바구니로 추가
 function addToCartFromWishlist(productId) {
