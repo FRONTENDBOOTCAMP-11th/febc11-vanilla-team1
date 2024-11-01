@@ -1,39 +1,43 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>위시리스트</title>
-  <link rel="stylesheet" href="/src/components/header/header.css" />
-  <link rel="stylesheet" href="/src/components/footer/footer.css" />
-  <link rel="stylesheet" href="../../../../style.css" />
-  <link rel="stylesheet" href="./styles.css" />
-</head>
-<body>
-  <div id="app">
-    <div id="header-wrap"></div>
-    <div class="main-layout">
-      <div class="wishlist-container">
-
-        <div class="title-container">
-          <h2>위시리스트</h2>
-          <img class="wishmodify" src="../../../../public/assets/images/wishmodify.png" >
-          <img class="wishdelete" src="../../../../public/assets/images/wishdelete.png" >
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>위시리스트</title>
+    <link rel="stylesheet" href="/src/components/header/header.css" />
+    <link rel="stylesheet" href="/src/components/footer/footer.css" />
+    <link rel="stylesheet" href="../../../../style.css" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="header-wrap"></div>
+      <div class="main-layout">
+        <div class="wishlist-container">
+          <div class="title-container">
+            <h2>위시리스트</h2>
+            <img
+              class="wishmodify"
+              src="../../../../public/assets/images/wishmodify.png"
+            />
+            <img
+              class="wishdelete"
+              src="../../../../public/assets/images/wishdelete.png"
+            />
           </div>
 
-        <div id="wishlist-items"></div>
-        
-        <div id="empty-wish-message" style="display: none">
-          <!-- 장바구니 비어있을 때 문구 -->
-          위시리스트에 추가한 상품이 없습니다.
+          <div id="wishlist-items"></div>
+
+          <div id="empty-wish-message" style="display: none">
+            <!-- 장바구니 비어있을 때 문구 -->
+            위시리스트에 추가한 상품이 없습니다.
+          </div>
         </div>
       </div>
+      <div id="footer-wrap"></div>
     </div>
-    <div id="footer-wrap"></div>
-  </div>
-  <script type="module" src="/src/components/header/header.js"></script>
-  <script type="module" src="/src/components/footer/footer.js"></script>
-  <script type="module" src="./index.js"></script>
-</body>
+    <script type="module" src="/src/components/header/header.js"></script>
+    <script type="module" src="/src/components/footer/footer.js"></script>
+    <script type="module" src="./index.js"></script>
+  </body>
 </html>

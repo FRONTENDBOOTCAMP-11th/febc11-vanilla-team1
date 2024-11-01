@@ -90,16 +90,18 @@
     <script type="module" src="index.js"></script>
     <script type="module" src="/src/components/header/header.js"></script>
     <script type="module" src="/src/components/footer/footer.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c06131216df2073fd83cf357eb0ca3f0"></script>
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c06131216df2073fd83cf357eb0ca3f0"
+    ></script>
     <script>
       var container = document.getElementById('map');
       var options = {
         center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 3
+        level: 3,
       };
 
       var map = new kakao.maps.Map(container, options);
-    
     </script>
   </body>
 </html>

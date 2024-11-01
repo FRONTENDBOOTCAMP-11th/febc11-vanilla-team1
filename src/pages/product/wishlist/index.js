@@ -19,40 +19,37 @@ let wishlist = [
 function addToCartFromWishlist(productId) {
   const item = wishlist.find(i => i.product?._id === productId);
   if (item && item.product) {
-    const existingCartItem = cart.items.find(i => i.product_id === productId); 
+    const existingCartItem = cart.items.find(i => i.product_id === productId);
     if (existingCartItem) {
-    existingCartItem.quantity += 1;
+      existingCartItem.quantity += 1;
     } else {
-    cart.items.push({
-      _id: item._id,
-      user_id: item.user_id,
-      product_id: item.product._id,
-      quantity: 1,
-      size: item.size || '미설정',
-      createdAt: item.createdAt,
-      updatedAt: item.createdAt,
-      product: {
-      ...item.product,
-      image: {
-        path: item.product.image.url,
-        name: item.product.image.fileName,
-        originalname: item.product.image.orgName,
-      },
-      },
-      shippingFees: '무료 배송',
-      deliveryDate: '7월 26일 (금)',
-    });
+      cart.items.push({
+        _id: item._id,
+        user_id: item.user_id,
+        product_id: item.product._id,
+        quantity: 1,
+        size: item.size || '미설정',
+        createdAt: item.createdAt,
+        updatedAt: item.createdAt,
+        product: {
+          ...item.product,
+          image: {
+            path: item.product.image.url,
+            name: item.product.image.fileName,
+            originalname: item.product.image.orgName,
+          },
+        },
+        shippingFees: '무료 배송',
+        deliveryDate: '7월 26일 (금)',
+      });
     }
     deleteItem(productId); // 위시리스트에서 삭제
     updateWishlistView();
   }
-  }
-  window.addToCartFromWishlist = addToCartFromWishlist;
+}
+window.addToCartFromWishlist = addToCartFromWishlist;
 
-
-
-
-  function initWishlist() {
+function initWishlist() {
   const wishlistContainer = document.getElementById('wishlist-items');
   wishlistContainer.innerHTML = ''; // Clear the container before rendering
 
@@ -81,7 +78,8 @@ function addToCartFromWishlist(productId) {
   });
 
   // Show or hide the empty message based on the wishlist content
-  document.getElementById('empty-wish-message').style.display = wishlist.length === 0 ? 'block' : 'none';
+  document.getElementById('empty-wish-message').style.display =
+    wishlist.length === 0 ? 'block' : 'none';
 }
 
 function deleteItem(id) {
@@ -95,17 +93,20 @@ function updateWishlistView() {
   initWishlist();
 }
 
-
 document.querySelector('.wishmodify').addEventListener('click', () => {
   document.querySelector('.wishmodify').style.display = 'none';
   document.querySelector('.wishdelete').style.display = 'inline-block';
-  document.querySelectorAll('.wishdelbtn').forEach(btn => btn.style.display = 'block');
+  document
+    .querySelectorAll('.wishdelbtn')
+    .forEach(btn => (btn.style.display = 'block'));
 });
 
 document.querySelector('.wishdelete').addEventListener('click', () => {
   document.querySelector('.wishmodify').style.display = 'inline-block';
   document.querySelector('.wishdelete').style.display = 'none';
-  document.querySelectorAll('.wishdelbtn').forEach(btn => btn.style.display = 'none');
+  document
+    .querySelectorAll('.wishdelbtn')
+    .forEach(btn => (btn.style.display = 'none'));
 });
 
 initWishlist();
