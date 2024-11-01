@@ -230,7 +230,7 @@ body {
 .select-tap {
   display: none;
 }
-.map,
+#map,
 .card-container {
   display: block;
 }
@@ -308,20 +308,20 @@ body {
   font-size: 16px;
 }
 
+
 /*map*/
-.map {
-  background-color: white;
-  border: 1px solid yellowgreen;
-  height: 100%;
-  width: 100%;
+#map {
+  width: 100%;  /* 너비 100% */
+  height: 100%; /* 높이 100% */
+  /* 추가 스타일을 여기에 넣을 수 있습니다. */
 }
-.map img {
+#map img {
   height: 100%;
   width: 100%;
   background-repeat: no-repeat;
 }
 
-.map,
+#map,
 .card-container {
   display: block;
 }
@@ -440,7 +440,7 @@ body {
   .card-container {
     display: block;
   }
-  .map {
+  #map {
     display: none;
   }
 
@@ -493,12 +493,12 @@ body {
   }
 
   /*map*/
-  .map {
+  #map {
     margin-top: 100px;
     background-color: white;
     margin-bottom: 100px;
   }
-  .map img {
+  #map img {
     width: 700px;
     aspect-ratio: 360/324;
   }
