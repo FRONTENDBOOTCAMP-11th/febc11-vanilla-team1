@@ -139,15 +139,16 @@ const getProduct = async function (productId) {
     return;
   }
 };
-const product = await getProduct(productId);
+let product;
 
 const renderImage = function (product) {
+  console.log(product);
+
   const shoes_img = document.querySelector('.nike_shoes');
   const img = product.item.mainImages[0];
   shoes_img.src = `https://11.fesp.shop${img.path}`;
   console.log(shoes_img.src);
 };
-renderImage(product);
 
 const currentOption = function () {};
 
@@ -174,3 +175,8 @@ basket.addEventListener('click', async function () {
     }
   }
 });
+
+window.onload = async function () {
+  product = await getProduct(productId);
+  renderImage(product);
+};
