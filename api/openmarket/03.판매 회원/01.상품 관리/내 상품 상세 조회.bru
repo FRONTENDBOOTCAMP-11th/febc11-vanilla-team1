@@ -5,8 +5,25 @@ meta {
 }
 
 get {
-  url: {{url}}/seller/products/2
-  body: text
+  url: {{url}}/seller/products/2?type=inifo
+  body: json
   auth: inherit
 }
 
+params:query {
+  type: inifo
+}
+
+body:json {
+  {
+    "id": 1,
+    "name": "나이키"
+  }
+}
+
+body:text {
+  {
+  "id": 1
+  "name":
+  }
+}

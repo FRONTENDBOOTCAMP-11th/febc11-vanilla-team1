@@ -5,9 +5,13 @@ meta {
 }
 
 post {
-  url: {{url}}/users
+  url: {{url}}/users?type=info
   body: json
   auth: none
+}
+
+params:query {
+  type: info
 }
 
 body:json {
