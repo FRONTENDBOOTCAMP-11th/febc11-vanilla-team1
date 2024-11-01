@@ -1,45 +1,22 @@
-/* reset */
-body,
-p {
-  margin: unset;
-  padding: unset;
-}
-
 body {
   min-width: 375px;
 }
 
 a {
-  color: unset;
   font-weight: 700;
   text-decoration: underline;
 }
 
-h1,
-h2,
-h3 {
-  margin: unset;
-  font-size: unset;
-  font-weight: unset;
-}
-
-img {
-  max-width: 100%;
-  vertical-align: top;
-}
-
 button,
 input {
-  all: unset;
+  /* all: unset; */
   display: inline-block;
   cursor: pointer;
 }
 
-/* Variable */
-
-/* Typography */
-:root {
-  font-size: 62.5%;
+input {
+  outline: none;
+  cursor: pointer;
 }
 
 /* Layouts */
@@ -383,11 +360,15 @@ input[type='date']:valid::before {
   font-size: 1.5rem;
   line-height: 1.6rem;
   border-radius: 30px;
-  margin-top: 70px;
+  margin-top: 50px;
 }
 
 .signUp-btn:focus {
   border: 1px solid blue;
+}
+
+.signUp-btn:hover {
+  background-color: #737374;
 }
 
 .valid {
@@ -475,6 +456,7 @@ input[type='date']:valid::before {
 .label-text {
   margin-left: 30px;
   font-size: 1.6rem;
+  line-height: 1.2;
   vertical-align: top;
 }
 
@@ -632,9 +614,7 @@ label {
   color: var(--color-gray-300);
 }
 
-/* 기본 스타일 설정 (375px 이상) */
-
-/* 375px 이하의 화면 크기에 적용할 스타일 */
+/* 기본 스타일 설정 (375px 이하)*/
 @media (max-width: 500px) {
   .l_wrapper {
     padding: 0 36px;
@@ -648,5 +628,45 @@ label {
   }
   .signUp-agreement {
     margin-top: 10px;
+  }
+
+  .check-container {
+    margin-bottom: 30px;
+  }
+
+  .label-hover {
+    min-width: 375px;
+  }
+
+  .label-text {
+    display: inline-block;
+    width: 300px;
+  }
+  .label-hover::before {
+    display: none;
+  }
+}
+
+/* 기본 스타일 설정 (375px 이하) */
+
+@media (max-width: 400px) {
+  .auth-input {
+    height: 40px;
+  }
+
+  .check-contents {
+    margin-bottom: 20px;
+  }
+
+  .check-container .last {
+    margin-bottom: 20px;
+  }
+
+  .label-text {
+    width: 280px;
+  }
+
+  .signUp-btn {
+    margin-top: 30px;
   }
 }

@@ -112,7 +112,7 @@ async function loginUser(email, password) {
         sessionStorage.setItem('accessToken', accessToken);
         sessionStorage.setItem('refreshToken', refreshToken);
         sessionStorage.setItem('name', userName);
-        window.location.href = 'complete.html';
+        window.location.href = 'index.html';
         resetInputs();
         sessionStorage.removeItem('email');
       } else {

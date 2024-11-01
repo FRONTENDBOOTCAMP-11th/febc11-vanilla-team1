@@ -45,7 +45,7 @@
                 aria-expanded="false"
                 aria-controls="sorting-options"
               >
-                <span>정렬 기준:</span>
+                <div>정렬 기준: <span class="sort__selected__text"></span></div>
                 <img
                   src="/assets/icons/button24px/down.svg"
                   alt="정렬 기준 보기"
@@ -54,61 +54,109 @@
               </button>
 
               <!-- 정렬 옵션 리스트 -->
-              <div
+              <fieldset
+                aria-label="정렬 기준"
                 id="sorting-options"
                 class="sorting__options-list dropdown__options-wrapper"
                 aria-labelledby="dropdown-btn"
                 role="menu"
               >
-                <button
-                  aria-hidden="false"
-                  aria-label="추천순"
-                  class="sorting__options"
-                  data-ndx="0"
-                  role="menuitem"
-                  tabindex="-1"
-                  type="button"
-                  value="beast"
-                >
-                  추천순
-                </button>
-                <button
-                  aria-hidden="false"
-                  aria-label="최신순"
-                  class="sorting__options"
-                  data-ndx="1"
-                  role="menuitem"
-                  tabindex="-1"
-                  type="button"
-                  value="newest"
-                >
-                  최신순
-                </button>
-                <button
-                  aria-hidden="false"
-                  aria-label="높은 가격순"
-                  class="sorting__options"
-                  data-ndx="2"
-                  role="menuitem"
-                  tabindex="-1"
-                  type="button"
-                  value="priceDesc"
-                >
-                  높은 가격순
-                </button>
-                <button
-                  aria-hidden="false"
-                  aria-label="낮은 가격순"
-                  class="sorting__options"
-                  data-ndx="3"
-                  role="menuitem"
-                  tabindex="-1"
-                  type="button"
-                  value="priceAsc"
-                >
-                  낮은 가격순
-                </button>
-              </div>
+                <div class="radio-item sorting__options">
+                  <div class="sort-input">
+                    <input
+                      type="radio"
+                      name="sortBy"
+                      id="sort-by-best"
+                      checked
+                      aria-label="추천순"
+                      value="beast"
+                    />
+                  </div>
+                  <label
+                    for="sort-by-best"
+                    aria-hidden="false"
+                    aria-label="추천순"
+                    class="sorting__options"
+                    data-ndx="0"
+                    role="menuitem"
+                    type="button"
+                  >
+                    추천순
+                  </label>
+                </div>
+
+                <div class="radio-item sorting__options">
+                  <div class="sort-input">
+                    <input
+                      type="radio"
+                      name="sortBy"
+                      id="sort-by-newest"
+                      checked
+                      aria-label="최신순"
+                      value="newest"
+                    />
+                  </div>
+                  <label
+                    for="sort-by-newest"
+                    aria-hidden="false"
+                    aria-label="최신순"
+                    class="sorting__options"
+                    data-ndx="1"
+                    role="menuitem"
+                    type="button"
+                  >
+                    최신순
+                  </label>
+                </div>
+
+                <div class="radio-item sorting__options">
+                  <div class="sort-input">
+                    <input
+                      type="radio"
+                      name="sortBy"
+                      id="sort-by-priceDesc"
+                      checked
+                      aria-label="높은 가격순"
+                      value="priceDesc"
+                    />
+                  </div>
+                  <label
+                    for="sort-by-priceDesc"
+                    aria-hidden="false"
+                    aria-label="높은 가격순"
+                    class="sorting__options"
+                    data-ndx="2"
+                    role="menuitem"
+                    type="button"
+                  >
+                    높은 가격순
+                  </label>
+                </div>
+
+                <div class="radio-item sorting__options">
+                  <div class="sort-input">
+                    <input
+                      type="radio"
+                      name="sortBy"
+                      id="sort-by-priceAsc"
+                      checked
+                      aria-label="낮은 가격순"
+                      value="priceAsc"
+                    />
+                  </div>
+                  <label
+                    for="sort-by-priceAsc"
+                    aria-hidden="false"
+                    aria-label="추천순"
+                    class="sorting__options"
+                    data-ndx="3"
+                    role="menuitem"
+                    type="button"
+                  >
+                    낮은 가격순
+                  </label>
+                </div>
+              </fieldset>
             </div>
           </div>
         </header>
@@ -135,53 +183,58 @@
             <div class="dialog__header">필터</div>
             <fieldset aria-label="정렬 기준">
               <legend>
-                <h3>정렬 기준:</h3>
+                <h3>정렬 기준: <span class="sort__selected__text"></span></h3>
               </legend>
+              <!-- 정렬 옵션 리스트 -->
               <div class="selection-list">
                 <div class="radio-item">
                   <div class="sort-input">
                     <input
                       type="radio"
                       name="sortBy"
-                      id="sort-by-best"
+                      id="sort-by-best-mobile"
                       checked
                       aria-label="추천순"
+                      value="beast"
                     />
                   </div>
-                  <label for="sort-by-best">추천순</label>
+                  <label for="sort-by-best-mobile">추천순</label>
                 </div>
                 <div class="radio-item">
                   <div class="sort-input">
                     <input
                       type="radio"
                       name="sortBy"
-                      id="sort-by-newest"
+                      id="sort-by-newest-mobile"
                       aria-label="최신순"
+                      value="newest"
                     />
                   </div>
-                  <label for="sort-by-newest">최신순</label>
+                  <label for="sort-by-newest-mobile">최신순</label>
                 </div>
                 <div class="radio-item">
                   <div class="sort-input">
                     <input
                       type="radio"
                       name="sortBy"
-                      id="sort-by-priceDesc"
+                      id="sort-by-priceDesc-mobile"
                       aria-label="높은 가격순"
+                      value="priceDesc"
                     />
                   </div>
-                  <label for="sort-by-priceDesc">높은 가격순</label>
+                  <label for="sort-by-priceDesc-mobile">높은 가격순</label>
                 </div>
                 <div class="radio-item">
                   <div class="sort-input">
                     <input
                       type="radio"
                       name="sortBy"
-                      id="sort-by-priceAsc"
+                      id="sort-by-priceAsc-mobile"
                       aria-label="낮은 가격순"
+                      value="priceAsc"
                     />
                   </div>
-                  <label for="sort-by-priceAsc">낮은 가격순</label>
+                  <label for="sort-by-priceAsc-mobile">낮은 가격순</label>
                 </div>
               </div>
             </fieldset>
