@@ -127,6 +127,7 @@ function getInfo() {
       const kakaoName = res.kakao_account.name;
       sessionStorage.setItem('email', kakaoEmail);
       sessionStorage.setItem('name', kakaoName);
+      window.location.href = import.meta.env.VITE_REDIRECT_URL;
     })
     .catch(function (error) {
       console.error('사용자 정보 요청 실패:', error);
